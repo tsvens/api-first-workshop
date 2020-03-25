@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">webMethods/WebSocket</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">servicemonitor.websocket:MachineStatusStream</value>
+  <value name="node_pkg">ServiceMonitor</value>
+  <value name="is_public">false</value>
+  <value name="uri">ws://machine-status-api.193-26-203-31.nip.io/machine/status</value>
+  <value name="behaviour">Client</value>
+  <record name="callback" javaclass="com.wm.util.Values">
+    <value name="onConnect">servicemonitor.websocket.MachineStatusStream:onConnect</value>
+    <value name="onBinary">servicemonitor.websocket.MachineStatusStream:onBinary</value>
+    <value name="onText">servicemonitor.websocket.MachineStatusStream:onText</value>
+    <value name="onClose">servicemonitor.websocket.MachineStatusStream:onClose</value>
+    <value name="onError">servicemonitor.websocket.MachineStatusStream:onError</value>
+  </record>
+</Values>
