@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>quickstart.md</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="quick-start">Quick Start</h1>
+<h2 id="starting-the-demo">Starting the Demo</h2>
+<p>Before starting the demo check the simulators are running by<br>
+<a href="https://smartmaintenance.cumulocity.com/apps/racm-application/index.html#/overview">https://smartmaintenance.cumulocity.com/apps/racm-application/index.html#/overview</a> and verify the status.(Ask democenter team for the credentials)<br>
+<img src="./images/quick1.png" alt="quick1.png"><br>
+Also observe the temperature gauge in the below link, it should be moving. <a href="https://smartmaintenance.cumulocity.com/apps/racm-application/index.html#/device/5268612/dashboard/6309517">https://smartmaintenance.cumulocity.com/apps/racm-application/index.html#/device/5268612/dashboard/6309517</a><br>
+<img src="./images/quick2.png" alt="quick2.png"><br>
+After that logon to the following URL.</p>
+<ul>
+<li>URL = <a href="http://sagbase.eur.ad.sag:8585/ConnectedServices#!/home">http://sagbase.eur.ad.sag:8585/ConnectedServices#!/home</a></li>
+<li>Username: Administrator</li>
+<li>Password :manage</li>
+</ul>
+<ol>
+<li>You should be presented with the following window.<br>
+<img src="./images/quick3.png" alt="quick3.png"></li>
+<li>Select the “Start Demo” button and select the desired outcome. Three switches are displayed.<br>
+<img src="./images/quick4.png" alt="quick4.png"><br>
+<strong>Clear Master Data</strong> – This option will clear the Terracotta Caches and reset the data. Note this will clear all caches of every demo connected the common event bus.<br>
+<strong>Load Master Data</strong> – This option will load the Master Data into the Terracotta Caches on all demos connected to the common event bus.<br>
+<strong>Start Demo</strong> – This will generate events for vibration, pressure and temperature and will raise one alert for a temperature increase in the time frame of 1 min from starting the demo.</li>
+</ol>
+</div>
+</body>
+
+</html>

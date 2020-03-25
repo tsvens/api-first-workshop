@@ -1,0 +1,6 @@
+{
+	"machineId": "PROD00003",
+	"status": "FAILED",
+	"component": "fuel source",
+	"componentStatusDescription": "Ran out of rocket fuel"
+}

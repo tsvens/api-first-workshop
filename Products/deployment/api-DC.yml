@@ -1,0 +1,202 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demodata
+data:
+  ProductData.json: |
+    {
+        "dataLoad": {
+            "Metadata": [{
+                    "version": 1.1,
+                    "description": "Demo Master Product Data",
+                    "industryType": "",
+                    "usedInDemos": "",
+                    "lastModifiedBy": "",
+                    "lastModifiedDate": "2018-08-22T00:00:00+0100",
+                    "reasonsForThisVersionOrIndustryType": "None",
+                    "comments": ""
+                }
+            ],
+            "Inventory": [{
+                    "id": "INVT-001",
+                    "productId": "PROD00001",
+                    "locationId": "LOC00018",
+                    "batchId": "",
+                    "quantity": 26.0,
+                    "serialNumber": "",
+                    "inventoryTypeId": "REFINV-01"
+                }, {
+                    "id": "INVT-002",
+                    "productId": "PROD00004",
+                    "locationId": "LOC00005",
+                    "batchId": "",
+                    "quantity": 3.0,
+                    "serialNumber": "",
+                    "inventoryTypeId": "REFINV-01"
+                }, {
+                    "id": "INVT-003",
+                    "productId": "PROD00002",
+                    "locationId": "LOC00018",
+                    "batchId": "",
+                    "quantity": 0.0,
+                    "serialNumber": "",
+                    "inventoryTypeId": "REFINV-01"
+                }, {
+                    "id": "INVT-004",
+                    "productId": "PROD00003",
+                    "locationId": "LOC00018",
+                    "batchId": "",
+                    "quantity": 35.0,
+                    "serialNumber": "",
+                    "inventoryTypeId": "REFINV-01"
+                }, {
+                    "id": "INVT-005",
+                    "productId": "PROD00004",
+                    "locationId": "LOC00018",
+                    "batchId": "",
+                    "quantity": 20.0,
+                    "serialNumber": "",
+                    "inventoryTypeId": "REFINV-01"
+                }, {
+                    "id": "INVT-006",
+                    "productId": "PROD00005",
+                    "locationId": "LOC00018",
+                    "batchId": "",
+                    "quantity": 28.0,
+                    "serialNumber": "",
+                    "inventoryTypeId": "REFINV-01"
+                }, {
+                    "id": "INVT-007",
+                    "productId": "PROD00002",
+                    "locationId": "LOC00005",
+                    "batchId": "",
+                    "quantity": 16.0,
+                    "serialNumber": "",
+                    "inventoryTypeId": "REFINV-01"
+                }, {
+                    "id": "INVT-008",
+                    "productId": "PROD00001",
+                    "locationId": "LOC00005",
+                    "batchId": "",
+                    "quantity": 0.0,
+                    "serialNumber": "",
+                    "inventoryTypeId": "REFINV-01"
+                }
+            ],
+            "Product": [{
+                    "id": "PROD00001",
+                    "productName": "Millennium Falcon",
+                    "productDescription": "YT-1300 light freighter",
+                    "manufacturerId": "MNFR_014",
+                    "purchaseCost": 14000.0,
+                    "listPrice": 15450.0,
+                    "productTypeId": "PRO-CAT-004",
+                    "UOMTypeId": "UOM-001",
+                    "merchandiseId": "MERCH-001",
+                    "currencyId": "CUR-001",
+                    "brandId": "BRD-004",
+                    "imageId": "PROD00001-MD",
+                    "bestBeforeDate": ""
+                }, {
+                    "id": "PROD00002",
+                    "productName": "Death Star",
+                    "productDescription": "DS-1 Orbital Battle Station",
+                    "manufacturerId": "MNFR_014",
+                    "purchaseCost": 6000.0,
+                    "listPrice": 8500.0,
+                    "productTypeId": "PRO-CAT-004",
+                    "UOMTypeId": "UOM-001",
+                    "merchandiseId": "CVFFRC8911",
+                    "currencyId": "CUR-001",
+                    "brandId": "BRD-004",
+                    "imageId": "PROD00002-MD",
+                    "bestBeforeDate": ""
+                }, {
+                    "id": "PROD00003",
+                    "productName": "Y-wing",
+                    "productDescription": "Koensayr BTL Y-wing",
+                    "manufacturerId": "MNFR_014",
+                    "purchaseCost": 15999.0,
+                    "listPrice": 17250.0,
+                    "productTypeId": "PRO-CAT-003",
+                    "UOMTypeId": "UOM-001",
+                    "merchandiseId": "HYHYAA8812",
+                    "currencyId": "CUR-001",
+                    "brandId": "BRD-004",
+                    "imageId": "PROD00003-MD",
+                    "bestBeforeDate": ""
+                }, {
+                    "id": "PROD00004",
+                    "productName": "X-wing",
+                    "productDescription": "Incom Corporation T-65 X-wing",
+                    "manufacturerId": "MNFR_014",
+                    "purchaseCost": 14340.0,
+                    "listPrice": 15000.0,
+                    "productTypeId": "PRO-CAT-004",
+                    "UOMTypeId": "UOM-001",
+                    "merchandiseId": "CVXXXC3312",
+                    "currencyId": "CUR-001",
+                    "brandId": "BRD-004",
+                    "imageId": "PROD00004-MD",
+                    "bestBeforeDate": ""
+                }, {
+                    "id": "PROD00005",
+                    "productName": "TIE Advanced x1",
+                    "productDescription": "Sienar Fleet Systems Twin Ion Engine Advanced x1",
+                    "manufacturerId": "MNFR_014",
+                    "purchaseCost": 15500.0,
+                    "listPrice": 16245.0,
+                    "productTypeId": "PRO-CAT-004",
+                    "UOMTypeId": "UOM-001",
+                    "merchandiseId": "BHWSQQ9822",
+                    "currencyId": "CUR-001",
+                    "brandId": "BRD-004",
+                    "imageId": "PROD00005-MD",
+                    "bestBeforeDate": ""
+                }
+            ]
+        }
+    }
+
+---
+kind: "DeploymentConfig"
+apiVersion: "v1"
+metadata:
+  name: "${CONTAINER}"
+spec:
+  template: 
+    metadata:
+      labels:
+        name: "${CONTAINER}"
+    spec:
+      containers:
+        - name: "${CONTAINER}"
+          image: "${NAMESPACE}/${CONTAINER_TAG}"
+          ports:
+            - containerPort: 5555
+              protocol: "TCP"
+          volumeMounts:
+            - name: data-volume
+              mountPath: /data
+      volumes:
+        - name: data-volume
+          configMap:
+            name: demodata
+  replicas: 1
+  triggers:
+    - type: "ConfigChange" 
+    - type: "ImageChange" 
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - ${CONTAINER}
+        from:
+          kind: ImageStreamTag
+          name: '${CONTAINER_TAG}'
+          namespace: ${NAMESPACE}
+      type: ImageChange
+  strategy: 
+    type: "Rolling"
+  paused: false 
+  revisionHistoryLimit: 2 
+  minReadySeconds: 0

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><Root>
+  <DeploymentSet allowEmptyValues="false" assetCompositeName="ConnectedDemosTCDB" deploymentSetName="myDeploymentSet" serverAliasName="RepoSource" targetServerName="RepoISTarget" targetServerType="IS">
+    <Property propertyName="activatePkgOnInstall" propertyValue="true"/>
+    <Property propertyName="archivePkgOnInstall" propertyValue="true"/>
+    <Property propertyName="compilePackage" propertyValue="true"/>
+    <Property propertyName="fragPackage" propertyValue="true"/>
+    <Property propertyName="clearACLs" propertyValue="false"/>
+    <Property propertyName="disallowActivePackageInstall" propertyValue="false"/>
+    <Property propertyName="packageExecutionCheck" propertyValue="0"/>
+    <Property propertyName="suspendTriggersDuringDeploy" propertyValue="false"/>
+    <Property propertyName="syncDocTypesToBroker" propertyValue="true"/>
+    <Component name="ConnectedDemosTCDB.connections.ConnectedDemoStore" type="artconnection">
+      <Property propertyName="art.deployment.state" propertyValue="enabled"/>
+      <Property propertyName="uri" propertyValue="terracotta://terracotta.api-hip-workshop.svc:9410"/>
+      <Property propertyName="connectionTimeOut" propertyValue="20"/>
+      <Property propertyName="secureDirPath" propertyValue=""/>
+      <Property propertyName="reconnectTimeOut" propertyValue="20"/>
+      <Property propertyName="datasetCacheSize" propertyValue="20"/>
+      <Property propertyName=".CMGRPROP.poolable" propertyValue="true"/>
+      <Property propertyName=".CMGRPROP.minimumPoolSize" propertyValue="1"/>
+      <Property propertyName=".CMGRPROP.maximumPoolSize" propertyValue="10"/>
+      <Property propertyName=".CMGRPROP.poolIncrementSize" propertyValue="1"/>
+      <Property propertyName=".CMGRPROP.blockingTimeout" propertyValue="1000"/>
+      <Property propertyName=".CMGRPROP.expireTimeout" propertyValue="1000"/>
+      <Property propertyName=".CMGRPROP.startupRetryCount" propertyValue="0"/>
+      <Property propertyName=".CMGRPROP.startupBackoffSecs" propertyValue="10"/>
+    </Component>
+  </DeploymentSet>
+
+</Root>

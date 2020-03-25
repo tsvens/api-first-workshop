@@ -1,0 +1,166 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "ServiceIncident"
+  },
+  "host" : "beneluxint.gateway.webmethodscloud.com",
+  "basePath" : "/gateway/ServiceIncident/1.0",
+  "schemes" : [ "http" ],
+  "security" : [ {
+    "apiKey" : [ ]
+  } ],
+  "paths" : {
+    "/incident/{incidentNumber}" : {
+      "get" : {
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/serviceIncident"
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "incidentNumber",
+        "in" : "path",
+        "required" : true,
+        "type" : "string"
+      } ]
+    },
+    "/incident" : {
+      "get" : {
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "examples" : {
+              "application/json" : "{\n   \"assetId\": \"PROD00001\",\n   \"assetName\": \"LightSabre\",\n   \"shortDescription\": \"Lightsource broken\",\n   \"severity\": \"HIGH\",\n   \"urgency\": \"1\",\n   \"customer\": \"Imperial Force\",\n   \"customerContact\": \"Anakin Skywalker\"\n}"
+            },
+            "schema" : {
+              "type" : "object",
+              "required" : [ "assetId", "assetName", "customer", "customerContact", "severity", "shortDescription" ],
+              "properties" : {
+                "severity" : {
+                  "type" : "string",
+                  "description" : "The severity of the incident, possible values: HIGH, MEDIUM, LOW"
+                },
+                "customerContact" : {
+                  "type" : "string",
+                  "description" : "The contact person at customers side"
+                },
+                "assetId" : {
+                  "type" : "string",
+                  "description" : "The serial number of the affected asset"
+                },
+                "assetName" : {
+                  "type" : "string",
+                  "description" : "The name of the affected asset"
+                },
+                "id" : {
+                  "type" : "string",
+                  "description" : "The generated id for the service incident"
+                },
+                "shortDescription" : {
+                  "type" : "string",
+                  "description" : "A short description for the incident"
+                },
+                "urgeny" : {
+                  "type" : "string",
+                  "description" : "Urgency of the incident, possible values: HIGH, MEDIUM, LOW"
+                },
+                "customer" : {
+                  "type" : "string",
+                  "description" : "Customer for which the incident is raised"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/serviceIncident"
+          },
+          "x-examples" : {
+            "application/json" : "{\n   \"assetId\": \"PROD00001\",\n   \"assetName\": \"LightSabre\",\n   \"shortDescription\": \"Lightsource broken\",\n   \"severity\": \"HIGH\",\n   \"urgency\": \"1\",\n   \"customer\": \"Imperial Force\",\n   \"customerContact\": \"Anakin Skywalker\"\n}"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "serviceIncidentId" : {
+                  "type" : "string",
+                  "description" : "The generated id for the service incident"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "apiKey" : {
+      "type" : "apiKey",
+      "name" : "x-Gateway-APIKey",
+      "in" : "header"
+    }
+  },
+  "definitions" : {
+    "serviceIncident" : {
+      "type" : "object",
+      "required" : [ "assetId", "assetName", "customer", "customerContact", "severity", "shortDescription" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The generated id for the service incident"
+        },
+        "assetId" : {
+          "type" : "string",
+          "description" : "The serial number of the affected asset"
+        },
+        "assetName" : {
+          "type" : "string",
+          "description" : "The name of the affected asset"
+        },
+        "shortDescription" : {
+          "type" : "string",
+          "description" : "A short description for the incident"
+        },
+        "severity" : {
+          "type" : "string",
+          "description" : "The severity of the incident, possible values: HIGH, MEDIUM, LOW"
+        },
+        "urgeny" : {
+          "type" : "string",
+          "description" : "Urgency of the incident, possible values: HIGH, MEDIUM, LOW"
+        },
+        "customer" : {
+          "type" : "string",
+          "description" : "Customer for which the incident is raised"
+        },
+        "customerContact" : {
+          "type" : "string",
+          "description" : "The contact person at customers side"
+        }
+      },
+      "title" : "A JSON schema for Service Incident Objects"
+    }
+  }
+}

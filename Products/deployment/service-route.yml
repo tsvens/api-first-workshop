@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ${CONTAINER}
+  name: ${CONTAINER}-service
+  namespace: ${NAMESPACE}
+spec:
+  clusterIP: 
+  ports:
+    - name: 5555-tcp
+      port: 56565
+      protocol: TCP
+      targetPort: 5555
+  selector:
+    deploymentconfig: ${CONTAINER}
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Route
+metadata:
+  name: ${CONTAINER}-route
+  namespace: ${NAMESPACE}
+spec:
+  host: ${CONTAINER}.193-26-203-31.nip.io
+  port:
+    targetPort: 5555-tcp
+  to:
+    kind: Service
+    name: ${CONTAINER}-service
+    weight: 100
+  wildcardPolicy: None

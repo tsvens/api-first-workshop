@@ -1,0 +1,78 @@
+pipeline {
+    agent {
+		node {
+			label 'wm-jenkins-slave'
+		}
+	}
+	
+	environment {
+        JAVA_HOME = "/opt/softwareag/jvm/jvm"
+		PACKAGE = "Products"
+		NAMESPACE = "api-hip-workshop"
+		CONTAINER = "products-api"
+		CONTAINER_TAG = "${env.CONTAINER}:latest"
+    }
+
+    stages {
+        stage('Initialize'){
+            steps {
+                sh 'chmod -R 777 ${WORKSPACE}'
+				sh '/opt/softwareag/common/lib/ant/bin/ant -f ${WORKSPACE}/${PACKAGE}/prepareBuild.xml prep'
+			}
+		}
+		
+		stage('Build'){
+            steps {		
+				sh 'cd ${WORKSPACE}/${PACKAGE}; /opt/softwareag/common/AssetBuildEnvironment/bin/build.sh -propertyfile build.properties'
+            }
+        }
+		
+		stage('Deploy') {
+			steps {
+				timeout(120) {
+					waitUntil {
+						script {
+							def r = sh script: 'wget -q --user Administrator --password manage http://localhost:5555 -O /dev/null', returnStatus: true
+							return (r == 0);
+						}
+					}
+				}
+				sh 'cp ${WORKSPACE}/${PACKAGE}/config/substitutionVars.xml /opt/softwareag/IntegrationServer/instances/default/packages/WmDeployer/replicate/inbound/;\
+					cd /opt/softwareag/IntegrationServer/instances/default/packages/WmDeployer/bin;\
+					./projectautomatorUnix.sh ${WORKSPACE}/${PACKAGE}/build/project-deploy.xml;\
+					./Deployer.sh --import -varsub -vsFile substitutionVars.xml -map myDeploymentMap -project ACDL_MSR_PACKAGES -validate true -host localhost -port 5555 -user Administrator -pwd manage;\
+					./Deployer.sh --deploy -force -dc myDeployment -project ACDL_MSR_PACKAGES -host localhost -port 5555 -user Administrator -pwd manage'
+			}
+		}
+		
+		stage('CreateContainer') {
+			steps {
+				sh 'cd ${PACKAGE}/build/container; \
+					cp -r /opt/softwareag/IntegrationServer/instances/default/packages/{${PACKAGE},WmTCDBAdapter,ConnectedDemos,ConnectedDemosTCDB} .;\
+					cp /opt/softwareag/common/lib/terracotta* .'
+			    sh 'cd ${PACKAGE}/build/container; \
+				    docker build -t ${CONTAINER_TAG} -f Dockerfile .'
+			}
+		}
+		stage('tag') {
+			steps {
+				sh 'docker tag ${CONTAINER_TAG} 172.30.1.1:5000/${NAMESPACE}/${CONTAINER_TAG}; docker login -u admin -p `oc whoami -t` 172.30.1.1:5000; docker push 172.30.1.1:5000/${NAMESPACE}/${CONTAINER_TAG}'
+			} // steps
+		} // stage
+	
+	stage('Deploy-Container'){
+            steps {
+				sh 'oc apply -f ${PACKAGE}/deployment/${CONTAINER}-DC.yml'
+				
+				script {
+					try {
+						sh 'oc get service ${CONTAINER}-service'
+					} catch (exc) {
+						echo 'Service does not exist yet'
+						sh 'oc apply -f ${PACKAGE}/deployment/${CONTAINER}-service-route.yml'
+					}
+				}
+            }
+        }
+    }
+}

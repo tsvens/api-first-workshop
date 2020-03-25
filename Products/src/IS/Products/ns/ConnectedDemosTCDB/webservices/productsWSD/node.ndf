@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">webServiceDescriptor</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">ConnectedDemosTCDB.webservices:productsWSD</value>
+  <value name="node_pkg">Products</value>
+  <value name="is_public">false</value>
+  <Boolean name="inbound">true</Boolean>
+  <Boolean name="WSICompliant">false</Boolean>
+  <value name="SOAPProtocol">SOAP 1.1 Protocol</value>
+  <value name="targetNamespace">http://ns.softwareag.com/dsa/ws/product</value>
+  <Boolean name="attachmentEnabled">false</Boolean>
+  <number name="mtomThreshold" type="Integer">0</number>
+  <array name="externalWSDLSources" type="record" depth="1">
+    <record javaclass="com.wm.util.Values">
+      <value name="contextURI">http://localhost:5555/</value>
+      <value name="locationURI">ConnectedDemosTCDB.webservices.productsWSD?wsdl=wsdl0</value>
+      <byte name="source">
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHdzZGw6ZGVmaW5pdGlvbnMgbmFtZT0icHJvZHVjdCIgdGFyZ2V0TmFtZXNwYWNlPSJodHRwOi8vbnMuc29mdHdhcmVhZy5jb20vZHNhL3dzL3Byb2R1Y3QiIHhtbG5zOnByZD0iaHR0cDovL25zLnNvZnR3YXJlYWcuY29tL2RzYS9wcm9kdWN0LyIgeG1sbnM6d3NkbD0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3NkbC8iIHhtbG5zOnRucz0iaHR0cDovL25zLnNvZnR3YXJlYWcuY29tL2RzYS93cy9wcm9kdWN0IiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxuczpzb2FwPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93c2RsL3NvYXAvIj4KICA8d3NkbDp0eXBlcz4KICAgIDx4c2Q6c2NoZW1hIHRhcmdldE5hbWVzcGFjZT0iaHR0cDovL25zLnNvZnR3YXJlYWcuY29tL2RzYS9wcm9kdWN0LyIgeG1sbnM6cHJkPSJodHRwOi8vbnMuc29mdHdhcmVhZy5jb20vZHNhL3Byb2R1Y3QvIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIj4KCQkJPHhzZDplbGVtZW50IG5hbWU9ImdldFByb2R1Y3RzIiB0eXBlPSJ4c2Q6c3RyaW5nIj4KCQkJPC94c2Q6ZWxlbWVudD4KCQkJPHhzZDplbGVtZW50IG5hbWU9ImdldFByb2R1Y3RzUmVzcG9uc2UiPgoJCQkJPHhzZDpjb21wbGV4VHlwZT4KCQkJCQk8eHNkOnNlcXVlbmNlPgoKCQkJCQkJPHhzZDplbGVtZW50IG1heE9jY3Vycz0idW5ib3VuZGVkIiBtaW5PY2N1cnM9IjAiIG5hbWU9InByb2R1Y3RzIiB0eXBlPSJwcmQ6UHJvZHVjdCIvPgoJCQkJCTwveHNkOnNlcXVlbmNlPgoJCQkJPC94c2Q6Y29tcGxleFR5cGU+CgkJCTwveHNkOmVsZW1lbnQ+CgkJCTx4c2Q6ZWxlbWVudCBuYW1lPSJjcmVhdGVQcm9kdWN0IiB0eXBlPSJwcmQ6UHJvZHVjdCI+CgoJCQk8L3hzZDplbGVtZW50PgoJCQk8eHNkOmVsZW1lbnQgbmFtZT0iY3JlYXRlUHJvZHVjdFJlc3BvbnNlIiB0eXBlPSJwcmQ6UHJvZHVjdElkIj4KCgkJCTwveHNkOmVsZW1lbnQ+CgkJCTx4c2Q6ZWxlbWVudCBuYW1lPSJ1cGRhdGVQcm9kdWN0IiB0eXBlPSJwcmQ6UHJvZHVjdCI+CgoJCQk8L3hzZDplbGVtZW50PgoJCQk8eHNkOmVsZW1lbnQgbmFtZT0idXBkYXRlUHJvZHVjdFJlc3BvbnNlIj4KCQkJCTx4c2Q6Y29tcGxleFR5cGU+CgkJCQkJPHhzZDpzZXF1ZW5jZT4KCgkJCQkJCTx4c2Q6ZWxlbWVudCBuYW1lPSJyZXN1bHQiIHR5cGU9InhzZDpzdHJpbmciLz4KCQkJCQk8L3hzZDpzZXF1ZW5jZT4KCQkJCTwveHNkOmNvbXBsZXhUeXBlPgoJCQk8L3hzZDplbGVtZW50PgoJCQk8eHNkOmVsZW1lbnQgbmFtZT0iZGVsZXRlUHJvZHVjdCIgdHlwZT0icHJkOlByb2R1Y3RJZCI+CgoJCQk8L3hzZDplbGVtZW50PgoJCQk8eHNkOmVsZW1lbnQgbmFtZT0iZGVsZXRlUHJvZHVjdFJlc3BvbnNlIj4KCQkJCTx4c2Q6Y29tcGxleFR5cGU+CgkJCQkJPHhzZDpzZXF1ZW5jZT4KCgkJCQkJCTx4c2Q6ZWxlbWVudCBuYW1lPSJzdGF0dXMiIHR5cGU9InhzZDpzdHJpbmciLz4KCQkJCQk8L3hzZDpzZXF1ZW5jZT4KCQkJCTwveHNkOmNvbXBsZXhUeXBlPgoJCQk8L3hzZDplbGVtZW50PgoJCQk8eHNkOmVsZW1lbnQgbmFtZT0iZ2V0UHJvZHVjdEJ5SWQiIHR5cGU9InByZDpQcm9kdWN0SWQiPgoKCQkJPC94c2Q6ZWxlbWVudD4KCQkJPHhzZDplbGVtZW50IG5hbWU9ImdldFByb2R1Y3RCeUlkUmVzcG9uc2UiIHR5cGU9InByZDpQcm9kdWN0Ij4KCgkJCTwveHNkOmVsZW1lbnQ+CgkJCTx4c2Q6Y29tcGxleFR5cGUgbmFtZT0iUHJvZHVjdCI+CgkJCQk8eHNkOnNlcXVlbmNlPgoJCQkJCTx4c2Q6ZWxlbWVudCBtYXhPY2N1cnM9IjEiIG1pbk9jY3Vycz0iMCIgbmFtZT0iaWQiIHR5cGU9InhzZDpzdHJpbmciLz4KCQkJCQk8eHNkOmVsZW1lbnQgbmFtZT0ibmFtZSIgdHlwZT0ieHNkOnN0cmluZyIvPgoJCQkJCTx4c2Q6ZWxlbWVudCBuYW1lPSJkZXNjcmlwdGlvbiIgdHlwZT0ieHNkOnN0cmluZyIvPgoJCQkJCTx4c2Q6ZWxlbWVudCBuYW1lPSJwcm9kdWN0VHlwZUlkIiB0eXBlPSJ4c2Q6c3RyaW5nIi8+CgkJCQkJPHhzZDplbGVtZW50IG1heE9jY3Vycz0iMSIgbWluT2NjdXJzPSIwIiBuYW1lPSJpbWFnZUlkIiB0eXBlPSJ4c2Q6c3RyaW5nIi8+CgkJCQkJPHhzZDplbGVtZW50IG5hbWU9ImJyYW5kSWQiIHR5cGU9InhzZDpzdHJpbmciLz4KCQkJCQk8eHNkOmVsZW1lbnQgbmFtZT0iYmVzdEJlZm9yZURhdGUiIHR5cGU9InhzZDpkYXRlIi8+CgkJCQkJPHhzZDplbGVtZW50IG5hbWU9InB1cmNoYXNlQ29zdCIgdHlwZT0ieHNkOmZsb2F0Ii8+CgkJCQkJPHhzZDplbGVtZW50IG5hbWU9Imxpc3RQcmljZSIgdHlwZT0ieHNkOmZsb2F0Ii8+CgkJCQkJPHhzZDplbGVtZW50IG5hbWU9ImN1cnJlbmN5SWQiIHR5cGU9InhzZDpzdHJpbmciLz4KCgkJCQkJPHhzZDplbGVtZW50IG5hbWU9IlVPTUlkIiB0eXBlPSJ4c2Q6c3RyaW5nIi8+CgkJCQkJPHhzZDplbGVtZW50IG1heE9jY3Vycz0iMSIgbWluT2NjdXJzPSIwIiBuYW1lPSJtYW51ZmFjdHVyZXJJZCIgdHlwZT0ieHNkOnN0cmluZyIvPgoJCQkJCTx4c2Q6ZWxlbWVudCBtYXhPY2N1cnM9IjEiIG1pbk9jY3Vycz0iMCIgbmFtZT0ibWVyY2hhbmRpc2VJZCIgdHlwZT0ieHNkOnN0cmluZyIvPgoJCQkJPC94c2Q6c2VxdWVuY2U+CgkJCTwveHNkOmNvbXBsZXhUeXBlPgoKCQkJPHhzZDpjb21wbGV4VHlwZSBuYW1lPSJQcm9kdWN0SWQiPgoJCQkJPHhzZDpzZXF1ZW5jZT4KCQkJCQk8eHNkOmVsZW1lbnQgbmFtZT0icHJvZHVjdElkIiB0eXBlPSJ4c2Q6c3RyaW5nIi8+CgkJCQk8L3hzZDpzZXF1ZW5jZT4KCQkJPC94c2Q6Y29tcGxleFR5cGU+CgkJCgkJCTx4c2Q6ZWxlbWVudCBuYW1lPSJnZXRDdXN0b21lckJ5UHJvZHVjdElkIiB0eXBlPSJwcmQ6UHJvZHVjdElkIj4KCQkJPC94c2Q6ZWxlbWVudD4KCgkJCTx4c2Q6ZWxlbWVudCBuYW1lPSJnZXRDdXN0b21lckJ5UHJvZHVjdElkUmVzcG9uc2UiIHR5cGU9InByZDpDdXN0b21lcklkIj4KCQkJPC94c2Q6ZWxlbWVudD4KCgkJCTx4c2Q6Y29tcGxleFR5cGUgbmFtZT0iQ3VzdG9tZXJJZCI+CgkJCQk8eHNkOnNlcXVlbmNlPgoJCQkJCTx4c2Q6ZWxlbWVudCBuYW1lPSJjdXN0b21lcklkIiB0eXBlPSJ4c2Q6c3RyaW5nIi8+CgkJCQk8L3hzZDpzZXF1ZW5jZT4KCQkJPC94c2Q6Y29tcGxleFR5cGU+CgkJPC94c2Q6c2NoZW1hPgogIDwvd3NkbDp0eXBlcz4KICA8d3NkbDptZXNzYWdlIG5hbWU9InVwZGF0ZVByb2R1Y3RSZXNwb25zZSI+CiAgICA8d3NkbDpwYXJ0IG5hbWU9InBhcmFtZXRlcnMiIGVsZW1lbnQ9InByZDp1cGRhdGVQcm9kdWN0UmVzcG9uc2UiPgogICAgPC93c2RsOnBhcnQ+CiAgPC93c2RsOm1lc3NhZ2U+CiAgPHdzZGw6bWVzc2FnZSBuYW1lPSJkZWxldGVQcm9kdWN0UmVxdWVzdCI+CiAgICA8d3NkbDpwYXJ0IG5hbWU9InBhcmFtZXRlcnMiIGVsZW1lbnQ9InByZDpkZWxldGVQcm9kdWN0Ij4KICAgIDwvd3NkbDpwYXJ0PgogIDwvd3NkbDptZXNzYWdlPgogIDx3c2RsOm1lc3NhZ2UgbmFtZT0iZ2V0Q3VzdG9tZXJCeVByb2R1Y3RSZXNwb25zZSI+CiAgICA8d3NkbDpwYXJ0IG5hbWU9InBhcmFtZXRlcnMiIGVsZW1lbnQ9InByZDpnZXRDdXN0b21lckJ5UHJvZHVjdElkUmVzcG9uc2UiPgogICAgPC93c2RsOnBhcnQ+CiAgPC93c2RsOm1lc3NhZ2U+CiAgPHdzZGw6bWVzc2FnZSBuYW1lPSJnZXRQcm9kdWN0QnlJZFJlc3BvbnNlIj4KICAgIDx3c2RsOnBhcnQgbmFtZT0icGFyYW1ldGVycyIgZWxlbWVudD0icHJkOmdldFByb2R1Y3RCeUlkUmVzcG9uc2UiPgogICAgPC93c2RsOnBhcnQ+CiAgPC93c2RsOm1lc3NhZ2U+CiAgPHdzZGw6bWVzc2FnZSBuYW1lPSJjcmVhdGVQcm9kdWN0UmVxdWVzdCI+CiAgICA8d3NkbDpwYXJ0IG5hbWU9InBhcmFtZXRlcnMiIGVsZW1lbnQ9InByZDpjcmVhdGVQcm9kdWN0Ij4KICAgIDwvd3NkbDpwYXJ0PgogIDwvd3NkbDptZXNzYWdlPgogIDx3c2RsOm1lc3NhZ2UgbmFtZT0iZ2V0UHJvZHVjdHNSZXNwb25zZSI+CiAgICA8d3NkbDpwYXJ0IG5hbWU9InBhcmFtZXRlcnMiIGVsZW1lbnQ9InByZDpnZXRQcm9kdWN0c1Jlc3BvbnNlIj4KICAgIDwvd3NkbDpwYXJ0PgogIDwvd3NkbDptZXNzYWdlPgogIDx3c2RsOm1lc3NhZ2UgbmFtZT0idXBkYXRlUHJvZHVjdFJlcXVlc3QiPgogICAgPHdzZGw6cGFydCBuYW1lPSJwYXJhbWV0ZXJzIiBlbGVtZW50PSJwcmQ6dXBkYXRlUHJvZHVjdCI+CiAgICA8L3dzZGw6cGFydD4KICA8L3dzZGw6bWVzc2FnZT4KICA8d3NkbDptZXNzYWdlIG5hbWU9ImdldFByb2R1Y3RCeUlkUmVxdWVzdCI+CiAgICA8d3NkbDpwYXJ0IG5hbWU9InBhcmFtZXRlcnMiIGVsZW1lbnQ9InByZDpnZXRQcm9kdWN0QnlJZCI+CiAgICA8L3dzZGw6cGFydD4KICA8L3dzZGw6bWVzc2FnZT4KICA8d3NkbDptZXNzYWdlIG5hbWU9ImNyZWF0ZVByb2R1Y3RSZXNwb25zZSI+CiAgICA8d3NkbDpwYXJ0IG5hbWU9InBhcmFtZXRlcnMiIGVsZW1lbnQ9InByZDpjcmVhdGVQcm9kdWN0UmVzcG9uc2UiPgogICAgPC93c2RsOnBhcnQ+CiAgPC93c2RsOm1lc3NhZ2U+CiAgPHdzZGw6bWVzc2FnZSBuYW1lPSJkZWxldGVQcm9kdWN0UmVzcG9uc2UiPgogICAgPHdzZGw6cGFydCBuYW1lPSJwYXJhbWV0ZXJzIiBlbGVtZW50PSJwcmQ6ZGVsZXRlUHJvZHVjdFJlc3BvbnNlIj4KICAgIDwvd3NkbDpwYXJ0PgogIDwvd3NkbDptZXNzYWdlPgogIDx3c2RsOm1lc3NhZ2UgbmFtZT0iZ2V0UHJvZHVjdHNSZXF1ZXN0Ij4KICAgIDx3c2RsOnBhcnQgbmFtZT0icGFyYW1ldGVycyIgZWxlbWVudD0icHJkOmdldFByb2R1Y3RzIj4KICAgIDwvd3NkbDpwYXJ0PgogIDwvd3NkbDptZXNzYWdlPgogIDx3c2RsOm1lc3NhZ2UgbmFtZT0iZ2V0Q3VzdG9tZXJCeVByb2R1Y3RSZXF1ZXN0Ij4KICAgIDx3c2RsOnBhcnQgbmFtZT0icGFyYW1ldGVycyIgZWxlbWVudD0icHJkOmdldEN1c3RvbWVyQnlQcm9kdWN0SWQiPgogICAgPC93c2RsOnBhcnQ+CiAgPC93c2RsOm1lc3NhZ2U+CiAgPHdzZGw6cG9ydFR5cGUgbmFtZT0iUHJvZHVjdCI+CiAgICA8d3NkbDpvcGVyYXRpb24gbmFtZT0iZ2V0UHJvZHVjdHMiPgogICAgICA8d3NkbDppbnB1dCBtZXNzYWdlPSJ0bnM6Z2V0UHJvZHVjdHNSZXF1ZXN0Ij4KICAgIDwvd3NkbDppbnB1dD4KICAgICAgPHdzZGw6b3V0cHV0IG1lc3NhZ2U9InRuczpnZXRQcm9kdWN0c1Jlc3BvbnNlIj4KICAgIDwvd3NkbDpvdXRwdXQ+CiAgICA8L3dzZGw6b3BlcmF0aW9uPgogICAgPHdzZGw6b3BlcmF0aW9uIG5hbWU9ImNyZWF0ZVByb2R1Y3QiPgogICAgICA8d3NkbDppbnB1dCBtZXNzYWdlPSJ0bnM6Y3JlYXRlUHJvZHVjdFJlcXVlc3QiPgogICAgPC93c2RsOmlucHV0PgogICAgICA8d3NkbDpvdXRwdXQgbWVzc2FnZT0idG5zOmNyZWF0ZVByb2R1Y3RSZXNwb25zZSI+CiAgICA8L3dzZGw6b3V0cHV0PgogICAgPC93c2RsOm9wZXJhdGlvbj4KICAgIDx3c2RsOm9wZXJhdGlvbiBuYW1lPSJ1cGRhdGVQcm9kdWN0Ij4KICAgICAgPHdzZGw6aW5wdXQgbWVzc2FnZT0idG5zOnVwZGF0ZVByb2R1Y3RSZXF1ZXN0Ij4KICAgIDwvd3NkbDppbnB1dD4KICAgICAgPHdzZGw6b3V0cHV0IG1lc3NhZ2U9InRuczp1cGRhdGVQcm9kdWN0UmVzcG9uc2UiPgogICAgPC93c2RsOm91dHB1dD4KICAgIDwvd3NkbDpvcGVyYXRpb24+CiAgICA8d3NkbDpvcGVyYXRpb24gbmFtZT0iZGVsZXRlUHJvZHVjdCI+CiAgICAgIDx3c2RsOmlucHV0IG1lc3NhZ2U9InRuczpkZWxldGVQcm9kdWN0UmVxdWVzdCI+CiAgICA8L3dzZGw6aW5wdXQ+CiAgICAgIDx3c2RsOm91dHB1dCBtZXNzYWdlPSJ0bnM6ZGVsZXRlUHJvZHVjdFJlc3BvbnNlIj4KICAgIDwvd3NkbDpvdXRwdXQ+CiAgICA8L3dzZGw6b3BlcmF0aW9uPgogICAgPHdzZGw6b3BlcmF0aW9uIG5hbWU9ImdldFByb2R1Y3RCeUlkIj4KICAgICAgPHdzZGw6aW5wdXQgbWVzc2FnZT0idG5zOmdldFByb2R1Y3RCeUlkUmVxdWVzdCI+CiAgICA8L3dzZGw6aW5wdXQ+CiAgICAgIDx3c2RsOm91dHB1dCBtZXNzYWdlPSJ0bnM6Z2V0UHJvZHVjdEJ5SWRSZXNwb25zZSI+CiAgICA8L3dzZGw6b3V0cHV0PgogICAgPC93c2RsOm9wZXJhdGlvbj4KICAgIDx3c2RsOm9wZXJhdGlvbiBuYW1lPSJnZXRDdXN0b21lckJ5UHJvZHVjdCI+CiAgICAgIDx3c2RsOmlucHV0IG1lc3NhZ2U9InRuczpnZXRDdXN0b21lckJ5UHJvZHVjdFJlcXVlc3QiPgogICAgPC93c2RsOmlucHV0PgogICAgICA8d3NkbDpvdXRwdXQgbWVzc2FnZT0idG5zOmdldEN1c3RvbWVyQnlQcm9kdWN0UmVzcG9uc2UiPgogICAgPC93c2RsOm91dHB1dD4KICAgIDwvd3NkbDpvcGVyYXRpb24+CiAgPC93c2RsOnBvcnRUeXBlPgogIDx3c2RsOmJpbmRpbmcgbmFtZT0iUHJvZHVjdEJpbmRpbmciIHR5cGU9InRuczpQcm9kdWN0Ij4KICAgIDxzb2FwOmJpbmRpbmcgc3R5bGU9ImRvY3VtZW50IiB0cmFuc3BvcnQ9Imh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3NvYXAvaHR0cCIvPgogICAgPHdzZGw6b3BlcmF0aW9uIG5hbWU9ImdldFByb2R1Y3RzIj4KICAgICAgPHNvYXA6b3BlcmF0aW9uIHNvYXBBY3Rpb249Imh0dHA6Ly9ucy5zb2Z0d2FyZWFnLmNvbS9kc2Evd3MvcHJvZHVjdC9nZXRQcm9kdWN0cyIvPgogICAgICA8d3NkbDppbnB1dD4KICAgICAgICA8c29hcDpib2R5IHVzZT0ibGl0ZXJhbCIvPgogICAgICA8L3dzZGw6aW5wdXQ+CiAgICAgIDx3c2RsOm91dHB1dD4KICAgICAgICA8c29hcDpib2R5IHVzZT0ibGl0ZXJhbCIvPgogICAgICA8L3dzZGw6b3V0cHV0PgogICAgPC93c2RsOm9wZXJhdGlvbj4KICAgIDx3c2RsOm9wZXJhdGlvbiBuYW1lPSJjcmVhdGVQcm9kdWN0Ij4KICAgICAgPHNvYXA6b3BlcmF0aW9uIHNvYXBBY3Rpb249Imh0dHA6Ly9ucy5zb2Z0d2FyZWFnLmNvbS9kc2Evd3MvcHJvZHVjdC9jcmVhdGVQcm9kdWN0Ii8+CiAgICAgIDx3c2RsOmlucHV0PgogICAgICAgIDxzb2FwOmJvZHkgdXNlPSJsaXRlcmFsIi8+CiAgICAgIDwvd3NkbDppbnB1dD4KICAgICAgPHdzZGw6b3V0cHV0PgogICAgICAgIDxzb2FwOmJvZHkgdXNlPSJsaXRlcmFsIi8+CiAgICAgIDwvd3NkbDpvdXRwdXQ+CiAgICA8L3dzZGw6b3BlcmF0aW9uPgogICAgPHdzZGw6b3BlcmF0aW9uIG5hbWU9InVwZGF0ZVByb2R1Y3QiPgogICAgICA8c29hcDpvcGVyYXRpb24gc29hcEFjdGlvbj0iaHR0cDovL25zLnNvZnR3YXJlYWcuY29tL2RzYS93cy9wcm9kdWN0L3VwZGF0ZVByb2R1Y3QiLz4KICAgICAgPHdzZGw6aW5wdXQ+CiAgICAgICAgPHNvYXA6Ym9keSB1c2U9ImxpdGVyYWwiLz4KICAgICAgPC93c2RsOmlucHV0PgogICAgICA8d3NkbDpvdXRwdXQ+CiAgICAgICAgPHNvYXA6Ym9keSB1c2U9ImxpdGVyYWwiLz4KICAgICAgPC93c2RsOm91dHB1dD4KICAgIDwvd3NkbDpvcGVyYXRpb24+CiAgICA8d3NkbDpvcGVyYXRpb24gbmFtZT0iZGVsZXRlUHJvZHVjdCI+CiAgICAgIDxzb2FwOm9wZXJhdGlvbiBzb2FwQWN0aW9uPSJodHRwOi8vbnMuc29mdHdhcmVhZy5jb20vZHNhL3dzL3Byb2R1Y3QvZGVsZXRlUHJvZHVjdCIvPgogICAgICA8d3NkbDppbnB1dD4KICAgICAgICA8c29hcDpib2R5IHVzZT0ibGl0ZXJhbCIvPgogICAgICA8L3dzZGw6aW5wdXQ+CiAgICAgIDx3c2RsOm91dHB1dD4KICAgICAgICA8c29hcDpib2R5IHVzZT0ibGl0ZXJhbCIvPgogICAgICA8L3dzZGw6b3V0cHV0PgogICAgPC93c2RsOm9wZXJhdGlvbj4KICAgIDx3c2RsOm9wZXJhdGlvbiBuYW1lPSJnZXRQcm9kdWN0QnlJZCI+CiAgICAgIDxzb2FwOm9wZXJhdGlvbiBzb2FwQWN0aW9uPSJodHRwOi8vbnMuc29mdHdhcmVhZy5jb20vZHNhL3dzL3Byb2R1Y3QvZ2V0UHJvZHVjdEJ5SWQiLz4KICAgICAgPHdzZGw6aW5wdXQ+CiAgICAgICAgPHNvYXA6Ym9keSB1c2U9ImxpdGVyYWwiLz4KICAgICAgPC93c2RsOmlucHV0PgogICAgICA8d3NkbDpvdXRwdXQ+CiAgICAgICAgPHNvYXA6Ym9keSB1c2U9ImxpdGVyYWwiLz4KICAgICAgPC93c2RsOm91dHB1dD4KICAgIDwvd3NkbDpvcGVyYXRpb24+CiAgICA8d3NkbDpvcGVyYXRpb24gbmFtZT0iZ2V0Q3VzdG9tZXJCeVByb2R1Y3QiPgogICAgICA8c29hcDpvcGVyYXRpb24gc29hcEFjdGlvbj0iaHR0cDovL25zLnNvZnR3YXJlYWcuY29tL2RzYS93cy9wcm9kdWN0L2dldEN1c3RvbWVyQnlQcm9kdWN0Ii8+CiAgICAgIDx3c2RsOmlucHV0PgogICAgICAgIDxzb2FwOmJvZHkgdXNlPSJsaXRlcmFsIi8+CiAgICAgIDwvd3NkbDppbnB1dD4KICAgICAgPHdzZGw6b3V0cHV0PgogICAgICAgIDxzb2FwOmJvZHkgdXNlPSJsaXRlcmFsIi8+CiAgICAgIDwvd3NkbDpvdXRwdXQ+CiAgICA8L3dzZGw6b3BlcmF0aW9uPgogIDwvd3NkbDpiaW5kaW5nPgogIDx3c2RsOnNlcnZpY2UgbmFtZT0iQ29ubmVjdGVkRGVtb3NUQ0RCX3dlYnNlcnZpY2VzX3Byb2R1Y3RzV1NEIj4KICAgIDx3c2RsOnBvcnQgbmFtZT0iQ29ubmVjdGVkRGVtb3NUQ0RCX3dlYnNlcnZpY2VzX3Byb2R1Y3RzV1NEX1BvcnQiIGJpbmRpbmc9InRuczpQcm9kdWN0QmluZGluZyI+CiAgICAgIDxzb2FwOmFkZHJlc3MgbG9jYXRpb249Imh0dHA6Ly9wcm9kdWN0cy1hcGktMTItZzIyMjg6NTU1NS8iLz4KICAgIDwvd3NkbDpwb3J0PgogIDwvd3NkbDpzZXJ2aWNlPgo8L3dzZGw6ZGVmaW5pdGlvbnM+Cg==      </byte>
+      <number name="type" type="Integer">1</number>
+    </record>
+  </array>
+  <value name="externalWSDLURL">file:/C:/Users/mihe/workspace103/WSDLs/product/product.wsdl</value>
+  <value name="WSDLURL">http://SAG-8127PC2.eur.ad.sag:5555/ws/ConnectedDemosTCDB.webservices_3:productsWSD?WSDL</value>
+  <value name="definitionName">productsWSD</value>
+  <value name="version">V_10_5</value>
+  <value name="schemaDomain">36f82577a63948798fbcca0a4fc0657c</value>
+  <Boolean name="rawArray">true</Boolean>
+  <array name="handlerList" type="record" depth="1">
+  </array>
+  <array name="binderList" type="record" depth="1">
+    <record javaclass="com.wm.util.Values">
+      <value name="binderName">ProductBinding</value>
+      <value name="bindingName">ProductBinding</value>
+      <value name="bindingStyle">document</value>
+      <value name="bindingUse">literal</value>
+      <value name="bindingType">SOAP</value>
+      <value name="portName">ConnectedDemosTCDB_webservices_productsWSD_Port</value>
+      <value name="portTypeName">Product</value>
+      <value name="bindingTransport">http://schemas.xmlsoap.org/soap/http</value>
+      <value name="transportType">http</value>
+      <record name="operationMap" javaclass="com.wm.util.Values">
+        <value name="http://ns.softwareag.com/dsa/ws/product/updateProduct">updateProduct</value>
+        <value name="http://ns.softwareag.com/dsa/ws/product/deleteProduct">deleteProduct</value>
+        <value name="http://ns.softwareag.com/dsa/ws/product/createProduct">createProduct</value>
+        <value name="http://ns.softwareag.com/dsa/ws/product/getCustomerByProduct">getCustomerByProduct</value>
+        <value name="http://ns.softwareag.com/dsa/ws/product/getProducts">getProducts</value>
+        <value name="http://ns.softwareag.com/dsa/ws/product/getProductById">getProductById</value>
+      </record>
+      <value name="SOAPProtocol">SOAP 1.1 Protocol</value>
+      <value name="SOAPDirective">ws</value>
+      <Boolean name="useCSQ">false</Boolean>
+    </record>
+  </array>
+  <array name="operationList" type="record" depth="1">
+    <record javaclass="com.wm.util.Values">
+      <value name="operationName">getProducts</value>
+      <value name="serviceName">ConnectedDemosTCDB.webservices.productsWSD_.services:getProducts</value>
+      <value name="originalMEPType">MEP_URI_IN_OUT</value>
+      <record name="requestElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_getProducts_Input</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getProducts_Input</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getProducts_Input</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+      <record name="responseElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_getProducts_Output</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getProducts_Output</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getProducts_Output</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+    </record>
+    <record javaclass="com.wm.util.Values">
+      <value name="operationName">createProduct</value>
+      <value name="serviceName">ConnectedDemosTCDB.webservices.productsWSD_.services:createProduct</value>
+      <value name="originalMEPType">MEP_URI_IN_OUT</value>
+      <record name="requestElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_createProduct_Input</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_createProduct_Input</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_createProduct_Input</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+      <record name="responseElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_createProduct_Output</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_createProduct_Output</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_createProduct_Output</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+    </record>
+    <record javaclass="com.wm.util.Values">
+      <value name="operationName">updateProduct</value>
+      <value name="serviceName">ConnectedDemosTCDB.webservices.productsWSD_.services:updateProduct</value>
+      <value name="originalMEPType">MEP_URI_IN_OUT</value>
+      <record name="requestElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_updateProduct_Input</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_updateProduct_Input</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_updateProduct_Input</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+      <record name="responseElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_updateProduct_Output</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_updateProduct_Output</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_updateProduct_Output</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+    </record>
+    <record javaclass="com.wm.util.Values">
+      <value name="operationName">deleteProduct</value>
+      <value name="serviceName">ConnectedDemosTCDB.webservices.productsWSD_.services:deleteProduct</value>
+      <value name="originalMEPType">MEP_URI_IN_OUT</value>
+      <record name="requestElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_deleteProduct_Input</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_deleteProduct_Input</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_deleteProduct_Input</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+      <record name="responseElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_deleteProduct_Output</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_deleteProduct_Output</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_deleteProduct_Output</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+    </record>
+    <record javaclass="com.wm.util.Values">
+      <value name="operationName">getProductById</value>
+      <value name="serviceName">ConnectedDemosTCDB.webservices.productsWSD_.services:getProductById</value>
+      <value name="originalMEPType">MEP_URI_IN_OUT</value>
+      <record name="requestElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_getProductById_Input</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getProductById_Input</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getProductById_Input</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+      <record name="responseElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_getProductById_Output</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getProductById_Output</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getProductById_Output</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+    </record>
+    <record javaclass="com.wm.util.Values">
+      <value name="operationName">getCustomerByProduct</value>
+      <value name="serviceName">ConnectedDemosTCDB.webservices.productsWSD_.services:getCustomerByProduct</value>
+      <value name="originalMEPType">MEP_URI_IN_OUT</value>
+      <record name="requestElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_getCustomerByProduct_Input</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getCustomerByProduct_Input</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getCustomerByProduct_Input</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+      <record name="responseElement" javaclass="com.wm.util.Values">
+        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">
+          <value name="name">http://ns.softwareag.com/dsa/ws/product:Product_getCustomerByProduct_Output</value>
+          <value name="docType">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getCustomerByProduct_Output</value>
+          <value name="nsOwner">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:Product_getCustomerByProduct_Output</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+    </record>
+  </array>
+  <record name="namespaces" javaclass="com.wm.util.Values">
+    <value name="prd">http://ns.softwareag.com/dsa/product/</value>
+    <value name="wsdl">http://schemas.xmlsoap.org/wsdl/</value>
+    <value name="tns">http://ns.softwareag.com/dsa/ws/product</value>
+    <value name="xsd">http://www.w3.org/2001/XMLSchema</value>
+    <value name="soap">http://schemas.xmlsoap.org/wsdl/soap/</value>
+  </record>
+  <Boolean name="HeadersInPipelineEnabled">false</Boolean>
+  <Boolean name="validateSOAPResponse">true</Boolean>
+  <Boolean name="validateSchemaUsingXerces">true</Boolean>
+  <Boolean name="enableCompatibility">false</Boolean>
+  <Boolean name="omitXSDAny">true</Boolean>
+  <record name="userDefinedURIReferencePrefixes" javaclass="com.wm.util.Values">
+  </record>
+  <Boolean name="registerDoctypes">true</Boolean>
+  <Boolean name="allTypes">false</Boolean>
+  <Boolean name="generateXOPObjectForBase64Binary">false</Boolean>
+  <value name="originURI">file://C:\Users\mihe\workspace103\WSDLs\product\product.wsdl</value>
+  <value name="modifiable">false</value>
+  <value name="externalServiceName">{http://ns.softwareag.com/dsa/ws/product}ConnectedDemosTCDB_webservices_productsWSD</value>
+  <null name="policyAttachmentList"/>
+  <Boolean name="filterLoginCredentials">false</Boolean>
+</Values>

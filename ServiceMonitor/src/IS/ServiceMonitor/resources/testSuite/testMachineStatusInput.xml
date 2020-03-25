@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IDataXMLCoder version="1.0">
+  <record javaclass="com.wm.data.ISMemDataImpl">
+    <value name="rawJsonStatus">{
+  "machineId": "PROD00005",
+  "status": "RUNNING",
+  "timestamp": "25-03-2020T08:51:51.051"
+}</value>
+  </record>
+</IDataXMLCoder>

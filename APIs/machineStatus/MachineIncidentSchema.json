@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://json.softwareag.com/machineincident",
+  "title": "A JSON schema for Machine Incident Messages",
+  "type": "object",
+  "default": {},
+  "required": [
+    "machineId",
+	"status",
+	"component"
+  ],
+  "properties": {
+    "machineId": {
+      "description": "The serial number of the machine which has an incident",
+      "type": "string"
+    },
+    "status": {
+      "description": "The status of the machine.",
+        "type":"string"
+    },
+    "component": {
+      "description": "The affected component in the machine.",
+        "type":"string"
+    },
+    "componentStatusDescription": {
+      "description": "A description of what seems to be the cause of the failure.",
+        "type":"string"
+    }
+  }
+}

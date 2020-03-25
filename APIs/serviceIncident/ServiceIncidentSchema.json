@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://json.softwareag.com/serviceincident",
+  "title": "A JSON schema for Service Incident Objects",
+  "type": "object",
+  "default": {},
+  "required": [
+    "assetId",
+	"assetName",
+	"shortDescription",
+	"severity",
+	"urgency",
+	"customer",
+	"customerContact"
+  ],
+  "properties": {
+    "id": {
+      "description": "The generated id for the service incident",
+      "type": "string"
+    },
+	"assetId": {
+	  "description": "The serial number of the affected asset",
+      "type": "string"
+	},
+	"assetName": {
+	  "description": "The name of the affected asset",
+	  "type": "string"
+	},
+	"shortDescription": {
+	  "description": "A short description for the incident",
+      "type": "string"
+	},
+	"severity": {
+	  "description": "The severity of the incident, possible values: HIGH, MEDIUM, LOW",
+      "type": "string"
+	},
+	"urgeny": {
+	  "description": "Urgency of the incident, possible values: HIGH, MEDIUM, LOW",
+      "type": "string"
+	},
+	"customer": {
+	  "description": "Customer for which the incident is raised",
+	  "type": "string"
+	},
+	"customerContact": {
+	  "description": "The contact person at customers side",
+      "type": "string"
+	}
+  }
+}

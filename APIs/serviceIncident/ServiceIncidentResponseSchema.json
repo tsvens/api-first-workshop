@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://json.softwareag.com/serviceincidentresponse",
+  "title": "A JSON schema for Service Incident response Messages",
+  "type": "object",
+  "properties": {
+    "serviceIncidentId": {
+      "description": "The generated id for the service incident",
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+   "assetId": "PROD00001",
+   "assetName": "LightSabre",
+   "shortDescription": "Lightsource broken",
+   "severity": "HIGH",
+   "urgency": "1",
+   "customer": "Imperial Force",
+   "customerContact": "Anakin Skywalker"
+}

@@ -1,0 +1,36 @@
+kind: "DeploymentConfig"
+apiVersion: "v1"
+metadata:
+  name: "${CONTAINER}"
+spec:
+  template: 
+    metadata:
+      labels:
+        name: "${CONTAINER}"
+    spec:
+      containers:
+        - name: "${CONTAINER}"
+          image: "${NAMESPACE}/${CONTAINER_TAG}"
+          ports:
+            - containerPort: 5555
+              protocol: "TCP"
+            - containerPort: 5333
+              protocol: "TCP"
+  replicas: 1
+  triggers:
+    - type: "ConfigChange" 
+    - type: "ImageChange" 
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - ${CONTAINER}
+        from:
+          kind: ImageStreamTag
+          name: '${CONTAINER_TAG}'
+          namespace: ${NAMESPACE}
+      type: ImageChange
+  strategy: 
+    type: "Rolling"
+  paused: false 
+  revisionHistoryLimit: 2 
+  minReadySeconds: 0
