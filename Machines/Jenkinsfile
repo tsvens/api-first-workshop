@@ -39,7 +39,6 @@ pipeline {
 					sh 'cp ${WORKSPACE}/${PACKAGE}/config/substitutionVars.xml /opt/softwareag/IntegrationServer/instances/default/packages/WmDeployer/replicate/inbound/;\
 						cd /opt/softwareag/IntegrationServer/instances/default/packages/WmDeployer/bin;\
 						./projectautomatorUnix.sh ${WORKSPACE}/${PACKAGE}/build/project-deploy.xml;\
-						./Deployer.sh --import -varsub -vsFile substitutionVars.xml -map myDeploymentMap -project ACDL_MSR_PACKAGES -validate true -host localhost -port 5555 -user Administrator -pwd manage;\
 						./Deployer.sh --deploy -force -dc myDeployment -project ACDL_MSR_PACKAGES -host localhost -port 5555 -user Administrator -pwd manage'
 				}
 			}
