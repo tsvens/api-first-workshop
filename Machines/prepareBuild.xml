@@ -9,6 +9,7 @@
   <property name="CONTAINER" value="${env.CONTAINER}"/>
   <property name="NAMESPACE" value="${env.NAMESPACE}"/>
   <property name="CONTAINER_TAG" value="${env.CONTAINER_TAG}"/>
+  <property name="REGISTRY" value="${env.REGISTRY}"/>
   <property name="dist" value= "./dist" />
   <property name="build" value= "./build" />
   
@@ -54,6 +55,7 @@
 	<populate-from-template template="Dockerfile" target="${build}/container/Dockerfile"/>
 	<populate-from-template template="deployment/api-DC.yml" target="deployment/${env.CONTAINER}-DC.yml"/>
 	<populate-from-template template="deployment/service-route.yml" target="deployment/${env.CONTAINER}-service-route.yml"/>
+	<populate-from-template template="test/run-test-suites.properties" target="test/run-test.properties"/>
 	<copy todir="${build}/container/config" failonerror="false">
 		<fileset dir="./config"/>
 	</copy>
