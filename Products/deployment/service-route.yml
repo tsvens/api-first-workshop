@@ -23,7 +23,7 @@ metadata:
   name: ${CONTAINER}-route
   namespace: ${NAMESPACE}
 spec:
-  host: ${CONTAINER}.193-26-203-31.nip.io
+  host: ${CONTAINER}.daehpresal44966.hycloud.softwareag.com
   port:
     targetPort: 5555-tcp
   to:
