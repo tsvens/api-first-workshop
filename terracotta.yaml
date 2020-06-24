@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: tc-configs
+  namespace: swag-infra
 data:
   single-instance.xml: |
       <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -50,6 +51,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: terracotta-service
+  namespace: swag-infra
   labels:
     app: terracotta
   annotations:
@@ -70,6 +72,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: terracotta
+  namespace: swag-infra
 spec:
   selector:
     matchLabels:
@@ -138,6 +141,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: cluster-tool
+  namespace: swag-infra
 spec:
   template:
     metadata:
@@ -171,6 +175,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tmc
+  namespace: swag-infra
 spec:
   ports:
   - name: tmc-port
@@ -185,6 +190,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tmc-internal
+  namespace: swag-infra
   labels:
     app: tmc
 spec:
@@ -202,6 +208,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: tmc
+  namespace: swag-infra
 spec:
   selector:
     matchLabels:
