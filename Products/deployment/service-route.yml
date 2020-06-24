@@ -5,29 +5,36 @@ metadata:
     app: ${CONTAINER}
   name: ${CONTAINER}-service
   namespace: ${NAMESPACE}
-spec:
-  clusterIP: 
+spec: 
   ports:
-    - name: 5555-tcp
-      port: 56565
+    - name: micro-gateway-tcp
+      port: 4485
+      protocol: TCP
+      targetPort: 4485
+    - name: api-container-tcp
+      port: 5555
       protocol: TCP
       targetPort: 5555
   selector:
-    deploymentconfig: ${CONTAINER}
-  sessionAffinity: None
+    app: ${CONTAINER}
   type: ClusterIP
 ---
-apiVersion: v1
-kind: Route
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
 metadata:
-  name: ${CONTAINER}-route
-  namespace: ${NAMESPACE}
+  name: ${CONTAINER}-ingress
+  namespace: "${NAMESPACE}"
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
-  host: ${CONTAINER}.daehpresal44966.hycloud.softwareag.com
-  port:
-    targetPort: 5555-tcp
-  to:
-    kind: Service
-    name: ${CONTAINER}-service
-    weight: 100
-  wildcardPolicy: None
+  rules:
+  - host: ${CONTAINER}.daehpresal44966.hycloud.softwareag.com
+    http:
+      paths:
+      - backend:
+          serviceName: ${CONTAINER}-service
+          servicePort: 5555
+  tls:
+  - hosts:
+    - ${CONTAINER}.daehpresal44966.hycloud.softwareag.com
+    secretName: ${CONTAINER}-crt
