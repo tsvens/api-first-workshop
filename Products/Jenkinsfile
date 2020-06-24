@@ -85,7 +85,7 @@ pipeline {
 				
 						script {
 							try {
-								sh 'kubectl get service ${CONTAINER}-service'
+								sh 'kubectl -n ${NAMESPACE} get service ${CONTAINER}-service'
 							} catch (exc) {
 								echo 'Service does not exist yet'
 								sh 'kubectl apply -f ${PACKAGE}/deployment/${CONTAINER}-service-route.yml'
