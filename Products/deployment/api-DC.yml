@@ -158,47 +158,56 @@ data:
             ]
         }
     }
-
 ---
-kind: "DeploymentConfig"
-apiVersion: "v1"
+kind: "Deployment"
+apiVersion: "apps/v1"
 metadata:
   name: "${CONTAINER}"
   namespace: "${NAMESPACE}"
+  labels:
+    app: "${CONTAINER}"
 spec:
+  selector:
+    matchLabels:
+      app: "${CONTAINER}" 
   template: 
     metadata:
       labels:
-        name: "${CONTAINER}"
+        app: "${CONTAINER}"
     spec:
       containers:
         - name: "${CONTAINER}"
-          image: "${NAMESPACE}/${CONTAINER_TAG}"
+          image: "${REGISTRY}/${CONTAINER_TAG}"
           ports:
             - containerPort: 5555
               protocol: "TCP"
           volumeMounts:
+            - name: config-volume
+              mountPath: /opt/swagmsr/config          
             - name: data-volume
               mountPath: /data
+          env:
+            - name: "SAG_IS_CONFIG_PROPERTIES"
+              value: "/opt/swagmsr/config/application.properties"
+        - name: "api-micro-gateway"
+          image: "store/softwareag/microgateway-trial:10.5.0.2"
+          ports:
+            - containerPort: 9090
+              protocol: "TCP"
+          env:
+            - name: "mcgw_api_gateway_url"
+              value: "http://api-gateway.swag-infra:5555"
+            - name: "mcgw_api_gateway_user"
+              value: "Administrator"
+            - name: "mcgw_api_gateway_password"
+              value: "manage"
+            - name: "mcgw_downloads_apis"
+              value: "${CONTAINER}"
       volumes:
+        - name: config-volume
+          configMap:
+            name: application-properties-is
         - name: data-volume
           configMap:
             name: demodata
   replicas: 1
-  triggers:
-    - type: "ConfigChange" 
-    - type: "ImageChange" 
-      imageChangeParams:
-        automatic: true
-        containerNames:
-          - ${CONTAINER}
-        from:
-          kind: ImageStreamTag
-          name: '${CONTAINER_TAG}'
-          namespace: ${NAMESPACE}
-      type: ImageChange
-  strategy: 
-    type: "Rolling"
-  paused: false 
-  revisionHistoryLimit: 2 
-  minReadySeconds: 0
