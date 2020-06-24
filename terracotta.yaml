@@ -1,0 +1,249 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tc-configs
+data:
+  single-instance.xml: |
+      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+      <!--
+        Copyright (c) 2011-2018 Software AG, Darmstadt, Germany and/or Software AG USA Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors.
+        Use, reproduction, transfer, publication or disclosure is prohibited except as specifically provided for in your License Agreement with Software AG.
+        -->
+      <tc-config xmlns="http://www.terracotta.org/config">
+        <plugins>
+          <service>
+            <lease:connection-leasing xmlns:backup="http://www.terracottatech.com/config/backup-restore" xmlns:data="http://www.terracottatech.com/config/data-roots" xmlns:ohr="http://www.terracotta.org/config/offheap-resource" xmlns:lease="http://www.terracotta.org/service/lease">
+              <lease:lease-length unit="seconds">20</lease:lease-length>
+            </lease:connection-leasing>
+          </service>
+          <config>
+            <ohr:offheap-resources xmlns:backup="http://www.terracottatech.com/config/backup-restore" xmlns:data="http://www.terracottatech.com/config/data-roots" xmlns:ohr="http://www.terracotta.org/config/offheap-resource" xmlns:lease="http://www.terracotta.org/service/lease">
+              <ohr:resource name="offheap-1" unit="GB">1</ohr:resource>
+              <ohr:resource name="offheap-2" unit="GB">1</ohr:resource>
+            </ohr:offheap-resources>
+          </config>
+          <config>
+            <data:data-directories xmlns:backup="http://www.terracottatech.com/config/backup-restore" xmlns:data="http://www.terracottatech.com/config/data-roots" xmlns:ohr="http://www.terracotta.org/config/offheap-resource" xmlns:lease="http://www.terracotta.org/service/lease">
+              <data:directory name="PLATFORM" use-for-platform="true">/data/dataroots/platform</data:directory>
+              <data:directory name="dataroot-1" use-for-platform="false">/data/dataroots/dataroot-1</data:directory>
+              <data:directory name="dataroot-2" use-for-platform="false">/data/dataroots/dataroot-2</data:directory>
+            </data:data-directories>
+          </config>
+          <service>
+            <backup:backup-restore xmlns:backup="http://www.terracottatech.com/config/backup-restore" xmlns:data="http://www.terracottatech.com/config/data-roots" xmlns:ohr="http://www.terracotta.org/config/offheap-resource" xmlns:lease="http://www.terracotta.org/service/lease">
+              <backup:backup-location path="/data/backups"/>
+            </backup:backup-restore>
+          </service>
+        </plugins>
+        <servers>
+          <server host="terracotta.swag-infra" name="terracotta" bind="0.0.0.0">
+            <logs>/opt/softwareag/terracotta/server/conf/stdout:</logs>
+            <tsa-port bind="0.0.0.0">9410</tsa-port>
+            <tsa-group-port bind="0.0.0.0">9430</tsa-group-port>
+          </server>
+          <client-reconnect-window>120</client-reconnect-window>
+        </servers>
+      </tc-config>
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: terracotta-service
+  labels:
+    app: terracotta
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  ports:
+    - name: terracotta-port
+      port: 9410
+    - name: sync-port
+      port: 9430
+  selector:
+    app: terracotta
+  type: ClusterIP
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: terracotta
+spec:
+  selector:
+    matchLabels:
+      app: terracotta
+  serviceName: terracotta-service
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: terracotta
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: terracotta
+          image: store/softwareag/terracotta-server:10.5
+          command: ["bin/start-tc-server.sh"]
+          args: ["-f", "/configs/single-instance.xml", "-n", "terracotta"]
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 4Gi
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+          ports:
+            - containerPort: 9410
+              name: terracotta-port
+            - containerPort: 9430
+              name: sync-port
+          volumeMounts:
+            - name: config-volume
+              mountPath: /configs
+            - name: dataroots
+              mountPath: /data/dataroots
+        - name: readiness
+          image: store/softwareag/terracotta-cluster-tool:10.5
+          command: ["sh", "-c", "while true; do sleep 86400; done"]
+          imagePullPolicy: Always
+          readinessProbe:
+            exec:
+              command: ["bash", "-c", "bin/cluster-tool.sh status -s terracotta.swag-infra"]
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            timeoutSeconds: 5
+            # 10,000 as failure threshold gives around 41 hours of time to load from FRS and start terracotta successfully.
+            failureThreshold: 10000
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: tc-configs
+      imagePullSecrets:
+        - name: regcred
+  volumeClaimTemplates:
+    - metadata:
+        name: dataroots
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 10Gi
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cluster-tool
+spec:
+  template:
+    metadata:
+      name: cluster-tool
+    spec:
+      containers:
+        - name: cluster-tool
+          image: store/softwareag/terracotta-cluster-tool:10.5
+          args: ["configure", "-n", "MyCluster", "/configs/single-instance.xml"]
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          volumeMounts:
+          - name: config-volume
+            mountPath: /configs
+          - name: license-volume
+            mountPath: /licenses
+      volumes:
+        - name: config-volume
+          configMap:
+            name: tc-configs
+        - name: license-volume
+          configMap:
+            name: license
+      restartPolicy: OnFailure
+      imagePullSecrets:
+        - name: regcred
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tmc
+spec:
+  ports:
+  - name: tmc-port
+    port: 9480
+  type: LoadBalancer
+  selector:
+    app: tmc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tmc-internal
+  labels:
+    app: tmc
+spec:
+  ports:
+  - name: tmc-port
+    port: 9480
+  clusterIP: None
+  selector:
+    app: tmc
+
+---
+
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tmc
+spec:
+  selector:
+    matchLabels:
+      app: tmc
+  serviceName: tmc-internal
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tmc
+    spec:
+      terminationGracePeriodSeconds: 10
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kops.k8s.io/instancegroup
+                operator: In
+                values:
+                - clientnodes
+      containers:
+        - image: store/softwareag/tmc:10.5
+          name: tmc
+          imagePullPolicy: Always
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: TMS_DEFAULTURL
+              value: "terracotta://terracotta.swag-infra:9410"
+          ports:
+            - containerPort: 9480
+          volumeMounts:
+            - name: tmcdata
+              mountPath: /data/tmc/
+      imagePullSecrets:
+        - name: regcred
+  volumeClaimTemplates:
+    - metadata:
+        name: tmcdata
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 100Gi
