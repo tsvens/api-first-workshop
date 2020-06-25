@@ -224,8 +224,8 @@ spec:
               mountPath: /opt/swagmsr/config          
             - name: data-volume
               mountPath: /data
-            - name: wmpublic-config
-              mountPath: /opt/softwareag/IntegrationServer/packages/WmPublic/config
+#            - name: wmpublic-config
+#              mountPath: /opt/softwareag/IntegrationServer/packages/WmPublic/config
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
