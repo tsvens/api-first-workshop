@@ -237,6 +237,7 @@ spec:
               mountPath: /data/utils/dataSet
             - name: wmpublic-config
               mountPath: /opt/softwareag/IntegrationServer/packages/WmPublic/config/fileAccessControl.cnf
+              subPath: fileAccessControl.cnf
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
