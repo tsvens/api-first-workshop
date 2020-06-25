@@ -28,11 +28,11 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: fileAccessControl
+  name: wmpublic-config
   namespace: "${NAMESPACE}"
 data:
   fileAccessControl.cnf: |
-    allowedReadPaths=
+    allowedReadPaths=/data
     allowedWritePaths=
     allowedDeletePaths=
 ---
@@ -252,5 +252,5 @@ spec:
             name: demodata
         - name: wmpublic-config
           configMap:
-            name: fileAccessControl
+            name: wmpublic-config
   replicas: 1
