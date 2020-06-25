@@ -28,6 +28,17 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: fileAccessControl
+  namespace: "${NAMESPACE}"
+data:
+  fileAccessControl.cnf: |
+    allowedReadPaths=
+    allowedWritePaths=
+    allowedDeletePaths=
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: demodata
   namespace: "${NAMESPACE}"
 data:
@@ -213,6 +224,8 @@ spec:
               mountPath: /opt/swagmsr/config          
             - name: data-volume
               mountPath: /data
+            - name: wmpublic-config
+              mountPath: /opt/softwareag/IntegrationServer/packages/WmPublic/config
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
@@ -237,4 +250,7 @@ spec:
         - name: data-volume
           configMap:
             name: demodata
+        - name: wmpublic-config
+          configMap:
+            name: fileAccessControl
   replicas: 1

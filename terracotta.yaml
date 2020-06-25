@@ -50,7 +50,7 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: terracotta-service
+  name: terracotta
   namespace: swag-infra
   labels:
     app: terracotta
@@ -77,7 +77,7 @@ spec:
   selector:
     matchLabels:
       app: terracotta
-  serviceName: terracotta-service
+  serviceName: terracotta
   replicas: 2
   template:
     metadata:
