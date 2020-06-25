@@ -264,4 +264,7 @@ spec:
         - name: wmpublic-config
           configMap:
             name: wmpublic-config
+        - name: data-set-names
+          configMap:
+            name: datasetnames
   replicas: 1
