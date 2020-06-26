@@ -158,7 +158,7 @@ data:
                     "totalValue": 13.95,
                     "currencyId": "EUR"
                 }
-            ]
+            ],
             "Product": [{
                     "id": "PROD00001",
                     "productName": "Millennium Falcon",
