@@ -204,7 +204,7 @@ metadata:
   namespace: "${NAMESPACE}"
 data:  
   dataSetNames.txt: |
-    Inventory/Product
+    Inventory/Product/UOM
 ---
 kind: "Deployment"
 apiVersion: "apps/v1"
