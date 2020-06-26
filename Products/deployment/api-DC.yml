@@ -122,6 +122,42 @@ data:
                     "inventoryTypeId": "REFINV-01"
                 }
             ],
+            "SalesOrder": [
+                {
+                    "id": "SAL0000021",
+                    "customerId": "0011o00001q2b06AAA",
+                    "statusId": "STAT0001",
+                    "totalValue": 13.95,
+                    "orderDate": "2019-08-22T13:18:00+0100",
+                    "shipDate": "2019-08-22T13:21:00+0100",
+                    "isUrgent": false,
+                    "currencyId": "EUR",
+                    "processTypeId": "PROC00002",
+                    "orderItemCount": 1
+                }
+            ],
+            "SalesOrderItem": [
+                {
+                    "id": "SAL0000021-001",
+                    "orderId": "SAL0000021",
+                    "productId": "PROD00002",
+                    "statusId": "STAT005",
+                    "quantity": 1,
+                    "price": 11.00,
+                    "totalValue": 13.95,
+                    "currencyId": "EUR"
+                },
+                {
+                    "id": "SAL0000021-002",
+                    "orderId": "SAL0000021",
+                    "productId": "PROD00003",
+                    "statusId": "STAT005",
+                    "quantity": 1,
+                    "price": 2.95,
+                    "totalValue": 13.95,
+                    "currencyId": "EUR"
+                }
+            ]
             "Product": [{
                     "id": "PROD00001",
                     "productName": "Millennium Falcon",
@@ -204,7 +240,7 @@ metadata:
   namespace: "${NAMESPACE}"
 data:  
   dataSetNames.txt: |
-    Inventory/Product/UOM
+    Inventory/Product/SalesOrderItem/SalesOrder/UOM
 ---
 kind: "Deployment"
 apiVersion: "apps/v1"
