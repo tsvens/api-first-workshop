@@ -143,7 +143,7 @@ data:
                     "orderId": "SAL0000021",
                     "productId": "PROD00002",
                     "statusId": "STAT005",
-                    "quantity": 1,
+                    "quantity": 1.0,
                     "price": 11.00,
                     "totalValue": 13.95,
                     "currencyId": "EUR"
@@ -153,7 +153,7 @@ data:
                     "orderId": "SAL0000021",
                     "productId": "PROD00003",
                     "statusId": "STAT005",
-                    "quantity": 1,
+                    "quantity": 1.0,
                     "price": 2.95,
                     "totalValue": 13.95,
                     "currencyId": "EUR"
