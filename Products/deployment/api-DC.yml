@@ -22,6 +22,7 @@ data:
     healthindicators.Sessions.enabled=true
     healthindicators.Sessions.properties.threshold.value=85
     healthindicators.UMAliases.enabled=true
+    globalvariable.ConnectedDemos.config.dir.value=/data
     jms.DEFAULT_IS_JMS_CONNECTION.clientID=DEFAULT_IS_JMS_CLIENT
     jndi.DEFAULT_IS_JNDI_PROVIDER.providerURL=nsp\://universalmessaging.swag-infra\:9000
 ---
