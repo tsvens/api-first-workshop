@@ -17,6 +17,7 @@ pipeline {
             steps {
 					sh 'chmod -R 777 ${WORKSPACE}; \
 						mkdir build build/repo build/container build/container/config dist'
+					sh '/opt/softwareag/common/lib/ant/bin/ant -f ${WORKSPACE}/${PACKAGE}/prepareBuild.xml prep'
 
 			}
 		}
