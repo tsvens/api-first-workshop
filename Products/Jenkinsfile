@@ -16,11 +16,15 @@ pipeline {
         stage('Prepare'){
             steps {
 					sh 'chmod -R 777 ${WORKSPACE}; \
-						mkdir build build/repo build/container build/container/config dist'
-					sh 'list=$(grep -wo "\\$\S\S*\\$" Dockerfile | sort -u | tr '$' '\n'); \
-					    echo $list; \
-					    for thing in ${list[@]}; do sed -i 's/\$\$'$thing'\$\$/'$"${!thing}"'/g' Dockerfile; done'
-
+						mkdir build \
+						  build/repo \
+						  build/container \
+						  dist'
+					sh './substitute.sh Dockerfile'
+					sh './substitute.sh deployment/api-DC.yml'
+					sh './substitute.sh deployment/service-route.yml'
+					sh './substitute.sh test/run-test-suites.properties'
+					sh 'mv config build/container'
 			}
 		}
 
