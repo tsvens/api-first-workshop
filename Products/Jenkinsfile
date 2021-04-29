@@ -1,9 +1,4 @@
 pipeline {
-    agent {
-		node {
-			label 'wm-jenkins-slave'
-		}
-	}
 	
 	environment {
         JAVA_HOME = "/opt/softwareag/jvm/jvm"
@@ -15,13 +10,30 @@ pipeline {
     }
 
     stages {
-        stage('Build'){
+        stage('Prepare'){
             steps {
-				container('wm-jenkins-slave') {
-					sh 'chmod -R 777 ${WORKSPACE}'
-					sh '/opt/softwareag/common/lib/ant/bin/ant -f ${WORKSPACE}/${PACKAGE}/prepareBuild.xml prep'
-					sh 'cd ${WORKSPACE}/${PACKAGE}; /opt/softwareag/common/AssetBuildEnvironment/bin/build.sh -propertyfile build.properties'
-				}
+					sh 'chmod -R 777 ${WORKSPACE}; \
+						mkdir build build/repo build/container build/container/config dist'
+
+			}
+		}
+
+		stage('Build') {
+			steps {
+				sh 'cd ${PACKAGE}/build/container; \
+					cp -r /packages/{${PACKAGE},WmTCDBAdapter,ConnectedDemos,ConnectedDemosTCDB} .;\
+					cp /opt/softwareag/common/lib/terracotta* .'
+					
+						
+					script {
+						docker.withRegistry("https://${REGISTRY}") {
+					
+							def customImage = docker.build("${env.CONTAINER_TAG}", "${PACKAGE}/build/container")
+
+							/* Push the container to the custom Registry */
+							customImage.push()
+						}
+					}
 			}
 		}
 		

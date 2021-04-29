@@ -17,7 +17,7 @@
   <macrodef name="populate-from-template">
         <attribute name="template"/>
         <attribute name="target"/>
-        <attribute name="ifremaining" default="wxant.unsubstituted.exists" />
+        <attribute name="ifremaining" default="unsubstituted.exists" />
         <sequential>
 			<local name="temp.file" />
 			<tempfile property="temp.file" deleteonexit="true"/>
