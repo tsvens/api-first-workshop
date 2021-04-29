@@ -17,7 +17,9 @@ pipeline {
             steps {
 					sh 'chmod -R 777 ${WORKSPACE}; \
 						mkdir build build/repo build/container build/container/config dist'
-					sh '/opt/softwareag/common/lib/ant/bin/ant -f ${WORKSPACE}/${PACKAGE}/prepareBuild.xml prep'
+					sh 'list=$(grep -wo "\\$\S\S*\\$" Dockerfile | sort -u | tr '$' '\n'); \
+					    echo $list; \
+					    for thing in ${list[@]}; do sed -i 's/\$\$'$thing'\$\$/'$"${!thing}"'/g' Dockerfile; done'
 
 			}
 		}
