@@ -1,24 +1,3 @@
-import groovy.text.SimpleTemplateEngine     
-
-// Read all environment variables into a map.
-// Here, @NonCPS must NOT be used, because we are calling a Jenkins step.
-Map<String,String> getEnvMap() {
-    def envStr = sh(script: 'env', returnStdout: true)
-    return envStrToMap( envStr )
-}
-
-// Split a multiline string, where each line consists of key and value separated by '='.
-// It is critical to use @NonCPS to make splitEachLine() work!
-@NonCPS
-Map<String,String> envStrToMap( String envStr ) {
-    def envMap = [:]
-    envStr.splitEachLine('=') {
-        envMap[it[0]] = it[1]
-    } 
-    return envMap
-}
-
-
 pipeline {
 	
 	agent any
@@ -43,24 +22,21 @@ pipeline {
 						  dist'
 					pwd()
 					dir('Products') {
-						script {
-						    // TODO: Replace the hardcoded string with: 
-						    // def tmp = readFile file: 'yourfile.env'
-						    def tmp = readFile file: 'Dockerfile'
-						    
-						    withEnv(['API_URL=http://someurl', 'API_KEY=123', 'API_SECRET=456']) {    
-						    
-						        def envMap = getEnvMap()
-						        echo "envMap:\n$envMap"
-						        
-						        def tmpResolved = new SimpleTemplateEngine().createTemplate( tmp ).make( envMap )
-						  
-						        writeFile file: 'test.env', text: tmpResolved.toString()
-
-						        // Just for demo, to let me see the result
-						        archiveArtifacts artifacts: 'test.env' 
-						    }
-						}
+						variableReplace(
+							configs: [
+								variablesReplaceConfig(
+									configs: [
+										variablesReplaceItemConfig( 
+											name: 'PACKAGE',
+											value: ${env.PACKAGE}
+										)
+									],
+									fileEncoding: 'UTF-8', 
+									filePath: 'Dockerfile', 
+									variablesPrefix: '${', 
+									variablesSuffix: '}'
+						            )]
+						)
 						sh 'mv config build/container'
 
 					}
