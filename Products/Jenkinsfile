@@ -21,11 +21,14 @@ pipeline {
 						  build/container \
 						  dist'
 					pwd()
-					sh 'chmod +x substitute.sh; ./substitute.sh Dockerfile'
-					sh './substitute.sh deployment/api-DC.yml'
-					sh './substitute.sh deployment/service-route.yml'
-					sh './substitute.sh test/run-test-suites.properties'
-					sh 'mv config build/container'
+					dir('Products') {
+						sh './substitute.sh Dockerfile'
+						sh './substitute.sh deployment/api-DC.yml'
+						sh './substitute.sh deployment/service-route.yml'
+						sh './substitute.sh test/run-test-suites.properties'
+						sh 'mv config build/container'
+
+					}
 			}
 		}
 
