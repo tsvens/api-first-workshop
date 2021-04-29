@@ -28,7 +28,7 @@ pipeline {
 									configs: [
 										variablesReplaceItemConfig( 
 											name: 'PACKAGE',
-											value: ${env.PACKAGE}
+											value: "${env.PACKAGE}"
 										)
 									],
 									fileEncoding: 'UTF-8', 
