@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Prepare'){
             steps {
-					dir('${PACKAGE}') {
+					dir("${PACKAGE}") {
 						sh 'mkdir build \
 						  build/repo \
 						  build/container \
@@ -35,7 +35,7 @@ pipeline {
 									variablesSuffix: '}'
 						            )]
 						)
-						sh 'mv config ../build/container'
+						sh 'mv config build/container'
 
 					}
 			}
