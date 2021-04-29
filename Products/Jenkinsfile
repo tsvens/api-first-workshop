@@ -15,13 +15,11 @@ pipeline {
     stages {
         stage('Prepare'){
             steps {
-					sh 'chmod -R 777 ${WORKSPACE}; \
-						mkdir build \
+					dir('${PACKAGE}') {
+						sh 'mkdir build \
 						  build/repo \
 						  build/container \
 						  dist'
-					pwd()
-					dir('Products') {
 						contentReplace(
 							configs: [
 								variablesReplaceConfig(
@@ -37,7 +35,7 @@ pipeline {
 									variablesSuffix: '}'
 						            )]
 						)
-						sh 'mv config build/container'
+						sh 'mv config ../build/container'
 
 					}
 			}
