@@ -22,7 +22,7 @@ pipeline {
 						  dist'
 					pwd()
 					dir('Products') {
-						variablesReplace(
+						contentReplace(
 							configs: [
 								variablesReplaceConfig(
 									configs: [
