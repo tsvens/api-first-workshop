@@ -20,7 +20,8 @@ pipeline {
 						  build/repo \
 						  build/container \
 						  dist'
-					sh './substitute.sh Dockerfile'
+					pwd()
+					sh 'chmod +x substitute.sh; ./substitute.sh Dockerfile'
 					sh './substitute.sh deployment/api-DC.yml'
 					sh './substitute.sh deployment/service-route.yml'
 					sh './substitute.sh test/run-test-suites.properties'
