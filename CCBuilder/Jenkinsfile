@@ -27,24 +27,21 @@ spec:
 		}
 	}
 
-
-	options([
-  		parameters([
-    		string(name: 'EMPOWER_USER', description: 'Your Empower username'),
-			string(name: 'EMPOWER_PASSWORD', description: 'Your Empower password'),
-			string(name: 'DOCKERHUB_USER', description: 'Your Docker hub username'),
-			string(name: 'DOCKERHUB_PASSWORD', description: 'Your Docker hub password'),
-  		])
+	parameters([
+    	string(name: 'EMPOWER_USER', description: 'Your Empower username'),
+		string(name: 'EMPOWER_PASSWORD', description: 'Your Empower password'),
+		string(name: 'DOCKERHUB_USER', description: 'Your Docker hub username'),
+		string(name: 'DOCKERHUB_PASSWORD', description: 'Your Docker hub password')
 	])
 
 	environment {
 		PACKAGE="CCBuilder"
         CC_TAG = "10.7"
 		TAG = "10.7"
-		EMPOWER_USR = this.params.get(EMPOWER_USER)
-		EMPOWER_PSW = this.params.get(EMPOWER_PASSWORD)
-		DOCKER_USR = this.params.get(DOCKERHUB_USER)
-		DOCKER_PWD = this.params.get(DOCKERHUB_PASSWORD)
+		EMPOWER_USR = ${params.EMPOWER_USER}
+		EMPOWER_PSW = ${params.EMPOWER_PASSWORD}
+		DOCKER_USR = ${params.DOCKERHUB_USER}
+		DOCKER_PWD = ${params.DOCKERHUB_PASSWORD}
     }
 
     stages {
