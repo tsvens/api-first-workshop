@@ -58,15 +58,19 @@ spec:
 
 		stage('Build') {
 			steps {
-				sh '/kaniko/executor --context ${PACKAGE} \
-					--destination ${REG}/commandcentral-builder:${TAG} \
-					--build-arg BUILDER_IMAGE=${CC_REG}/commandcentral-builder:${CC_TAG} \
-					--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${TAG} \
-					--build-arg https://sdc.softwareag.com/dataservewebM107/repository \
-					--build-arg https://sdc.softwareag.com/updates/prodRepo \
-					--build-arg ${EMPOWER_USR} \
-        			--build-arg ${EMPOWER_PSW} \
-					--build-arg /licenses/licenses.zip'
+				container(name: 'kaniko', shell: '/busybox/sh') {
+					sh '''#!/busybox/sh
+					/kaniko/executor --context ${PACKAGE} \
+						--destination ${REG}/commandcentral-builder:${TAG} \
+						--build-arg BUILDER_IMAGE=${CC_REG}/commandcentral-builder:${CC_TAG} \
+						--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${TAG} \
+						--build-arg https://sdc.softwareag.com/dataservewebM107/repository \
+						--build-arg https://sdc.softwareag.com/updates/prodRepo \
+						--build-arg ${EMPOWER_USR} \
+        				--build-arg ${EMPOWER_PSW} \
+						--build-arg /licenses/licenses.zip
+					'''
+				}
 			}
 		}
     }
