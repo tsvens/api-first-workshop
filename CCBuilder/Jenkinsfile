@@ -26,13 +26,8 @@ spec:
       persistentVolumeClaim:
         claimName: license-pvc
     - name: jenkins-docker-cfg
-      projected:
-        sources:
-        - secret:
+      configMap:
           name: regcred
-          items:
-            - key: .dockerconfigjson
-              path: config.json  
 """
 		}
 	}
