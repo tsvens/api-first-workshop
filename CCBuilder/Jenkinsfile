@@ -38,7 +38,7 @@ spec:
 		PACKAGE="CCBuilder"
         CC_TAG = "10.7"
 		TAG = "10.7"
-		REG = "docker-registry.registry"
+		REG = "docker-registry.registry:5000"
 		EMPOWER_USR = "${params.EMPOWER_USER}"
 		EMPOWER_PSW = "${params.EMPOWER_PASSWORD}"
 		DOCKER_USR = "${params.DOCKERHUB_USER}"
@@ -52,7 +52,6 @@ spec:
 				sh 'printenv'
 				sh 'mkdir -p ~/.docker'
 				sh 'echo "{ \"auths\":{\"https://index.docker.io/v1/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"  > ~/.docker/config.json'
-				sh 'cat ~/.docker/config.json'
 			}
 		}
 
