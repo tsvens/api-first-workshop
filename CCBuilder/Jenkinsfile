@@ -12,9 +12,6 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
     imagePullPolicy: Always
-    command:
-    - sleep
-    - "9999999"
     volumeMounts:
     - name: swag-license-keys
       mountPath: /licenses
