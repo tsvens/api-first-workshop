@@ -19,10 +19,20 @@ spec:
     volumeMounts:
     - name: swag-license-keys
       mountPath: /licenses
+    - name: jenkins-docker-cfg
+      mountPath: /kaniko/.docker
   volumes:
     - name: swag-license-keys
       persistentVolumeClaim:
         claimName: license-pvc
+    - name: jenkins-docker-cfg
+      projected:
+        sources:
+        - secret:
+          name: regcred
+          items:
+            - key: .dockerconfigjson
+              path: config.json  
 """
 		}
 	}
@@ -50,7 +60,7 @@ spec:
 		stage('validate') {
 			steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
-					sh 'DOCKER_AUTH="{ \"\"auths\"\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"; echo $DOCKER_AUTH  > /kaniko/.docker/config.json'
+					sh 'DOCKER_AUTH="{ \"\"auths\"\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"; echo $DOCKER_AUTH  > config.json'
 				}
 			}
 		}
