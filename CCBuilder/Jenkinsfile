@@ -37,6 +37,7 @@ spec:
 		PACKAGE="CCBuilder"
         CC_TAG = "10.7"
 		TAG = "10.7"
+		REG = "docker-registry.registry"
 		EMPOWER_USR = "${params.EMPOWER_USER}"
 		EMPOWER_PSW = "${params.EMPOWER_PASSWORD}"
 		DOCKER_USR = "${params.DOCKERHUB_USER}"
