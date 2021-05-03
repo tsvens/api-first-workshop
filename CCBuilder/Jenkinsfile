@@ -29,8 +29,8 @@ spec:
       projected:
         sources:
         - secret:
-          secretName: regcred
-          items:
+          - name: regcred
+            items:
             - key: .dockerconfigjson
               path: config.json  
 """
