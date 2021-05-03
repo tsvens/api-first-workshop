@@ -22,10 +22,10 @@ spec:
     - name: jenkins-docker-cfg
       mountPath: /kaniko/.docker
   volumes:
-    - name: swag-license-keys
-      persistentVolumeClaim:
-        claimName: license-pvc
-    - name: jenkins-docker-cfg
+  - name: swag-license-keys
+    persistentVolumeClaim:
+      claimName: license-pvc
+  - name: jenkins-docker-cfg
     projected:
       sources:
       - secret:
