@@ -62,7 +62,7 @@ spec:
 				container(name: 'kaniko', shell: '/busybox/sh') {
 					sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE} \
-						--destination store/commandcentral-builder:${TAG} \
+						--destination ${REG}/commandcentral-builder:${TAG} \
 						--insecure-registry docker-registry.registry:5000 \
 						--build-arg BUILDER_IMAGE=${CC_REG}/commandcentral-builder:${CC_TAG} \
 						--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${TAG} \
