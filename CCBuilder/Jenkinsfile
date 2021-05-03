@@ -28,7 +28,7 @@ spec:
 	}
 
 
-	properties([
+	options([
   		parameters([
     		string(name: 'EMPOWER_USER', description: 'Your Empower username'),
 			string(name: 'EMPOWER_PASSWORD', description: 'Your Empower password'),
