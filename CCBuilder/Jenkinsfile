@@ -56,21 +56,13 @@ spec:
     }
 
     stages {
-        
-		stage('validate') {
-			steps {
-				container(name: 'kaniko', shell: '/busybox/sh') {
-					sh 'echo -n "{\'auths\':{\'https://index.docker.io/v2/\':{\'auth\':\'$(echo -n $DOCKERHUB_USER:$DOCKERHUB_PASSWD|base64)\'}} }" > config.json'
-				}
-			}
-		}
 
 		stage('Build') {
 			steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
 					sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE} \
-						--destination ${REG}/commandcentral-builder:${TAG} \
+						--destination store/commandcentral-builder:${TAG} \
 						--insecure-registry docker-registry.registry:5000 \
 						--build-arg BUILDER_IMAGE=${CC_REG}/commandcentral-builder:${CC_TAG} \
 						--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${TAG} \
