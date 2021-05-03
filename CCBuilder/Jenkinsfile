@@ -49,9 +49,7 @@ spec:
         
 		stage('validate') {
 			steps {
-				sh 'printenv'
-				sh 'mkdir -p ~/.docker'
-				sh 'echo "{ \"auths\":{\"https://index.docker.io/v1/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"  > ~/.docker/config.json'
+				sh 'echo "{ \"auths\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"  > /kaniko/.docker/config.json'
 			}
 		}
 
@@ -61,7 +59,7 @@ spec:
 					sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE} \
 						--destination ${REG}/commandcentral-builder:${TAG} \
-						--skip-tls-verify \
+						--insecure-registry docker-registry.registry \
 						--build-arg BUILDER_IMAGE=${CC_REG}/commandcentral-builder:${CC_TAG} \
 						--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${TAG} \
 						--build-arg https://sdc.softwareag.com/dataservewebM107/repository \
