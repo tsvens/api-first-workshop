@@ -27,7 +27,7 @@ spec:
         claimName: license-pvc
     - name: jenkins-docker-cfg
       secret:
-	    secretName: regcred 
+        secretName: regcred 
 """
 		}
 	}
