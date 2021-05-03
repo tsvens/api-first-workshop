@@ -60,7 +60,7 @@ spec:
 		stage('validate') {
 			steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
-					sh 'DOCKER_AUTH="{\"auths\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"; echo $DOCKER_AUTH; echo $DOCKER_AUTH  > config.json'
+					sh 'DOCKER_AUTH="{\'auths\':{\'https://index.docker.io/v2/\':{\'auth\':\'$(echo -n $DOCKERHUB_USER:$DOCKERHUB_PASSWD|base64)\'}} }"; echo $DOCKER_AUTH  > config.json'
 				}
 			}
 		}
