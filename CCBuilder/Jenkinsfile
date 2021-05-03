@@ -46,6 +46,7 @@ spec:
 
 	environment {
 		PACKAGE="CCBuilder"
+		CC_REG = "store"
         CC_TAG = "10.7"
 		TAG = "10.7"
 		REG = "docker-registry.registry:5000"
