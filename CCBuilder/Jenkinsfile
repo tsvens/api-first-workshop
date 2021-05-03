@@ -13,7 +13,7 @@ spec:
     image: gcr.io/kaniko-project/executor:latest
     imagePullPolicy: Always
     restartPolicy: Never
-	entrypoint: [""]
+    entrypoint: [""]
     volumeMounts:
     - name: swag-license-keys
       mountPath: /licenses
