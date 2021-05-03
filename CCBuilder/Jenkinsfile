@@ -15,7 +15,7 @@ spec:
     restartPolicy: Never
     command: 
     - /busybox/cat
-	tty: true
+    tty: true
     volumeMounts:
     - name: swag-license-keys
       mountPath: /licenses
