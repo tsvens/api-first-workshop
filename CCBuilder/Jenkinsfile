@@ -51,6 +51,7 @@ spec:
 			steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
 					sh 'echo "{ \"auths\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"  > /kaniko/.docker/config.json'
+				}
 			}
 		}
 
