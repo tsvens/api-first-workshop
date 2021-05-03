@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+  name: license-pv
+spec: 
+  accessModes: 
+    - ReadWriteOnce
+  capacity: 
+    storage: 20M
+  hostPath: 
+    path: /tmp/license
+  storageClassName: local-storage
+--- 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: 
+  name: license-pvc
+spec: 
+  accessModes: 
+    - ReadWriteOnce
+  resources: 
+    requests: 
+      storage: 20M
+  storageClassName: local-storage
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: swag-licenses
+  labels:
+    pod: swag-licenses
+  namespace: cicd
+spec:
+  containers:
+  - name: license-upload
+    image: busybox:latest
+    command:
+    - sleep
+    - "100m"
+    volumeMounts:
+    - name: swag-license-keys
+      mountPath: /licenses
+  volumes:
+  - name: swag-license-keys
+    persistentVolumeClaim:
+      claimName: license-pvc
