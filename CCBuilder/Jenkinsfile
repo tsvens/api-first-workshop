@@ -13,7 +13,8 @@ spec:
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
     restartPolicy: Never
-    entrypoint: ["/busybox/cat"]
+    command: 
+      - /busybox/cat
     volumeMounts:
     - name: swag-license-keys
       mountPath: /licenses
