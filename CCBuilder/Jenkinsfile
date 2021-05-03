@@ -38,7 +38,7 @@ spec:
 		PACKAGE="CCBuilder"
         CC_TAG = "10.7"
 		TAG = "10.7"
-		REG = "registry.master.servers"
+		REG = "docker-registry.registry:5000"
 		EMPOWER_USR = "${params.EMPOWER_USER}"
 		EMPOWER_PSW = "${params.EMPOWER_PASSWORD}"
 		DOCKER_USR = "${params.DOCKERHUB_USER}"
@@ -50,7 +50,7 @@ spec:
 		stage('validate') {
 			steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
-					sh 'echo "{ \"auths\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"  > /kaniko/.docker/config.json'
+					sh 'DOCKER_AUTH="{ \"\"auths\"\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"; echo $DOCKER_AUTH  > /kaniko/.docker/config.json'
 				}
 			}
 		}
@@ -61,7 +61,7 @@ spec:
 					sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE} \
 						--destination ${REG}/commandcentral-builder:${TAG} \
-						--insecure-registry docker-registry.registry \
+						--insecure-registry docker-registry.registry:5000 \
 						--build-arg BUILDER_IMAGE=${CC_REG}/commandcentral-builder:${CC_TAG} \
 						--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${TAG} \
 						--build-arg https://sdc.softwareag.com/dataservewebM107/repository \
