@@ -14,7 +14,8 @@ spec:
     imagePullPolicy: Always
     restartPolicy: Never
     command: 
-      - /busybox/cat
+    - /busybox/cat
+	tty: true
     volumeMounts:
     - name: swag-license-keys
       mountPath: /licenses
