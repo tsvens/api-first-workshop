@@ -31,8 +31,8 @@ spec:
         - secret:
           name: regcred
           items:
-          - key: .dockerconfigjson
-            path: config.json  
+            - key: .dockerconfigjson
+              path: config.json  
 """
 		}
 	}
@@ -60,7 +60,7 @@ spec:
 		stage('validate') {
 			steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
-					sh 'DOCKER_AUTH="{ \"\"auths\"\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"; echo $DOCKER_AUTH  > config.json'
+					sh 'DOCKER_AUTH="{\"auths\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"; echo $DOCKER_AUTH; echo $DOCKER_AUTH  > config.json'
 				}
 			}
 		}
