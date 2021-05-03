@@ -10,10 +10,10 @@ spec:
   serviceAccountName: jenkins-agent-account
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
+    image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
     restartPolicy: Never
-    entrypoint: [""]
+    entrypoint: ["/busybox/cat"]
     volumeMounts:
     - name: swag-license-keys
       mountPath: /licenses
