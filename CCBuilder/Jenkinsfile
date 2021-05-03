@@ -49,8 +49,8 @@ spec:
         
 		stage('validate') {
 			steps {
-				sh 'mkdir -p /kaniko/.docker'
-				sh 'echo "{ \"auths\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"  > /kaniko/.docker/config.json'
+				container(name: 'kaniko', shell: '/busybox/sh')
+					sh 'echo "{ \"auths\":{\"https://index.docker.io/v2/\":{\"username\":\"$DOCKER_USR\",\"password\":\"$DOCKER_PWD\"}} }"  > /kaniko/.docker/config.json'
 			}
 		}
 
