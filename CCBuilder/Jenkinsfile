@@ -38,7 +38,7 @@ spec:
 		PACKAGE="CCBuilder"
         CC_TAG = "10.7"
 		TAG = "10.7"
-		REG = "docker-registry.registry:5000"
+		REG = "registry.master.servers"
 		EMPOWER_USR = "${params.EMPOWER_USER}"
 		EMPOWER_PSW = "${params.EMPOWER_PASSWORD}"
 		DOCKER_USR = "${params.DOCKERHUB_USER}"
@@ -61,6 +61,7 @@ spec:
 					sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE} \
 						--destination ${REG}/commandcentral-builder:${TAG} \
+						--skip-tls-verify \
 						--build-arg BUILDER_IMAGE=${CC_REG}/commandcentral-builder:${CC_TAG} \
 						--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${TAG} \
 						--build-arg https://sdc.softwareag.com/dataservewebM107/repository \
