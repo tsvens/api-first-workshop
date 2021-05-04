@@ -40,8 +40,6 @@ spec:
 	parameters{
     	string(name: 'EMPOWER_USER', description: 'Your Empower username')
 		string(name: 'EMPOWER_PASSWORD', description: 'Your Empower password')
-		string(name: 'DOCKERHUB_USER', description: 'Your Docker hub username')
-		string(name: 'DOCKERHUB_PASSWORD', description: 'Your Docker hub password')
 	}
 
 	environment {
@@ -60,7 +58,9 @@ spec:
 
 		stage('Prepare') {
 			steps {
-				sh 'cp /licenses/licenses.zip ${PACKAGE}/licenses.zip'
+				container(name: 'kaniko') {
+					sh 'cp /licenses/licenses.zip ${PACKAGE}/licenses.zip'
+				}
 			}
 		}
 		stage('Build') {
