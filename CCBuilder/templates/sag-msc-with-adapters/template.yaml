@@ -16,8 +16,8 @@
 #     limitations under the License.                                                            
 #
 ###############################################################################
-alias: sag-msc-server
-description: Microservices container instance
+alias: sag-msc-with-adapters
+description: Microservices container instance with TCDB Adapter
 dslVersion: "1.2"
 
 options:  
