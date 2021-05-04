@@ -58,6 +58,11 @@ spec:
 
     stages {
 
+		stage('Prepare') {
+			steps {
+				sh 'cp /licenses/licenses.zip ${PACKAGE}/licenses.zip'
+			}
+		}
 		stage('Build') {
 			steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
