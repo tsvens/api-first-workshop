@@ -1,0 +1,56 @@
+pipeline {
+	
+	agent {
+		kubernetes {
+    	label 'docker-builder'
+    	defaultContainer 'jnlp'
+    	yaml """
+kind: Pod
+spec:
+  serviceAccountName: jenkins-agent-account
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: Always
+    restartPolicy: Never
+    command: 
+    - /busybox/cat
+    tty: true
+    volumeMounts:
+    - name: jenkins-docker-cfg
+      mountPath: /kaniko/.docker
+  volumes:
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: docker-credentials 
+          items:
+            - key: .dockerconfigjson
+              path: config.json 
+"""
+		}
+	}
+
+	environment {
+		PACKAGE="MSRBaseImage"
+		TAG = "10.7"
+		REG = "docker-registry.registry:5000"
+    }
+
+    stages {
+		stage('Build') {
+			steps {
+				container(name: 'kaniko', shell: '/busybox/sh') {
+					sh '''#!/busybox/sh
+					/kaniko/executor --context ${PACKAGE} \
+						--destination ${REG}/microservice-runtime-tcdb:${TAG} \
+						--insecure-registry docker-registry.registry:5000 \
+						--build-arg BUILDER_IMAGE=${REG}/commandcentral-builder:${CC_TAG} \
+						--build-arg BASE_IMAGE=${REG}/java:${TAG}
+					'''
+				}
+			}
+		}
+    }
+}
