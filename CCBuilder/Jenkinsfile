@@ -38,8 +38,9 @@ spec:
 	}
 
 	parameters{
-    	string(name: 'EMPOWER_USER', description: 'Your Empower username')
-		string(name: 'EMPOWER_PASSWORD', description: 'Your Empower password')
+
+		credentials(credentialType: 'com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl', 
+			defaultValue: '', description: 'Empower credentials ', name: 'EMPOWER_CREDENTIALS', required: true)
 	}
 
 	environment {
@@ -48,10 +49,7 @@ spec:
         CC_TAG = "10.7"
 		TAG = "10.7"
 		REG = "docker-registry.registry:5000"
-		EMPOWER_USR = "${params.EMPOWER_USER}"
-		EMPOWER_PSW = "${params.EMPOWER_PASSWORD}"
-		DOCKER_USR = "${params.DOCKERHUB_USER}"
-		DOCKER_PWD = "${params.DOCKERHUB_PASSWORD}"
+		EMPOWER_CREDS = credentials('EMPOWER_CREDENTIALS')
     }
 
     stages {
@@ -59,6 +57,7 @@ spec:
 		stage('Prepare') {
 			steps {
 				container(name: 'kaniko') {
+					sh 'echo "Your empower username is $EMPOWER_CREDS_USR and $EMPOWER_CREDS_PSW"'
 					sh 'cp /licenses/licenses.zip ${PACKAGE}/licenses.zip'
 				}
 			}
@@ -72,11 +71,11 @@ spec:
 						--insecure-registry docker-registry.registry:5000 \
 						--build-arg BUILDER_IMAGE=${CC_REG}/commandcentral-builder:${CC_TAG} \
 						--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${TAG} \
-						--build-arg https://sdc.softwareag.com/dataservewebM107/repository \
-						--build-arg https://sdc.softwareag.com/updates/prodRepo \
-						--build-arg ${EMPOWER_USR} \
-        				--build-arg ${EMPOWER_PSW} \
-						--build-arg /licenses/licenses.zip
+						--build-arg REPO_PRODUCT_URL=https://sdc.softwareag.com/dataservewebM107/repository \
+						--build-arg REPO_FIX_URL=https://sdc.softwareag.com/updates/prodRepo \
+						--build-arg REPO_USERNAME=${EMPOWER_CREDS_USR} \
+        				--build-arg REPO_PASSWORD=${EMPOWER_CREDS_PSW} \
+						--build-arg LICENSES_URL=licenses.zip
 					'''
 				}
 			}
