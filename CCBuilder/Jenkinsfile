@@ -65,7 +65,7 @@ spec:
 				}
 			}
 		}
-		stage('Build') {
+		stage('Build CommandCentral Container') {
 			steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
 					sh '''#!/busybox/sh
@@ -79,7 +79,13 @@ spec:
 						--build-arg REPO_USERNAME=${EMPOWER_CREDS_USR} \
         				--build-arg REPO_PASSWORD=${EMPOWER_CREDS_PSW}
 					'''
+				}
+			}
+		}
 
+		stage('Build Base Container') {
+			steps {
+				container(name: 'kaniko', shell: '/busybox/sh') {
 					sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE}/Java \
 						--destination ${REG}/java:${TAG} \
