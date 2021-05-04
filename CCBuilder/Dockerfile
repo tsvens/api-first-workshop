@@ -33,7 +33,7 @@ ADD --chown=1724:1724 templates/ profiles/CCE/data/templates/composite/
 # ADD --chown=1724:1724 scripts/*.sh ./
 
 # add licenses.zip, if any
-ADD --chown=1724:1724 licenses/*.zip ./licenses/
+ADD --chown=1724:1724 licenses.zip ./licenses/
 
 # Copy target node from the $NODE_IMAGE
 COPY --from=node --chown=1724:1724 /opt/softwareag/ /opt/softwareag/

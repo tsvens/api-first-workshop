@@ -46,10 +46,10 @@ spec:
 
 	environment {
 		PACKAGE="CCBuilder"
-		REG = "store"
+		CC_REG = "store"
         CC_TAG = "10.7"
 		TAG = "10.7"
-		CC_REG = "docker-registry.registry:5000"
+		REG = "docker-registry.registry:5000"
 		EMPOWER_USR = "${params.EMPOWER_USER}"
 		EMPOWER_PSW = "${params.EMPOWER_PASSWORD}"
 		DOCKER_USR = "${params.DOCKERHUB_USER}"
