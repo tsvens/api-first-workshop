@@ -58,7 +58,7 @@ spec:
 			steps {
 				container(name: 'kaniko') {
 					sh 'echo "Your empower username is $EMPOWER_CREDS_USR and $EMPOWER_CREDS_PSW"'
-					sh 'mkdir ${PACKAGE}/CCE/license; cp /licenses/licenses.zip ${PACKAGE}/CCE/licenses/licenses.zip'
+					sh 'mkdir ${PACKAGE}/CCE/licenses; cp /licenses/licenses.zip ${PACKAGE}/CCE/licenses/licenses.zip'
 				}
 			}
 		}
