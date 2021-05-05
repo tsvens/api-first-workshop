@@ -70,6 +70,8 @@ spec:
 					sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE}/CCE \
 						--destination ${REG}/commandcentral-builder:${TAG} \
+						--destination ${REG}/commandcentral-builder:${TAG}.${BUILD_NUMBER} \
+						--destination ${REG}/commandcentral-builder:latest \
 						--insecure-registry docker-registry.registry:5000 \
 						--build-arg BUILDER_IMAGE=${CC_REG}/commandcentral-builder:${CC_TAG} \
 						--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${TAG} \
@@ -89,6 +91,8 @@ spec:
 					sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE}/Java \
 						--destination ${REG}/java:${TAG} \
+						--destination ${REG}/java:${TAG}.${BUILD_NUMBER} \
+						--destination ${REG}/java:latest \
 						--insecure-registry docker-registry.registry:5000 \
 						--build-arg BASE_IMAGE=centos:7 \
 						--build-arg NODE_IMAGE=${REG}/commandcentral-builder:${TAG}

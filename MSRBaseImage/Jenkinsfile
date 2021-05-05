@@ -45,7 +45,9 @@ spec:
 					sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE} \
 						--destination ${REG}/microservice-runtime-tcdb:${TAG} \
-						--insecure-registry docker-registry.registry:5000 \
+            --destination ${REG}/microservice-runtime-tcdb:${TAG}.${BUILD_NUMBER} \
+            --destination ${REG}/microservice-runtime-tcdb:latest \
+						--insecure-registry ${REG} \
 						--build-arg BUILDER_IMAGE=${REG}/commandcentral-builder:${TAG} \
 						--build-arg BASE_IMAGE=${REG}/java:${TAG}
 					'''
