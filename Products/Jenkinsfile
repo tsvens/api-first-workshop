@@ -68,12 +68,12 @@ spec:
 				container(name: 'kaniko', shell: '/busybox/sh') {
 					sh '''#!/busybox/sh
 						/kaniko/executor --context ${PACKAGE} \
-							--destination ${REG}/${CONTAINER}-API:${TAG} \
-							--destination ${REG}/${CONTAINER}-API:${TAG}.${BUILD_NUMBER} \
-							--destination ${REG}/${CONTAINER}-API:latest \
-							--insecure-registry ${REG} \
+							--destination ${REGISTRY}/${CONTAINER}-API:${TAG} \
+							--destination ${REGISTRY}/${CONTAINER}-API:${TAG}.${BUILD_NUMBER} \
+							--destination ${REGISTRY}/${CONTAINER}-API:latest \
+							--insecure-registry ${REGISTRY} \
 							--build-arg PACKAGE=${PACKAGE} \
-							--build-arg BASE_IMAGE=${REG}/microservice-runtime-tcdb:latest
+							--build-arg BASE_IMAGE=${REGISTRY}/microservice-runtime-tcdb:latest
 						'''
 				}
 			}
