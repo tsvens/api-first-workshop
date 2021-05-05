@@ -40,7 +40,7 @@ spec:
 		PACKAGE = "Products"
 		NAMESPACE = "api-first-workshop"
 		REGISTRY = "docker-registry.registry:5000"
-		CONTAINER = "products-api"
+		CONTAINER = "products_api"
 		CONTAINER_TAG = "1.0"
     }
 
