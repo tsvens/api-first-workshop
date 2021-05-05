@@ -67,7 +67,7 @@ spec:
 			steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
 					sh '''#!/busybox/sh
-						/kaniko/executor --context ${PACKAGE} \
+						/kaniko/executor --context ${PACKAGE}/build/container \
 							--destination ${REGISTRY}/${CONTAINER}:${TAG} \
 							--destination ${REGISTRY}/${CONTAINER}:${TAG}.${BUILD_NUMBER} \
 							--destination ${REGISTRY}/${CONTAINER}:latest \
