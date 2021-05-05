@@ -77,7 +77,7 @@ spec:
 						--build-arg REPO_FIX_URL=https://sdc.softwareag.com/updates/prodRepo \
 						--build-arg REPO_USERNAME=${EMPOWER_CREDS_USR} \
         				--build-arg REPO_PASSWORD=${EMPOWER_CREDS_PSW} \
-						--build-arg LICENSES_URL
+						--build-arg LICENSES_URL=file:///src/licenses/licenses.zip
 					'''
 				}
 			}
