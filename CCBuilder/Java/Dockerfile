@@ -33,10 +33,10 @@ RUN groupadd -g 1724 sagadmin && \
 
 USER 1724
 
-#COPY --from=javasource --chown=1724:1724 $SAG_HOME/jvm/jvm/ $SAG_HOME/jvm/jvm/
+COPY --from=javasource --chown=1724:1724 $SAG_HOME/jvm/jvm/ $SAG_HOME/jvm/jvm/
 
-#RUN env && java -version
+RUN env && java -version
 
 WORKDIR $SAG_HOME
 
-#ENTRYPOINT java
+ENTRYPOINT java

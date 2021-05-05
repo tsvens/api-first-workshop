@@ -90,7 +90,7 @@ spec:
 					/kaniko/executor --context ${PACKAGE}/Java \
 						--destination ${REG}/java:${TAG} \
 						--insecure-registry docker-registry.registry:5000 \
-						--build-arg BASE_IMAGE==${REG}/base:${TAG} \
+						--build-arg BASE_IMAGE=centos:7 \
 						--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${TAG}
 					'''
 				}
