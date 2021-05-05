@@ -61,7 +61,9 @@ spec:
 		stage('Build') {
 			steps {
 				sh 'cd ${PACKAGE}/build/container; \
-					cp -r ${WORKSPACE}/${PACKAGE}/${PACKAGE}/src/IS/{${PACKAGE},ConnectedDemos,ConnectedDemosTCDB} .;'
+					cp -r ${WORKSPACE}/${PACKAGE}/src/IS/${PACKAGE} .; \
+					cp -r ${WORKSPACE}/${PACKAGE}/src/IS/ConnectedDemos .; \
+					cp -r ${WORKSPACE}/${PACKAGE}/src/IS/ConnectedDemosTCDB .;'
 				sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE} \
 						--destination ${REG}/${CONTAINER}-API:${TAG} \
