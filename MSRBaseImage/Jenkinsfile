@@ -37,7 +37,8 @@ spec:
 
 	environment {
 		PACKAGE="MSRBaseImage"
-		TAG = "10.7"
+		TAG = "10.5"
+    BASE_TAG = "10.7"
 		REG = "docker-registry.registry:5000"
     }
 
@@ -52,7 +53,7 @@ spec:
             --destination ${REG}/microservice-runtime-tcdb:latest \
 						--insecure-registry ${REG} \
 						--build-arg BUILDER_IMAGE=${REG}/commandcentral-builder:${TAG} \
-						--build-arg BASE_IMAGE=${REG}/java:${TAG}
+						--build-arg BASE_IMAGE=${REG}/java:${BASE_TAG}
 					'''
 				}
 			}
