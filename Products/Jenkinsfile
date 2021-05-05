@@ -69,8 +69,8 @@ spec:
 				container(name: 'kaniko', shell: '/busybox/sh') {
 					sh '''#!/busybox/sh
 						/kaniko/executor --context ${PACKAGE}/build/container \
-							--destination ${REGISTRY}/${CONTAINER}:${TAG} \
-							--destination ${REGISTRY}/${CONTAINER}:${TAG}.${BUILD_NUMBER} \
+							--destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG} \
+							--destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}.${BUILD_NUMBER} \
 							--destination ${REGISTRY}/${CONTAINER}:latest \
 							--insecure-registry ${REGISTRY} \
 							--build-arg PACKAGE=${PACKAGE} \
