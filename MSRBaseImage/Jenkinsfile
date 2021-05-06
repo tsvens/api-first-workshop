@@ -37,7 +37,8 @@ spec:
 
 	environment {
 		PACKAGE="MSRBaseImage"
-		TAG = "10.5"
+		BUILDER_TAG = "10.5"
+    CONTAINER_TAG = "10.5"
 		REG = "docker-registry.registry:5000"
     }
 
@@ -47,12 +48,12 @@ spec:
 				container(name: 'kaniko', shell: '/busybox/sh') {
 					sh '''#!/busybox/sh
 					/kaniko/executor --context ${PACKAGE} \
-						--destination ${REG}/microservice-runtime-tcdb:${TAG} \
-            --destination ${REG}/microservice-runtime-tcdb:${TAG}.${BUILD_NUMBER} \
+						--destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG} \
+            --destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
             --destination ${REG}/microservice-runtime-tcdb:latest \
 						--insecure-registry ${REG} \
-						--build-arg BUILDER_IMAGE=${REG}/commandcentral-builder:${TAG} \
-						--build-arg BASE_IMAGE=${REG}/java:${TAG}
+						--build-arg BUILDER_IMAGE=${REG}/commandcentral-builder:${BUILDER_TAG} \
+						--build-arg BASE_IMAGE=${REG}/java:${BUILDER_TAG}
 					'''
 				}
 			}
