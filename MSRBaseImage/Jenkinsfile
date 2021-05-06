@@ -37,8 +37,8 @@ spec:
 
 	environment {
 		PACKAGE="MSRBaseImage"
-		BUILDER_TAG = "10.5"
-    CONTAINER_TAG = "10.5"
+		BUILDER_TAG = "10.7"
+    CONTAINER_TAG = "10.7"
 		REG = "docker-registry.registry:5000"
     }
 

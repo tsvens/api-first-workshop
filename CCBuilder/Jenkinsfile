@@ -49,8 +49,8 @@ spec:
 	environment {
 		PACKAGE="CCBuilder"
 		CC_REG = "store/softwareag"
-        CC_TAG = "10.5"
-		TAG = "10.5"
+        CC_TAG = "10.7"
+		TAG = "10.7"
 		REG = "docker-registry.registry:5000"
 		EMPOWER_CREDS = credentials('EMPOWER_CREDENTIALS')
     }
@@ -75,7 +75,7 @@ spec:
 						--insecure-registry docker-registry.registry:5000 \
 						--build-arg BUILDER_IMAGE=${CC_REG}/commandcentral-builder:${CC_TAG} \
 						--build-arg NODE_IMAGE=${CC_REG}/commandcentral-node:${CC_TAG} \
-						--build-arg REPO_PRODUCT_URL=https://sdc.softwareag.com/dataservewebM105/repository \
+						--build-arg REPO_PRODUCT_URL=https://sdc.softwareag.com/dataservewebM107/repository \
 						--build-arg REPO_FIX_URL=https://sdc.softwareag.com/updates/prodRepo \
 						--build-arg REPO_USERNAME=${EMPOWER_CREDS_USR} \
         				--build-arg REPO_PASSWORD=${EMPOWER_CREDS_PSW} \
