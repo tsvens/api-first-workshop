@@ -24,9 +24,9 @@ FROM $BUILDER_IMAGE as builder
 
 # can be sag-msc-server or a custom one
 ARG TEMPLATE=sag-msc-with-adapters
-ARG __msc_fixes=[]
+ARG __msc_fixes=[ALL]
 # can be only MSC or MSC and layer product, ex [MSC,WmSAP] 
-ARG __msc_products=[MSC,tcdb]
+ARG __msc_products=[MSC,tcdb,jdbcAdapter]
 
 # provision and unit test
 RUN $CC_HOME/provision.sh $TEMPLATE && \
