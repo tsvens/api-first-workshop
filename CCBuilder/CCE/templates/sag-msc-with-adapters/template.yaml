@@ -29,6 +29,7 @@ environments:
     msc.license.key: "*_MSC_10.*_*_*"    # license key
     msc.fixes: []
     msc.products:  [MSC, tcdb]
+    is.instance.name: default
 layers:
   runtime:
     productRepo: ${repo.product}
@@ -40,7 +41,12 @@ templates:
     licenses:
       "IntegrationServer/config/licenseKey.xml": "${msc.license.key}" 
     fixes: ${msc.fixes}
-    products: ${msc.products}       
+    products: 
+      integrationServer:
+        ${is.instance.name}:
+          primary.port:    5555
+          diagnostic.port: 9999
+          license.file:    IntegrationServer/config/licenseKey.xml
 provision:
   default:
     runtime: ${nodes}
