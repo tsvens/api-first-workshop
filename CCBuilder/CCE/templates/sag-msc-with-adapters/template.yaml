@@ -28,7 +28,6 @@ environments:
   default:
     msc.license.key: "*_MSC_10.*_*_*"    # license key
     msc.fixes: []
-    msc.products:  [MSC, tcdb]
     is.instance.name: default
     is.primary.port: 5555
     is.diagnostic.port: 9999
@@ -61,6 +60,7 @@ templates:
                 COMMON-MEMORY:
                   InitSize: ${is.memory.init}
                   MaxSize:  ${is.memory.max}
+    tcdb:
 provision:
   default:
     runtime: ${nodes}
