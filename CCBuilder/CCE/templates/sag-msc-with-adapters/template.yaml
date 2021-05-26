@@ -30,6 +30,12 @@ environments:
     msc.fixes: []
     msc.products:  [MSC, tcdb]
     is.instance.name: default
+    is.primary.port: 5555
+    is.diagnostic.port: 9999
+    is.jmx.port: 8094
+    is.install.service: false
+    is.memory.init: 256
+    is.memory.max: 256
 layers:
   runtime:
     productRepo: ${repo.product}
@@ -43,10 +49,18 @@ templates:
     fixes: ${msc.fixes}
     products: 
       integrationServer:
-        ${is.instance.name}:
-          primary.port:    5555
-          diagnostic.port: 9999
+        ${is.instance.name}: 
+          primary.port:    ${is.primary.port}
+          diagnostic.port: ${is.diagnostic.port}
+          jmx.port:        ${is.jmx.port}
           license.file:    IntegrationServer/config/licenseKey.xml
+          install.service: ${is.install.service}
+          configuration:
+            OSGI-IS_${instance.name}:
+              COMMON-MEMORY:
+                COMMON-MEMORY:
+                  InitSize: ${is.memory.init}
+                  MaxSize:  ${is.memory.max}
 provision:
   default:
     runtime: ${nodes}
