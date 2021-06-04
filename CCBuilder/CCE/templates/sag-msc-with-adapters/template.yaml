@@ -60,7 +60,7 @@ templates:
                 COMMON-MEMORY:
                   InitSize: ${is.memory.init}
                   MaxSize:  ${is.memory.max}
-    tcdb:
+      tcdb:
 provision:
   default:
     runtime: ${nodes}
