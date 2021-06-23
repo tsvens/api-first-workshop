@@ -26,8 +26,8 @@ spec:
       mountPath: /kaniko/.docker
   volumes:
   - name: swag-license-keys
-    persistentVolumeClaim:
-      claimName: license-pvc
+    hostPath:
+      path: "/tmp/license"
   - name: jenkins-docker-cfg
     projected:
       sources:
