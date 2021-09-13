@@ -22,6 +22,8 @@ ARG BASE_IMAGE
 
 FROM $BUILDER_IMAGE as builder
 
+ADD --chown=1724:1724 SoftwareAGInstaller.bin ./
+
 # provision and unit test
 RUN ./SoftwareAGInstaller.bin --runScript createIsImage.script
 
