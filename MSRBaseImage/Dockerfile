@@ -23,7 +23,7 @@ ARG BASE_IMAGE
 FROM $BUILDER_IMAGE as builder
 
 # provision and unit test
-RUN ./SoftwareAGInstaller20210826-Linux_x86_64.bin --runScript createIsImage.script
+RUN ./SoftwareAGInstaller.bin --runScript createIsImage.script
 
 FROM $BASE_IMAGE
 
