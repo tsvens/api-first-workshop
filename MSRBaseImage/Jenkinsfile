@@ -61,8 +61,8 @@ spec:
       stage('Prepare') {
         steps {
           sh '''#!/bin/sh
-          cd ${PACKAGE}
           cp /wm-installer/SoftwareAGInstaller.bin ${PACKAGE}/.
+          cd ${PACKAGE}
           chmod +x SoftwareAGInstaller.bin
           sed -i 's/%EMPOWER_USER%/'$EMPOWER_CREDS_USR'/g' createIsImage.script
           sed -i 's/%EMPOWER_PASSWORD%/'$EMPOWER_CREDS_PSW'/g' createIsImage.script
