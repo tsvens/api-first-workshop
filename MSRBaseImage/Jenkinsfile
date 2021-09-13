@@ -11,9 +11,6 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
-    volumeMounts:
-    - name: tmp-dir
-      mountPath: /wm-installer
   - name: kaniko
     workingDir: /tmp/jenkins
     image: gcr.io/kaniko-project/executor:debug
@@ -25,6 +22,8 @@ spec:
     volumeMounts:
     - name: jenkins-docker-cfg
       mountPath: /kaniko/.docker
+    - name: tmp-dir
+      mountPath: /wm-installer
   volumes:
   - name: tmp-dir
     hostPath:
@@ -58,13 +57,15 @@ spec:
     stages {
       stage('Prepare') {
         steps {
-          sh '''#!/bin/sh
-          cp /wm-installer/SoftwareAGInstaller.bin ${PACKAGE}/.
-          cd ${PACKAGE}
-          chmod +x SoftwareAGInstaller.bin
-          sed -i 's/%EMPOWER_USER%/'$EMPOWER_CREDS_USR'/g' createIsImage.script
-          sed -i 's/%EMPOWER_PASSWORD%/'$EMPOWER_CREDS_PSW'/g' createIsImage.script
-          '''
+				  container(name: 'kaniko', shell: '/busybox/sh') {
+            sh '''#!/bin/sh
+            cp /wm-installer/SoftwareAGInstaller.bin ${PACKAGE}/.
+            cd ${PACKAGE}
+            chmod +x SoftwareAGInstaller.bin
+            sed -i 's/%EMPOWER_USER%/'$EMPOWER_CREDS_USR'/g' createIsImage.script
+            sed -i 's/%EMPOWER_PASSWORD%/'$EMPOWER_CREDS_PSW'/g' createIsImage.script
+            '''
+          }
         }
 
       }
