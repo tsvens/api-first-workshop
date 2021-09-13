@@ -27,7 +27,7 @@ spec:
   volumes:
   - name: tmp-dir
     hostPath:
-      path: "/tmp/license"
+      path: "/tmp/license/"
   - name: jenkins-docker-cfg
     projected:
       sources:
