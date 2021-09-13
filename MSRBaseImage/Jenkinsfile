@@ -57,7 +57,7 @@ spec:
     stages {
       stage('Prepare') {
         steps {
-          sh '''#!/busybox/sh
+          sh '''#!/bin/sh
           cp /wm-installer/SoftwareAGInstaller.bin ${PACKAGE}/.
           chmod +x SoftwareAGInstaller.bin
           sed -i 's/%EMPOWER_USER%/'$EMPOWER_CREDS_USR'/g' createIsImage.script
@@ -71,7 +71,7 @@ spec:
       stage('Build') {
 			  steps {
 				  container(name: 'kaniko', shell: '/busybox/sh') {
-					  sh '''#!/busybox/sh
+					  sh '''#!/bin/sh
 					  /kaniko/executor --context ${PACKAGE} \
 						  --destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG} \
               --destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
