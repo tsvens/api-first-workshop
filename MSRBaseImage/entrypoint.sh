@@ -1,6 +1,6 @@
 #!/bin/sh
 #*******************************************************************************
-#  Copyright © 2013 - 2018 Software AG, Darmstadt, Germany and/or its licensors
+#  Copyright ï¿½ 2013 - 2018 Software AG, Darmstadt, Germany and/or its licensors
 #
 #   SPDX-License-Identifier: Apache-2.0
 #
@@ -17,10 +17,10 @@
 #     limitations under the License.                                                            
 #
 #*******************************************************************************
-echo "$SAG_HOME/IntegrationServer/bin/startup.sh"
-$SAG_HOME/IntegrationServer/bin/startup.sh
+echo "$SAG_HOME/IntegrationServer/instances/default/bin/startup.sh"
+$SAG_HOME/IntegrationServer/instances/default/bin/startup.sh
 # wait until IS server.log comes up
-while [  ! -f $SAG_HOME/IntegrationServer/logs/server.log ]; do
+while [  ! -f $SAG_HOME/IntegrationServer/instances/default/logs/server.log ]; do
      sleep 5
 done
 
@@ -28,11 +28,11 @@ echo "IS process successfully started. Waiting for HTTP stack ..."
 until curl -u Administrator:manage -s http://`hostname`:5555/ 
 do 
     sleep 5
-    tail $SAG_HOME/IntegrationServer/logs/server.log
+    tail $SAG_HOME/IntegrationServer/instances/default/logs/server.log
 done
 
 # this is our main container process
 
 echo "Integration Server is ONLINE at http://`hostname`:5555/"
 
-tail -f $SAG_HOME/IntegrationServer/logs/server.log
+tail -f $SAG_HOME/IntegrationServer/instances/default/logs/server.log

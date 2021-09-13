@@ -22,7 +22,12 @@ spec:
     volumeMounts:
     - name: jenkins-docker-cfg
       mountPath: /kaniko/.docker
+    - name: tmp-dir
+      mountPath: /wm-installer
   volumes:
+  - name: tmp-dir
+    hostPath:
+      path: "/tmp/license"
   - name: jenkins-docker-cfg
     projected:
       sources:
@@ -35,28 +40,48 @@ spec:
 		}
 	}
 
+  parameters{
+
+		credentials(credentialType: 'com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl', 
+			defaultValue: '', description: 'Empower credentials ', name: 'EMPOWER_CREDENTIALS', required: true)
+	}
+
 	environment {
 		PACKAGE="MSRBaseImage"
 		BUILDER_TAG = "10.7"
     CONTAINER_TAG = "10.7"
 		REG = "docker-registry.registry:5000"
+		EMPOWER_CREDS = credentials('EMPOWER_CREDENTIALS')
     }
 
     stages {
-		stage('Build') {
-			steps {
-				container(name: 'kaniko', shell: '/busybox/sh') {
-					sh '''#!/busybox/sh
-					/kaniko/executor --context ${PACKAGE} \
-						--destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG} \
-            --destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
-            --destination ${REG}/microservice-runtime-tcdb:latest \
-						--insecure-registry ${REG} \
-						--build-arg BUILDER_IMAGE=${REG}/commandcentral-builder:${BUILDER_TAG} \
-						--build-arg BASE_IMAGE=${REG}/java:${BUILDER_TAG}
-					'''
-				}
-			}
-		}
+      stage('Prepare') {
+        steps {
+          sh '''#!/busybox/sh
+          cp /wm-installer/SoftwareAGInstaller.bin ${PACKAGE}/.
+          chmod +x SoftwareAGInstaller.bin
+          sed -i 's/%EMPOWER_USER%/'$EMPOWER_CREDS_USR'/g' createIsImage.script
+          sed -i 's/%EMPOWER_PASSWORD%/'$EMPOWER_CREDS_PSW'/g' createIsImage.script
+          '''
+          unzip zipFile: '/wm-installer/license/licenses.zip', dir: '${PACKAGE}/licenses'
+        }
+
+      }
+		
+      stage('Build') {
+			  steps {
+				  container(name: 'kaniko', shell: '/busybox/sh') {
+					  sh '''#!/busybox/sh
+					  /kaniko/executor --context ${PACKAGE} \
+						  --destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG} \
+              --destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
+              --destination ${REG}/microservice-runtime-tcdb:latest \
+		  				--insecure-registry ${REG} \
+			  			--build-arg BUILDER_IMAGE=centos:7 \
+				  		--build-arg BASE_IMAGE=centos:7
+					  '''
+				  }
+			  }
+		  }
     }
 }
