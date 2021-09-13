@@ -22,12 +22,18 @@ ARG BASE_IMAGE
 
 FROM $BUILDER_IMAGE as builder
 
+RUN useradd −u 1724 swagadmin
+
+USER 1724
 ADD --chown=1724:1724 SoftwareAGInstaller.bin ./
 
 # provision and unit test
 RUN ./SoftwareAGInstaller.bin --runScript createIsImage.script
 
 FROM $BASE_IMAGE
+
+RUN useradd −u 1724 swagadmin
+USER 1724
 
 EXPOSE 5555 9999 8094 8092 8093
 
