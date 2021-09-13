@@ -26,6 +26,7 @@ RUN groupadd -g 1724 swag && useradd -u 1724 -g 1724 swagadmin
 
 USER 1724
 ADD --chown=1724:1724 SoftwareAGInstaller.bin ./
+ADD --chown=1724:1724 createIsImage.script ./
 
 # provision and unit test
 RUN ./SoftwareAGInstaller.bin -readScript createIsImage.script
