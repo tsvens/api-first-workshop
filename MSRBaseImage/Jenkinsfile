@@ -11,6 +11,9 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
+    volumeMounts:
+    - name: tmp-dir
+      mountPath: /wm-installer
   - name: kaniko
     workingDir: /tmp/jenkins
     image: gcr.io/kaniko-project/executor:debug
