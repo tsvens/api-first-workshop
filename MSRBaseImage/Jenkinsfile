@@ -27,7 +27,7 @@ spec:
   volumes:
   - name: tmp-dir
     hostPath:
-      path: "/tmp/license/"
+      path: "/tmp/license"
   - name: jenkins-docker-cfg
     projected:
       sources:
@@ -64,7 +64,6 @@ spec:
           sed -i 's/%EMPOWER_USER%/'$EMPOWER_CREDS_USR'/g' createIsImage.script
           sed -i 's/%EMPOWER_PASSWORD%/'$EMPOWER_CREDS_PSW'/g' createIsImage.script
           '''
-          unzip zipFile: '/wm-installer/license/licenses.zip', dir: '${PACKAGE}/licenses'
         }
 
       }
