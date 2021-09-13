@@ -22,7 +22,7 @@ ARG BASE_IMAGE
 
 FROM $BUILDER_IMAGE as builder
 
-RUN groupadd -g 1724 swag && useradd -m −u 1724 -g 1724 swagadmin
+RUN groupadd -g 1724 swag && useradd -u 1724 -g 1724 swagadmin
 
 USER 1724
 ADD --chown=1724:1724 SoftwareAGInstaller.bin ./
@@ -32,7 +32,7 @@ RUN ./SoftwareAGInstaller.bin --runScript createIsImage.script
 
 FROM $BASE_IMAGE
 
-RUN groupadd -g 1724 swag && useradd -m −u 1724 -g 1724 swagadmin
+RUN groupadd -g 1724 swag && useradd -u 1724 -g 1724 swagadmin
 USER 1724
 
 EXPOSE 5555 9999 8094 8092 8093
