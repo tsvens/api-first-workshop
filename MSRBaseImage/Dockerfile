@@ -28,7 +28,7 @@ USER 1724
 ADD --chown=1724:1724 SoftwareAGInstaller.bin ./
 
 # provision and unit test
-RUN ./SoftwareAGInstaller.bin --runScript createIsImage.script
+RUN ./SoftwareAGInstaller.bin -readScript createIsImage.script
 
 FROM $BASE_IMAGE
 
