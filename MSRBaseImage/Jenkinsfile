@@ -58,7 +58,7 @@ spec:
       stage('Prepare') {
         steps {
 				  container(name: 'kaniko', shell: '/busybox/sh') {
-            sh '''#!/bin/sh
+            sh '''#!/busybox/sh
             cp /wm-installer/SoftwareAGInstaller.bin ${PACKAGE}/.
             cd ${PACKAGE}
             chmod +x SoftwareAGInstaller.bin
@@ -73,7 +73,7 @@ spec:
       stage('Build') {
 			  steps {
 				  container(name: 'kaniko', shell: '/busybox/sh') {
-					  sh '''#!/bin/sh
+					  sh '''#!/busybox/sh
 					  /kaniko/executor --context ${PACKAGE} \
 						  --destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG} \
               --destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
