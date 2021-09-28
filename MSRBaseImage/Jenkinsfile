@@ -60,10 +60,13 @@ spec:
 				  container(name: 'kaniko', shell: '/busybox/sh') {
             sh '''#!/busybox/sh
             cp /wm-installer/SoftwareAGInstaller.bin ${PACKAGE}/.
+            cp /wm-installer/*Integration_Server*.xml /tmp/ISLicense.xml
             cd ${PACKAGE}
             chmod +x SoftwareAGInstaller.bin
             sed -i 's/%EMPOWER_USER%/'$EMPOWER_CREDS_USR'/g' createIsImage.script
             sed -i 's/%EMPOWER_PASSWORD%/'$EMPOWER_CREDS_PSW'/g' createIsImage.script
+            sh ./SoftwareAGInstaller.bin -readScript ./createIsImage.script -console
+            rm ./SoftwareAGInstaller.bin
             '''
           }
         }
