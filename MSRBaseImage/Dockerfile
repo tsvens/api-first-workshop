@@ -42,8 +42,8 @@ EXPOSE 5555 9999 8094 8092 8093
 COPY --from=builder --chown=1724:1724 $SAG_HOME/ $SAG_HOME/
 
 # custom entry point
-ADD entrypoint.sh $SAG_HOME/
-ENTRYPOINT $SAG_HOME/entrypoint.sh
+ADD entrypoint.sh /opt/softwareag/
+ENTRYPOINT /opt/softwareag/entrypoint.sh
 
 # Current working directory for all commands. This is where the MSC installation is copied to within the image.
-WORKDIR $SAG_HOME
+WORKDIR /opt/softwareag
