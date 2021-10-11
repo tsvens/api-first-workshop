@@ -29,7 +29,7 @@ ADD --chown=1724:1724 SoftwareAGInstaller.bin ./
 ADD --chown=1724:1724 createIsImage.script ./
 
 # provision and unit test
-RUN ./SoftwareAGInstaller.bin -readScript createIsImage.script
+RUN echo "./SoftwareAGInstaller.bin -readScript createIsImage.script" > $SAG_HOME/install.sh
 
 FROM $BASE_IMAGE
 
