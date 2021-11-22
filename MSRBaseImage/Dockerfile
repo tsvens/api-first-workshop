@@ -28,8 +28,9 @@ USER 1724
 ADD --chown=1724:1724 SoftwareAGInstaller.bin ./
 ADD --chown=1724:1724 createIsImage.script ./
 
+RUN chmod +x SoftwareAGInstaller.bin
 # provision and unit test
-RUN echo "./SoftwareAGInstaller.bin -readScript createIsImage.script" > $SAG_HOME/install.sh
+RUN ./SoftwareAGInstaller.bin -readScript createIsImage.script
 
 FROM $BASE_IMAGE
 
@@ -39,7 +40,7 @@ USER 1724
 EXPOSE 5555 9999 8094 8092 8093
 
 # copy everything from the builder stage $SAG_HOME
-COPY --from=builder --chown=1724:1724 $SAG_HOME/ $SAG_HOME/
+COPY --from=builder --chown=1724:1724 /tmp/installation_dir_is-tca-image $SAG_HOME/
 
 # custom entry point
 ADD entrypoint.sh /opt/softwareag/

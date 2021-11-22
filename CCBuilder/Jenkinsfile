@@ -49,8 +49,8 @@ spec:
 	environment {
 		PACKAGE="CCBuilder"
 		CC_REG = "store/softwareag"
-        CC_TAG = "10.7"
-		TAG = "10.7"
+        CC_TAG = "10.11"
+		TAG = "10.11"
 		REG = "docker-registry.registry:5000"
 		EMPOWER_CREDS = credentials('EMPOWER_CREDENTIALS')
     }
