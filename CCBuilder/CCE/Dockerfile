@@ -20,6 +20,12 @@
 ARG BUILDER_IMAGE
 ARG NODE_IMAGE
 
+ARG REPO_USERNAME
+ARG REPO_PASSWORD
+ARG REPO_PRODUCT_URL=https://sdc-hq.softwareag.com/dataservewebM1011/repository/
+ARG REPO_FIX_URL=https://sdc.softwareag.com/updates/prodRepo
+
+
 FROM $NODE_IMAGE as node
 FROM $BUILDER_IMAGE as builder
 
