@@ -92,5 +92,18 @@ spec:
 				  }
 			  }
 		  }
+
+      stage('Push') {
+			  steps {
+				  container(name: 'dind', shell: '/bin/sh') {
+					  sh '''#!/bin/sh
+            cd ${PACKAGE}
+					  docker push ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}
+            docker push ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER}
+            docker push ${REG}/microservice-runtime-tcdb:latest
+					  '''
+				  }
+			  }
+		  }
     }
 }
