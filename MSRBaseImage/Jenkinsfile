@@ -67,7 +67,7 @@ spec:
 				  container(name: 'dind', shell: '/bin/sh') {
             sh '''#!/bin/sh
             cp /wm-installer/SoftwareAGInstaller.bin ${PACKAGE}/.
-            cp /wm-installer/*Integration_Server*.xml /tmp/ISLicense.xml
+            cp /wm-installer/ISLicense.xml /tmp/ISLicense.xml
             cd ${PACKAGE}
             chmod +x SoftwareAGInstaller.bin
             sed -i 's/%EMPOWER_USER%/'$EMPOWER_CREDS_USR'/g' createIsImage.script
