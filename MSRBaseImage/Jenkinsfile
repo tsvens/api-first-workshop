@@ -67,7 +67,7 @@ spec:
 				  container(name: 'dind', shell: '/bin/sh') {
             sh '''#!/bin/sh
             cp /wm-installer/SoftwareAGInstaller.bin ${PACKAGE}/.
-            cp /wm-installer/ISLicense.xml /tmp/ISLicense.xml
+            cp /wm-installer/ISLicense.xml .
             cd ${PACKAGE}
             chmod +x SoftwareAGInstaller.bin
             sed -i 's/%EMPOWER_USER%/'$EMPOWER_CREDS_USR'/g' createIsImage.script
@@ -82,11 +82,9 @@ spec:
 			  steps {
 				  container(name: 'dind', shell: '/bin/sh') {
 					  sh '''#!/bin/sh
-					  /kaniko/executor --context ${PACKAGE} \
-						  --destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG} \
-              --destination ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
-              --destination ${REG}/microservice-runtime-tcdb:latest \
-		  				--insecure-registry ${REG} \
+					  docker build -t ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG} \
+              -t ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
+              -t ${REG}/microservice-runtime-tcdb:latest \
 			  			--build-arg BUILDER_IMAGE=redhat/ubi8 \
 				  		--build-arg BASE_IMAGE=redhat/ubi8
 					  '''

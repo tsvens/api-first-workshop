@@ -27,7 +27,7 @@ ENV PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
 ADD SoftwareAGInstaller.bin ./
 ADD createIsImage.script ./
-ADD is-license.xml /tmp/ISLicense.xml
+ADD ISLicense.xml /tmp/ISLicense.xml
 
 RUN chmod +x SoftwareAGInstaller.bin
 # provision and unit test
