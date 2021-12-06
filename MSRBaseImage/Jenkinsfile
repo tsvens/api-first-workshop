@@ -86,7 +86,7 @@ spec:
               -t ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
               -t ${REG}/microservice-runtime-tcdb:latest \
 			  			--build-arg BUILDER_IMAGE=redhat/ubi8 \
-				  		--build-arg BASE_IMAGE=redhat/ubi8
+				  		--build-arg BASE_IMAGE=redhat/ubi8 .
 					  '''
 				  }
 			  }
