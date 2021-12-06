@@ -31,7 +31,7 @@ ADD ISLicense.xml /tmp/ISLicense.xml
 
 RUN chmod +x SoftwareAGInstaller.bin
 # provision and unit test
-RUN /workspace/my_init --skip-runit "/bin/bash ./SoftwareAGInstaller.bin -scriptErrorInteract no -readScript createIsImage.script"
+RUN ./SoftwareAGInstaller.bin -scriptErrorInteract no -readScript createIsImage.script
 
 FROM $BASE_IMAGE
 
