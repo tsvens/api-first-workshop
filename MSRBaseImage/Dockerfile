@@ -38,7 +38,7 @@ FROM $BASE_IMAGE
 RUN dnf install -y procps net-tools util-linux
 
 RUN groupadd -g 1724 swag && useradd -u 1724 -g 1724 swagadmin
-RUN mkdir /opt
+
 USER 1724
 
 ENV SAG_HOME=/opt/softwareag
