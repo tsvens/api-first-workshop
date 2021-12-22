@@ -57,7 +57,7 @@ spec:
 		PACKAGE="MSRBaseImage"
 		BUILDER_TAG = "10.11"
     CONTAINER_TAG = "10.11"
-		REG = "docker-registry.registry:5000"
+		REGISTRY = "docker-registry.registry:5000"
 		EMPOWER_CREDS = credentials('EMPOWER_CREDENTIALS')
     }
 
@@ -83,25 +83,16 @@ spec:
 				  container(name: 'dind', shell: '/bin/sh') {
 					  sh '''#!/bin/sh
             cd ${PACKAGE}
-					  docker build -t ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG} \
-              -t ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
-              -t ${REG}/microservice-runtime-tcdb:latest \
-			  			--build-arg BUILDER_IMAGE=redhat/ubi8 \
-				  		--build-arg BASE_IMAGE=redhat/ubi8 .
-					  '''
-				  }
-			  }
-		  }
+            '''
+					  script {
+						  docker.withRegistry("http://${REGISTRY}") {
+					
+							def customImage = docker.build("microservice-runtime-tcdb:${CONTAINER_TAG}", "${PACKAGE}")
 
-      stage('Push') {
-			  steps {
-				  container(name: 'dind', shell: '/bin/sh') {
-					  sh '''#!/bin/sh
-            cd ${PACKAGE}
-					  docker push ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}
-            docker push ${REG}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER}
-            docker push ${REG}/microservice-runtime-tcdb:latest
-					  '''
+							/* Push the container to the custom Registry */
+							customImage.push()
+						}
+					}
 				  }
 			  }
 		  }
