@@ -87,7 +87,7 @@ spec:
 					  script {
 						  docker.withRegistry("http://${REGISTRY}") {
 					
-							def customImage = docker.build("microservice-runtime-tcdb:${CONTAINER_TAG}", "${PACKAGE}")
+							def customImage = docker.build("microservice-runtime-tcdb:${CONTAINER_TAG}", "${PACKAGE} --build-arg BUILDER_IMAGE=redhat/ubi8 --build-arg BASE_IMAGE=redhat/ubi8")
 
 							/* Push the container to the custom Registry */
 							customImage.push()
