@@ -51,13 +51,14 @@ spec:
 
 		credentials(credentialType: 'com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl', 
 			defaultValue: '', description: 'Empower credentials ', name: 'EMPOWER_CREDENTIALS', required: true)
+    string(name: 'REGISTRY_INGRESS', defaultValue: 'http://registry.master.servers:5000', description: 'Endpoint of the docker registry')
 	}
 
 	environment {
 		PACKAGE="MSRBaseImage"
 		BUILDER_TAG = "10.11"
     CONTAINER_TAG = "10.11"
-		REGISTRY = "docker-registry.registry:5000"
+		REGISTRY = "${params.REGISTRY_INGRESS}"
 		EMPOWER_CREDS = credentials('EMPOWER_CREDENTIALS')
     }
 
