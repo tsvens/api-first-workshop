@@ -51,7 +51,7 @@ spec:
 
 		credentials(credentialType: 'com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl', 
 			defaultValue: '', description: 'Empower credentials ', name: 'EMPOWER_CREDENTIALS', required: true)
-    string(name: 'REGISTRY_INGRESS', defaultValue: 'http://registry.master.servers:5000', description: 'Endpoint of the docker registry')
+    string(name: 'REGISTRY_INGRESS', defaultValue: 'http://registry.master.servers', description: 'Endpoint of the docker registry')
 	}
 
 	environment {
