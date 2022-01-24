@@ -74,7 +74,7 @@ spec:
 					script {
 						docker.withRegistry("${REGISTRY}") {
 					
-							def customImage = docker.build("${PACKAGE}:${CONTAINER_TAG}", "${PACKAGE} --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
+							def customImage = docker.build("registry.master.servers/${PACKAGE}:${CONTAINER_TAG}", "${PACKAGE} --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
 
 							/* Push the container to the custom Registry */
 							customImage.push()
@@ -83,6 +83,7 @@ spec:
 				}
 			}
 		}
+		
 
 		stage('Deploy-Container'){
             steps {
