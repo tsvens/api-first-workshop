@@ -86,16 +86,6 @@ spec:
 			}
 		}
 		
-/*		stage('Test') {
-			steps {
-				container(name: 'kaniko', shell: '/busybox/sh') {
-					sh 'cd ${WORKSPACE}/${PACKAGE}/test; \
-						/opt/softwareag/common/lib/ant/bin/ant -f run-composite-runner.xml -propertyfile run-test.properties composite-runner-all-tests'
-					junit '**/build/test/reports/*.xml'
-				}
-			}
-		}
-*/
 		stage('Deploy-Container'){
             steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
