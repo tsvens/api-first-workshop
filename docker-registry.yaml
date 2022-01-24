@@ -70,6 +70,8 @@ kind: Ingress
 metadata:
   name: registry-ingress
   namespace: registry
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 0
 spec:
   rules:
   - host: registry.master.servers

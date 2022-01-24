@@ -1,5 +1,5 @@
 pipeline {
-	
+
 	agent {
 		kubernetes {
     	label 'docker-builder'
@@ -11,35 +11,38 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
-  - name: kaniko
+  - name: dind
     workingDir: /tmp/jenkins
-    image: gcr.io/kaniko-project/executor:debug
+    image: docker
     imagePullPolicy: Always
     restartPolicy: Never
     command: 
-    - /busybox/cat
+    - /bin/cat
     tty: true
     volumeMounts:
-    - name: jenkins-docker-cfg
-      mountPath: /kaniko/.docker
+    - name: tmp-dir
+      mountPath: /wm-installer
+    - name: docker-sock
+      mountPath: /var/run/docker.sock
+    securityContext:
+      privileged: true
   volumes:
-  - name: jenkins-docker-cfg
-    projected:
-      sources:
-      - secret:
-          name: docker-credentials 
-          items:
-            - key: .dockerconfigjson
-              path: config.json 
+  - name: docker-sock
+    hostPath:
+      path: "/var/run/docker.sock"
 """
 		}
 	}
 	
+	parameters{
+		string(name: 'REGISTRY_INGRESS', defaultValue: 'https://registry.master.servers', description: 'Endpoint of the docker registry')
+	}
+
 	environment {
         JAVA_HOME = "/opt/softwareag/jvm/jvm"
 		PACKAGE = "Products"
 		NAMESPACE = "api-first-workshop"
-		REGISTRY = "docker-registry.registry:5000"
+		REGISTRY = "${params.REGISTRY_INGRESS}"
 		CONTAINER = "products_api"
 		CONTAINER_TAG = "1.0"
     }
@@ -66,21 +69,23 @@ spec:
 
 		stage('Build') {
 			steps {
-				container(name: 'kaniko', shell: '/busybox/sh') {
-					sh '''#!/busybox/sh
-						/kaniko/executor --context ${PACKAGE}/build/container \
-							--destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG} \
-							--destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}.${BUILD_NUMBER} \
-							--destination ${REGISTRY}/${CONTAINER}:latest \
-							--insecure-registry ${REGISTRY} \
-							--build-arg PACKAGE=${PACKAGE} \
-							--build-arg BASE_IMAGE=${REGISTRY}/microservice-runtime-tcdb:latest
-						'''
+				container(name: 'dind', shell: '/bin/sh') {
+					sh '''#!/bin/sh
+            			cd ${PACKAGE}
+            		'''
+					script {
+						docker.withRegistry("${REGISTRY}") {
+					
+						def customImage = docker.build("${PACKAGE}:${CONTAINER_TAG}", "${PACKAGE} --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
+
+						/* Push the container to the custom Registry */
+						customImage.push()
+					}
 				}
 			}
 		}
 		
-		stage('Test') {
+/*		stage('Test') {
 			steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
 					sh 'cd ${WORKSPACE}/${PACKAGE}/test; \
@@ -89,7 +94,7 @@ spec:
 				}
 			}
 		}
-
+*/
 		stage('Deploy-Container'){
             steps {
 				container(name: 'kaniko', shell: '/busybox/sh') {
