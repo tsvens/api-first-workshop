@@ -33,14 +33,14 @@ spec:
 	}
 	
 	parameters{
-		string(name: 'REGISTRY_INGRESS', defaultValue: 'https://registry.master.servers', description: 'Endpoint of the docker registry')
+		string(name: 'REGISTRY', defaultValue: 'registry.master.servers', description: 'Endpoint of the docker registry')
 	}
 
 	environment {
         JAVA_HOME = "/opt/softwareag/jvm/jvm"
 		PACKAGE = "Products"
 		NAMESPACE = "api-first-workshop"
-		REGISTRY = "${params.REGISTRY_INGRESS}"
+		REGISTRY = "${params.REGISTRY}"
 		CONTAINER = "products_api"
 		CONTAINER_TAG = "1.0"
     }
@@ -72,9 +72,9 @@ spec:
             			cd ${PACKAGE}
             		'''
 					script {
-						docker.withRegistry("${REGISTRY}") {
+						docker.withRegistry("https://${REGISTRY}") {
 					
-							def customImage = docker.build("registry.master.servers/${PACKAGE}:${CONTAINER_TAG}", "${PACKAGE} --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
+							def customImage = docker.build("${CONTAINER}:${CONTAINER_TAG}", "${PACKAGE} --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
 
 							/* Push the container to the custom Registry */
 							customImage.push()
@@ -83,7 +83,6 @@ spec:
 				}
 			}
 		}
-		
 
 		stage('Deploy-Container'){
             steps {
