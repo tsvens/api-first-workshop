@@ -42,7 +42,7 @@ USER 1724
 ENV SAG_HOME=/opt/softwareag
 
 # copy everything from the builder stage $SAG_HOME
-COPY --from=builder --chown=1724:1724 /tmp/installation_dir_is-tca-image $SAG_HOME
+COPY --from=builder --chown=1724:1724 /opt/softwareag $SAG_HOME
 
 # custom entry point
 ADD entrypoint.sh /opt/softwareag/
