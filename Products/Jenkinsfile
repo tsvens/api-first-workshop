@@ -26,7 +26,7 @@ spec:
       privileged: true
   - name: kubectl
     workingDir: /tmp/jenkins
-    image: rancher/kubectl:v1.23.3
+    image: bitnami/kubectl
     command: /bin/cat
   volumes:
   - name: docker-sock
