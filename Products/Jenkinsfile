@@ -14,6 +14,8 @@ spec:
   - name: kubectl
     workingDir: /tmp/jenkins
     image: bitnami/kubectl
+    imagePullPolicy: Always
+    restartPolicy: Never
     command: 
     - /bin/cat
     tty: true
