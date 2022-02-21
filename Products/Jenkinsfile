@@ -11,6 +11,11 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
+  - name: kubectl
+    workingDir: /tmp/jenkins
+    image: bitnami/kubectl
+    command: 
+    - /bin/cat
   - name: dind
     workingDir: /tmp/jenkins
     image: docker
@@ -24,12 +29,6 @@ spec:
       mountPath: /var/run/docker.sock
     securityContext:
       privileged: true
-  - name: kubectl
-    workingDir: /tmp/jenkins
-    image: bitnami/kubectl
-    command: 
-    - /bin/cat
-    tty: true
   volumes:
   - name: docker-sock
     hostPath:
