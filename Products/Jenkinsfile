@@ -24,6 +24,9 @@ spec:
       mountPath: /var/run/docker.sock
     securityContext:
       privileged: true
+  - name: kubectl
+    workingDir: /tmp/jenkins
+    image: rancher/kubectl:v1.23.3
   volumes:
   - name: docker-sock
     hostPath:
