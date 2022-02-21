@@ -27,6 +27,7 @@ spec:
   - name: kubectl
     workingDir: /tmp/jenkins
     image: rancher/kubectl:v1.23.3
+    command: /bin/cat
   volumes:
   - name: docker-sock
     hostPath:
