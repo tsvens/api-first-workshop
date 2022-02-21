@@ -24,6 +24,9 @@ spec:
       mountPath: /var/run/docker.sock
     securityContext:
       privileged: true
+  - name: kubectl
+    workingDir: /tmp/jenkins
+    image: rancher/kubectl
   volumes:
   - name: docker-sock
     hostPath:
@@ -72,7 +75,7 @@ spec:
             			cd ${PACKAGE}
             		'''
 					script {
-						docker.withRegistry("${REGISTRY}") {
+						docker.withRegistry("${REGISTRY_INGRESS}") {
 					
 							def customImage = docker.build("${CONTAINER}:${CONTAINER_TAG}", "${PACKAGE}/build/container --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
 
