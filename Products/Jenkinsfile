@@ -27,7 +27,9 @@ spec:
   - name: kubectl
     workingDir: /tmp/jenkins
     image: bitnami/kubectl
-    command: /bin/cat
+    command: 
+    - /bin/cat
+    tty: true
   volumes:
   - name: docker-sock
     hostPath:
