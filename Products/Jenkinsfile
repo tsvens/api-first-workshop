@@ -70,9 +70,16 @@ spec:
 				container(name: 'dind', shell: '/bin/sh') {
 					sh '''#!/bin/sh
             			cd ${PACKAGE}
-						docker build -t "${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}" "build/container --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}"
-						docker push ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}
             		'''
+					script {
+						docker.withRegistry("${REGISTRY_INGRESS}") {
+					
+							def customImage = docker.build("${CONTAINER}:${CONTAINER_TAG}", "${PACKAGE}/build/container --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
+
+							/* Push the container to the custom Registry */
+							customImage.push()
+						}
+					}
 				}
 			}
 		}
@@ -80,7 +87,7 @@ spec:
 
 		stage('Deploy-Container'){
             steps {
-				kubernetesApply(file: "${PACKAGE}/deployment/${CONTAINER}-DC.yml")
+				kubernetesApply(file: "${PACKAGE}/deployment/${CONTAINER}-DC.yml", environment: "kubernetes")
 
             }
         }
