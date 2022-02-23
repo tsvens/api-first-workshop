@@ -80,7 +80,7 @@ spec:
 
 		stage('Deploy-Container'){
             steps {
-				kubernetesDeploy(configs: "${PACKAGE}/deployment/${CONTAINER}-DC.yml", kubeconfigId: "kubeconfig")
+				kubernetesApply(file: "${PACKAGE}/deployment/${CONTAINER}-DC.yml")
 
             }
         }
