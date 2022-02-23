@@ -89,7 +89,7 @@ spec:
             steps {
 				container(name: 'kubectl', shell: '/bin/sh') {
 
-						kubernetesDeploy configs: "${WORKSPACE}/${PACKAGE}/deployment/${CONTAINER}-DC.yml", kubeconfigId: 'kubeconf'
+						kubernetesDeploy configs: "**/${PACKAGE}/deployment/${CONTAINER}-DC.yml", kubeconfigId: 'kubeconf'
 
 				}
             }
