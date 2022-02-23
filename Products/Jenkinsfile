@@ -70,7 +70,7 @@ spec:
 				container(name: 'dind', shell: '/bin/sh') {
 					sh '''#!/bin/sh
             			cd ${PACKAGE}
-						docker build -t "${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}" "${PACKAGE}/build/container --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}"
+						docker build -t "${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}" "build/container --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}"
 						docker push ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}
             		'''
 				}
