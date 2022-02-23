@@ -88,11 +88,9 @@ spec:
 		stage('Deploy-Container'){
             steps {
 				container(name: 'kubectl', shell: '/bin/sh') {
-					withKubeConfig([credentialsId: '94e1b6f9-9e31-465a-be29-2c380efbd3e8', serverUrl: 'https://kubernetes.default']) {
-						kubernetesDeploy configs: "${PACKAGE}/deployment/${CONTAINER}-DC.yml"
-				
 
-					}
+						kubernetesDeploy configs: "${PACKAGE}/deployment/${CONTAINER}-DC.yml", kubeconfigId: '94e1b6f9-9e31-465a-be29-2c380efbd3e8'
+
 				}
             }
         }
