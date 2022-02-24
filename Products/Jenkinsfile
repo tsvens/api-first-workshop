@@ -11,6 +11,7 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
+    image: 'jenkins/inbound-agent:4.7-1'
   - name: dind
     workingDir: /tmp/jenkins
     image: docker
