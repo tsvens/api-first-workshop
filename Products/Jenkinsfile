@@ -88,7 +88,6 @@ spec:
 		stage('Deploy-Container'){
             steps {
 				container(name: 'dind', shell: '/bin/sh') {
-					withKubeConfig([credentialsId: '94e1b6f9-9e31-465a-be29-2c380efbd3e8', serverUrl: 'https://kubernetes.default']) {
 						sh 'kubectl apply -f ${PACKAGE}/deployment/api-DC.yml'
 				
 						script {
@@ -99,7 +98,7 @@ spec:
 								sh 'kubectl apply -f ${PACKAGE}/deployment/${CONTAINER}-service-route.yml'
 							}
 						}
-					}
+					
 				}
             }
         }
