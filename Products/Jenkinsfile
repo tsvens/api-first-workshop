@@ -101,17 +101,5 @@ spec:
 				}
             }
         }
-
-
-		stage('Test') {
-			
-			steps {
-				withAnt(installation: 'default-ant') {
-					sh 'cd ${WORKSPACE}/${PACKAGE}/test; \
-						ant -f run-composite-runner.xml -propertyfile run-test-suites.properties composite-runner-all-tests'
-					junit '**/build/test/reports/*.xml'
-				}
-			}
-		}
     }
 }
