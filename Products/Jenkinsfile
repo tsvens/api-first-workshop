@@ -41,8 +41,9 @@ spec:
 		PACKAGE = "Products"
 		NAMESPACE = "api-first-workshop"
 		REGISTRY_INGRESS = "https://${params.REGISTRY}"
-		CONTAINER = "products_api"
+		CONTAINER = "products-api"
 		CONTAINER_TAG = "1.0"
+		JAVA_HOME = "/opt/java/openjdk"
     }
 
     stages {

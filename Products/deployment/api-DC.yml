@@ -261,7 +261,7 @@ spec:
     spec:
       containers:
         - name: "products-api"
-          image: "registry.master.servers/products_api:1.0"
+          image: "registry.master.servers/products-api:1.0"
           ports:
             - containerPort: 5555
               protocol: "TCP"
