@@ -12,7 +12,6 @@ spec:
   - name: jnlp
     workingDir: /tmp/jenkins
   - name: dind
-    serviceAccount: jenkins-agent-account
     workingDir: /tmp/jenkins
     image: portainer/kube-tools
     imagePullPolicy: Always
@@ -88,6 +87,7 @@ spec:
 		stage('Deploy-Container'){
             steps {
 				container(name: 'dind', shell: '/bin/sh') {
+					withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://kubernetes.default']) {
 						sh 'kubectl apply -f ${PACKAGE}/deployment/api-DC.yml'
 				
 						script {
@@ -98,7 +98,7 @@ spec:
 								sh 'kubectl apply -f ${PACKAGE}/deployment/${CONTAINER}-service-route.yml'
 							}
 						}
-					
+					}
 				}
             }
         }
