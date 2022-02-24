@@ -12,6 +12,7 @@ spec:
   - name: jnlp
     workingDir: /tmp/jenkins
   - name: dind
+    serviceAccount: jenkins-agent-account
     workingDir: /tmp/jenkins
     image: portainer/kube-tools
     imagePullPolicy: Always
