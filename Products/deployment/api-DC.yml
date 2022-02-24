@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: application-properties-is
-  namespace: "${NAMESPACE}"
+  namespace: "api-first-workshop"
 data:
   application.properties: |
     healthindicators.Adapters.enabled=true
@@ -30,7 +30,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: wmpublic-config
-  namespace: "${NAMESPACE}"
+  namespace: "api-first-workshop"
 data:
   fileAccessControl.cnf: |
     allowedReadPaths=/data
@@ -41,7 +41,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: demodata
-  namespace: "${NAMESPACE}"
+  namespace: "api-first-workshop"
 data:
   ProductData.json: |
     {
@@ -238,7 +238,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: datasetnames
-  namespace: "${NAMESPACE}"
+  namespace: "api-first-workshop"
 data:  
   dataSetNames.txt: |
     Inventory/Product/SalesOrderItem/SalesOrder/UOM
@@ -246,22 +246,22 @@ data:
 kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
-  name: "${CONTAINER}"
-  namespace: "${NAMESPACE}"
+  name: "products_api"
+  namespace: "api-first-workshop"
   labels:
-    app: "${CONTAINER}"
+    app: "products_api"
 spec:
   selector:
     matchLabels:
-      app: "${CONTAINER}" 
+      app: "products_api" 
   template: 
     metadata:
       labels:
-        app: "${CONTAINER}"
+        app: "products_api"
     spec:
       containers:
-        - name: "${CONTAINER}"
-          image: "${REGISTRY}/${CONTAINER_TAG}"
+        - name: "products_api"
+          image: "registry.master.servers/products_api:1.0"
           ports:
             - containerPort: 5555
               protocol: "TCP"
@@ -291,7 +291,7 @@ spec:
             - name: "mcgw_api_gateway_password"
               value: "manage"
             - name: "mcgw_downloads_apis"
-              value: "${CONTAINER}"
+              value: "products_api"
       volumes:
         - name: config-volume
           configMap:
