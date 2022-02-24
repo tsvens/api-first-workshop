@@ -87,7 +87,7 @@ spec:
 		stage('Deploy-Container'){
             steps {
 				container(name: 'dind', shell: '/bin/sh') {
-					withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://kubernetes.default']) {
+					withKubeConfig([credentialsId: 'jenkins-agent-account', serverUrl: 'https://kubernetes.default']) {
 						sh 'kubectl apply -f ${PACKAGE}/deployment/api-DC.yml'
 				
 						script {
