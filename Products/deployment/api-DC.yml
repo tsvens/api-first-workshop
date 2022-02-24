@@ -246,21 +246,21 @@ data:
 kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
-  name: "products_api"
+  name: "products-api"
   namespace: "api-first-workshop"
   labels:
-    app: "products_api"
+    app: "products-api"
 spec:
   selector:
     matchLabels:
-      app: "products_api" 
+      app: "products-api" 
   template: 
     metadata:
       labels:
-        app: "products_api"
+        app: "products-api"
     spec:
       containers:
-        - name: "products_api"
+        - name: "products-api"
           image: "registry.master.servers/products_api:1.0"
           ports:
             - containerPort: 5555
@@ -291,7 +291,7 @@ spec:
             - name: "mcgw_api_gateway_password"
               value: "manage"
             - name: "mcgw_downloads_apis"
-              value: "products_api"
+              value: "products-api"
       volumes:
         - name: config-volume
           configMap:
