@@ -106,9 +106,10 @@ spec:
 
 		stage('Test') {
 			steps {
-				container(name: 'kaniko', shell: '/busybox/sh') {
+				def antVersion = 'default-ant'
+				withEnv( ["ANT_HOME=${tool antVersion}"] ) {
 					sh 'cd ${WORKSPACE}/${PACKAGE}/test; \
-						/opt/softwareag/common/lib/ant/bin/ant -f run-composite-runner.xml -propertyfile run-test.properties composite-runner-all-tests'
+						$ANT_HOME/bin/ant -f run-composite-runner.xml -propertyfile run-test.properties composite-runner-all-tests'
 					junit '**/build/test/reports/*.xml'
 				}
 			}
