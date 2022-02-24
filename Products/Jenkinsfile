@@ -105,9 +105,9 @@ spec:
 
 
 		stage('Test') {
-			def antVersion = 'default-ant'
+			
 			steps {
-				withEnv( ["ANT_HOME=${tool antVersion}"] ) {
+				withEnv( ["ANT_HOME=${tool 'default-ant'}"] ) {
 					sh 'cd ${WORKSPACE}/${PACKAGE}/test; \
 						$ANT_HOME/bin/ant -f run-composite-runner.xml -propertyfile run-test.properties composite-runner-all-tests'
 					junit '**/build/test/reports/*.xml'
