@@ -92,10 +92,10 @@ spec:
 				
 						script {
 							try {
-								sh 'kubectl -n ${NAMESPACE} get service ${CONTAINER}-service'
+								sh 'kubectl -n ${NAMESPACE} get service products-api-service'
 							} catch (exc) {
 								echo 'Service does not exist yet'
-								sh 'kubectl apply -f ${PACKAGE}/deployment/${CONTAINER}-service-route.yml'
+								sh 'kubectl apply -f ${PACKAGE}/deployment/service-route.yml'
 							}
 						}
 					}
