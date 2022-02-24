@@ -11,7 +11,6 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
-    image: 'jenkins/inbound-agent:4.7-1'
   - name: dind
     workingDir: /tmp/jenkins
     image: docker
@@ -25,6 +24,12 @@ spec:
       mountPath: /var/run/docker.sock
     securityContext:
       privileged: true
+  - name: kubectl
+    workingDir: /tmp/jenkins
+    image: bitnami/kubectl
+    command: 
+    - /bin/cat
+    tty: true
   volumes:
   - name: docker-sock
     hostPath:
@@ -84,17 +89,26 @@ spec:
 				}
 			}
 		}
-		
 
 		stage('Deploy-Container'){
             steps {
 				container(name: 'kubectl', shell: '/bin/sh') {
-
-						kubernetesDeploy configs: "**/${PACKAGE}/deployment/api-DC.yml", kubeconfigId: 'kubeconf'
-
+					withKubeConfig([credentialsId: '94e1b6f9-9e31-465a-be29-2c380efbd3e8', serverUrl: 'https://kubernetes.default']) {
+						sh 'kubectl apply -f ${PACKAGE}/deployment/api-DC.yml'
+				
+						script {
+							try {
+								sh 'kubectl -n ${NAMESPACE} get service ${CONTAINER}-service'
+							} catch (exc) {
+								echo 'Service does not exist yet'
+								sh 'kubectl apply -f ${PACKAGE}/deployment/${CONTAINER}-service-route.yml'
+							}
+						}
+					}
 				}
             }
         }
+
 
 		stage('Test') {
 			steps {
