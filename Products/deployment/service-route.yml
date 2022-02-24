@@ -2,9 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: ${CONTAINER}
-  name: ${CONTAINER}-service
-  namespace: ${NAMESPACE}
+    app: products-api
+  name: products-api-service
+  namespace: api-first-workshop
 spec: 
   ports:
     - name: micro-gateway-tcp
@@ -16,25 +16,25 @@ spec:
       protocol: TCP
       targetPort: 5555
   selector:
-    app: ${CONTAINER}
+    app: products-api
   type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: ${CONTAINER}-ingress
-  namespace: "${NAMESPACE}"
+  name: products-api-ingress
+  namespace: "api-first-workshop"
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
-  - host: ${CONTAINER}.daehpresal44966.hycloud.softwareag.com
+  - host: products-api.daehpresal44966.hycloud.softwareag.com
     http:
       paths:
       - backend:
-          serviceName: ${CONTAINER}-service
+          serviceName: products-api-service
           servicePort: 5555
   tls:
   - hosts:
-    - ${CONTAINER}.daehpresal44966.hycloud.softwareag.com
-    secretName: ${CONTAINER}-crt
+    - products-api.daehpresal44966.hycloud.softwareag.com
+    secretName: products-api-crt
