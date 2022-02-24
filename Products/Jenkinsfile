@@ -13,7 +13,7 @@ spec:
     workingDir: /tmp/jenkins
   - name: dind
     workingDir: /tmp/jenkins
-    image: docker
+    image: portainer/kube-tools
     imagePullPolicy: Always
     restartPolicy: Never
     command: 
@@ -24,12 +24,6 @@ spec:
       mountPath: /var/run/docker.sock
     securityContext:
       privileged: true
-  - name: kubectl
-    workingDir: /tmp/jenkins
-    image: bitnami/kubectl
-    command: 
-    - /bin/cat
-    tty: true
   volumes:
   - name: docker-sock
     hostPath:
@@ -92,7 +86,7 @@ spec:
 
 		stage('Deploy-Container'){
             steps {
-				container(name: 'kubectl', shell: '/bin/sh') {
+				container(name: 'dind', shell: '/bin/sh') {
 					withKubeConfig([credentialsId: '94e1b6f9-9e31-465a-be29-2c380efbd3e8', serverUrl: 'https://kubernetes.default']) {
 						sh 'kubectl apply -f ${PACKAGE}/deployment/api-DC.yml'
 				
