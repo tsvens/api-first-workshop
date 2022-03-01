@@ -69,6 +69,7 @@ spec:
             sh '''#!/bin/sh
             cp /wm-installer/SoftwareAGInstaller.bin ${PACKAGE}/.
             cp /wm-installer/ISLicense.xml ${PACKAGE}/.
+            cp /wm-installer/WmTestSuite100.xml ${PACKAGE}/.
             cd ${PACKAGE}
             chmod +x SoftwareAGInstaller.bin
             sed -i 's/%EMPOWER_USER%/'$EMPOWER_CREDS_USR'/g' createIsImage.script
