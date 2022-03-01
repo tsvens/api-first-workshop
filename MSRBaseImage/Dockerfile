@@ -28,6 +28,7 @@ ENV PATH=/bin:/sbin:/usr/bin:/usr/sbin
 ADD SoftwareAGInstaller.bin ./
 ADD createIsImage.script ./
 ADD ISLicense.xml /tmp/ISLicense.xml
+ADD WmTestSuite100.xml /tmp/WmTestSuite100.xml
 
 RUN chmod +x SoftwareAGInstaller.bin
 # provision and unit test
