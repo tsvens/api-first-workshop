@@ -292,8 +292,8 @@ spec:
               value: "manage"
             - name: "mcgw_downloads_apis"
               value: "products-api"
-          imagePullSecrets:
-          - name: regcred
+      imagePullSecrets:
+        - name: regcred
       volumes:
         - name: config-volume
           configMap:
