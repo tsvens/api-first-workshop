@@ -11,6 +11,9 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
+  - name: msr-base
+    workingDir: /tmp/jenkins
+    image: ${REGISTRY}/microservice-runtime-tcdb:10.11
   - name: dind
     workingDir: /tmp/jenkins
     image: portainer/kube-tools
@@ -101,5 +104,15 @@ spec:
 				}
             }
         }
+
+		stage('Test') {
+			steps {
+				container(name: 'msr-base', shell: '/bin/sh') {
+					sh 'cd ${WORKSPACE}/${PACKAGE}/test; \
+						/opt/softwareag/common/lib/ant/bin/ant -f run-composite-runner.xml -propertyfile run-test.properties composite-runner-all-tests'
+					junit '**/build/test/reports/*.xml'
+				}
+			}
+		}
     }
 }
