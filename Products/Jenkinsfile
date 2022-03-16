@@ -17,6 +17,7 @@ spec:
     command:
     - /bin/sleep
     - 6000
+	tty: true
   - name: dind
     workingDir: /tmp/jenkins
     image: portainer/kube-tools
