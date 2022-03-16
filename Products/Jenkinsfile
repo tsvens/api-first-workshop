@@ -15,7 +15,7 @@ spec:
     workingDir: /tmp/jenkins
     image: ${REGISTRY}/microservice-runtime-tcdb:10.11
     command:
-    - /bin/cat
+    - /bin/sleep 6000
   - name: dind
     workingDir: /tmp/jenkins
     image: portainer/kube-tools
