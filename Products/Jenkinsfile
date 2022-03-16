@@ -94,7 +94,7 @@ spec:
             steps {
 				container(name: 'dind', shell: '/bin/sh') {
 					withKubeConfig([credentialsId: 'jenkins-agent-account', serverUrl: 'https://kubernetes.default']) {
-						sh 'kubectl apply -f ${PACKAGE}/deployment/api-DC.yml'
+						sh 'cat ${PACKAGE}/deployment/api-DC.yml | sed --expression='s/[[REGISTRY]]/"$REGISTRY"/g' | kubectl apply -f -'
 				
 						script {
 							try {
