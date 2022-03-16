@@ -41,6 +41,7 @@ spec:
 	
 	parameters{
 		string(name: 'REGISTRY', defaultValue: 'registry.master.servers', description: 'Endpoint of the docker registry')
+		string(name: 'HOST', description: 'Base hostname of your cloud machine for the ingress')
 	}
 
 	environment {
@@ -101,7 +102,7 @@ spec:
 								sh 'kubectl -n ${NAMESPACE} get service products-api-service'
 							} catch (exc) {
 								echo 'Service does not exist yet'
-								sh 'kubectl apply -f ${PACKAGE}/deployment/service-route.yml'
+								sh 'cat ${PACKAGE}/deployment/service-route.yml | sed --expression=\'s/${HOST}/\'"$HOST"\'/g\' | kubectl apply -f -'
 							}
 						}
 					}

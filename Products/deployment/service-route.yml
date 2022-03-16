@@ -28,7 +28,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
-  - host: products-api.daehpresal44966.hycloud.softwareag.com
+  - host: products-api.${HOST}
     http:
       paths:
       - backend:
@@ -36,5 +36,5 @@ spec:
           servicePort: 5555
   tls:
   - hosts:
-    - products-api.daehpresal44966.hycloud.softwareag.com
+    - products-api.${HOST}
     secretName: products-api-crt
