@@ -14,6 +14,8 @@ spec:
   - name: msr-base
     workingDir: /tmp/jenkins
     image: ${REGISTRY}/microservice-runtime-tcdb:10.11
+    command:
+    - /bin/cat
   - name: dind
     workingDir: /tmp/jenkins
     image: portainer/kube-tools
