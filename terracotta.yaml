@@ -88,7 +88,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: terracotta
-          image: store/softwareag/terracotta-server:10.5
+          image: store/softwareag/terracotta-server:10.11
           command: ["bin/start-tc-server.sh"]
           args: ["-f", "/configs/tc-config.xml", "-n", "terracotta"]
           imagePullPolicy: Always
@@ -113,7 +113,7 @@ spec:
             - name: dataroots
               mountPath: /data/dataroots
         - name: readiness
-          image: store/softwareag/terracotta-cluster-tool:10.5
+          image: store/softwareag/terracotta-cluster-tool:10.11
           command: ["sh", "-c", "while true; do sleep 86400; done"]
           imagePullPolicy: Always
           readinessProbe:
@@ -154,7 +154,7 @@ spec:
     spec:
       containers:
         - name: cluster-tool
-          image: store/softwareag/terracotta-cluster-tool:10.5
+          image: store/softwareag/terracotta-cluster-tool:10.11
           args: ["configure", "-n", "MyCluster", "/configs/tc-config.xml"]
           env:
           - name: ACCEPT_EULA
@@ -236,7 +236,7 @@ spec:
                 values:
                 - clientnodes
       containers:
-        - image: store/softwareag/tmc:10.5
+        - image: store/softwareag/tmc:10.11
           name: tmc
           imagePullPolicy: Always
           env:
