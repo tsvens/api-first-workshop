@@ -62,7 +62,7 @@ spec:
 						dist \
 						build/test \
 						build/test/reports'
-					sh '''
+					sh '''#!/bin/sh
 					    cd test
 					    sed -i 's/%env.WORKSPACE%/'$WORKSPACE'/g' run-test-suites.properties
             			sed -i 's/%env.PACKAGE%/'$PACKAGE'/g' run-test-suites.properties
