@@ -69,7 +69,8 @@ spec:
 						sed -i 's/%env.HOST%/'$HOST'/g' run-test-suites.properties
 						cd ..'''
 					sh 'mv config build/container'
-					sh 'chmod -R go+w build/test'
+					sh 'chmod -R go+w build/test; \
+						chmod go+w test'
 					sh 'cd build/container; \
 					    cp -r ${WORKSPACE}/${PACKAGE}/Dockerfile .; \
 						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/${PACKAGE} .; \
