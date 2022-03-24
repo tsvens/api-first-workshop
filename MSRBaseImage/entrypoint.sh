@@ -25,7 +25,7 @@ while [  ! -f $SAG_HOME/IntegrationServer/instances/default/logs/server.log ]; d
 done
 
 echo "IS process successfully started. Waiting for HTTP stack ..."
-until curl -u Administrator:manage -s http://`hostname`:5555/ 
+until curl -u Administrator:manage -s http://localhost:5555/ 
 do 
     sleep 5
     tail $SAG_HOME/IntegrationServer/instances/default/logs/server.log
@@ -33,6 +33,6 @@ done
 
 # this is our main container process
 
-echo "Integration Server is ONLINE at http://`hostname`:5555/"
+echo "Integration Server is ONLINE at http://localhost:5555/"
 
 tail -f $SAG_HOME/IntegrationServer/instances/default/logs/server.log
