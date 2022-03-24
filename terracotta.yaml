@@ -125,7 +125,7 @@ spec:
       containers:
         - name: config-tool
           image: store/softwareag/terracotta-config-tool:10.11
-          args: ["activate", "-cluster-name", "MyCluster", "-connect-to", "terracotta", -"config-file", "/configs/tc-config.cfg"]
+          args: ["activate", "-cluster-name", "MyCluster", "-connect-to", "terracotta"]
           env:
           - name: ACCEPT_EULA
             value: "Y"
