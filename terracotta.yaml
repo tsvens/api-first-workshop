@@ -145,17 +145,17 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: cluster-tool
+  name: config-tool
   namespace: swag-infra
 spec:
   template:
     metadata:
-      name: cluster-tool
+      name: config-tool
     spec:
       containers:
-        - name: cluster-tool
-          image: store/softwareag/terracotta-cluster-tool:10.11
-          args: ["configure", "-n", "MyCluster", "/configs/tc-config.xml"]
+        - name: config-tool
+          image: store/softwareag/terracotta-config-tool:10.11
+          args: ["activate", "-cluster-name", "MyCluster", "-connect-to", "terracotta", -"config-file", "/configs/tc-config.xml"]
           env:
           - name: ACCEPT_EULA
             value: "Y"
