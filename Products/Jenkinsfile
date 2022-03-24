@@ -62,12 +62,12 @@ spec:
 						dist \
 						build/test \
 						build/test/reports'
-					sh '
+					sh '''
 					    cd test; \
 					    sed -i 's/${env.WORKSPACE}/'$WORKSPACE'/g' run-test-suites.properties; \
             			sed -i 's/${env.PACKAGE}/'$PACKAGE'/g' run-test-suites.properties; \
 						sed -i 's/${env.HOST}/'$HOST'/g' run-test-suites.properties; \
-						cd ..'
+						cd ..'''
 					sh 'mv config build/container'
 					sh 'chmod -R go+w build/test'
 					sh 'cd build/container; \
