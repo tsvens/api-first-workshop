@@ -28,6 +28,7 @@ h. webMethods.test.setup.external.classpath.layout= this property suggests the i
 <project name="WmTestSuite Runner Builder" default="composite-runner-all-tests" basedir="." xmlns:antcontrib="antlib:net.sf.antcontrib" xmlns:xmltask="antlib:com.oopsconsultancy.xmltask">
 	<description>WmTestSuite Composite Runner builder</description>
 
+	<property environment="env" />
 	<property file="run-test-suites.properties" />
 	<property name="webMethods.test.profile.result.location" location="test/reports" />
 	<property name="test.reports.dir" location="${webMethods.test.profile.result.location}" />
