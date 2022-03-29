@@ -36,7 +36,6 @@ spec:
 #  type: ClusterIP
 
 ---
-
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -146,22 +145,6 @@ spec:
       imagePullSecrets:
         - name: regcred
 ---
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: tmc
-  namespace: swag-infra
-spec:
-  ports:
-  - name: tmc-port
-    port: 9480
-  type: LoadBalancer
-  selector:
-    app: tmc
-
----
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -178,13 +161,13 @@ spec:
     app: tmc
 
 ---
-
-
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: tmc
   namespace: swag-infra
+  labels:
+    app: tmc
 spec:
   selector:
     matchLabels:
@@ -197,15 +180,6 @@ spec:
         app: tmc
     spec:
       terminationGracePeriodSeconds: 10
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: kops.k8s.io/instancegroup
-                operator: In
-                values:
-                - clientnodes
       containers:
         - image: store/softwareag/tmc:10.11
           name: tmc
@@ -229,4 +203,4 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 100Gi
+            storage: 2Gi
