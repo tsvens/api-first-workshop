@@ -10,7 +10,7 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
-  - name: msr-base
+  - name: msr-base 
     workingDir: /tmp/jenkins
     image: ${REGISTRY}/microservice-runtime-tcdb:10.11
     command:
@@ -28,12 +28,22 @@ spec:
     volumeMounts:
     - name: docker-sock
       mountPath: /var/run/docker.sock
+    - name: jenkins-docker-cfg
+      mountPath: /root/.docker
     securityContext:
       privileged: true
   volumes:
   - name: docker-sock
     hostPath:
       path: "/var/run/docker.sock"
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: regcred 
+          items:
+            - key: .dockerconfigjson
+              path: config.json 
 """
 		}
 	}
