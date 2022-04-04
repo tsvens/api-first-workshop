@@ -1,5 +1,4 @@
-FROM softwareag/webmethods-microservicesruntime:10.11
-
+FROM softwareag/webmethods-microservicesruntime:10.11.0.0
 MAINTAINER SoftwareAG
 
 USER root
