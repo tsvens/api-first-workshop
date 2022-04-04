@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
         - name: "${CONTAINER}"
-          image: "${REGISTRY}/${CONTAINER_TAG}"
+          image: "${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}"
           ports:
             - containerPort: 5555
               protocol: "TCP"
