@@ -6,7 +6,7 @@ metadata:
 data:
   tc-config.cfg: |
     cluster-name=MyCluster
-    offheap-resources=data:1024MB
+    offheap-resources=main:1024MB
     stripe-names=tc-stripe1
     tc-stripe1:node-names=terracotta
     terracotta:hostname=terracotta-0.terracotta.swag-infra.svc.cluster.local
