@@ -1,4 +1,4 @@
-FROM store/softwareag/webmethods-microservicesruntime:10.11
+FROM softwareag/webmethods-microservicesruntime:10.11
 
 MAINTAINER SoftwareAG
 
