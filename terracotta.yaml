@@ -121,7 +121,7 @@ spec:
       containers:
         - name: config-tool
           image: store/softwareag/terracotta-config-tool:10.11
-          args: ["activate", "-cluster-name", "MyCluster", "-connect-to", "terracotta.swag-infra"]
+          args: ["activate", "-cluster-name", "MyCluster", "-license-file", "/licenses/	license.xml", "-connect-to", "terracotta.swag-infra"]
           env:
           - name: ACCEPT_EULA
             value: "Y"
