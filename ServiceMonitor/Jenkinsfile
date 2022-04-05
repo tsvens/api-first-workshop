@@ -113,7 +113,7 @@ spec:
 							} catch (exc) {
 								echo 'Service does not exist yet'
 								sh '''#!/bin/sh
-								cat ${PACKAGE}/deployment/service-route.yml | sed --expression='s/${HOST}/'$HOST'/g' | sed --expression='s/${NAMESPACE}/'$NAMESPACE'/g' | kubectl apply -f -'''
+								cat ${PACKAGE}/deployment/service-route.yml | sed --expression='s/${HOST}/'$HOST'/g' | sed --expression='s/${CONTAINER}/'$CONTAINER'/g' | sed --expression='s/${NAMESPACE}/'$NAMESPACE'/g' | kubectl apply -f -'''
 							}
 						}
 					}
