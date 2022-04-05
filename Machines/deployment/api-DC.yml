@@ -53,20 +53,20 @@ spec:
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
-        - name: "api-micro-gateway"
-          image: "softwareag/microgateway-trial:10.11"
-          ports:
-            - containerPort: 9090
-              protocol: "TCP"
-          env:
-            - name: "mcgw_api_gateway_url"
-              value: "http://apigateway.swag-infra:5555"
-            - name: "mcgw_api_gateway_user"
-              value: "Administrator"
-            - name: "mcgw_api_gateway_password"
-              value: "manage"
-            - name: "mcgw_downloads_apis"
-              value: "${CONTAINER}"
+#        - name: "api-micro-gateway"
+#          image: "softwareag/microgateway-trial:10.11"
+#          ports:
+#            - containerPort: 9090
+#              protocol: "TCP"
+#          env:
+#            - name: "mcgw_api_gateway_url"
+#              value: "http://apigateway.swag-infra:5555"
+#            - name: "mcgw_api_gateway_user"
+#              value: "Administrator"
+#            - name: "mcgw_api_gateway_password"
+#              value: "manage"
+#            - name: "mcgw_downloads_apis"
+#              value: "${CONTAINER}"
       volumes:
         - name: config-volume
           configMap:
