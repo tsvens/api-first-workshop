@@ -109,7 +109,7 @@ spec:
 				
 						script {
 							try {
-								sh 'kubectl -n ${NAMESPACE} get service products-api-service'
+								sh 'kubectl -n ${NAMESPACE} get service ${CONTAINER}-service'
 							} catch (exc) {
 								echo 'Service does not exist yet'
 								sh 'cat ${PACKAGE}/deployment/service-route.yml | sed --expression=\'s/${HOST}/\'"$HOST"\'/g\' | kubectl apply -f -'
