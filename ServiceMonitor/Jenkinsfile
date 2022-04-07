@@ -90,7 +90,7 @@ spec:
 							groovy.json.JsonOutput.toJson(input)
 					}
 
-					def jsonSlurper = new JsonSlurper()
+					def jsonSlurper = new groovy.json.JsonSlurper()
 					
 					def host = "http://apigateway.swag-infra:5555"
 					def auth = "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
