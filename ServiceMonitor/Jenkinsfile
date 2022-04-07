@@ -3,6 +3,9 @@ def jsonParse(def json) {
 	new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
+def host = "http://apigateway.swag-infra:5555"
+def auth = "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
+
 pipeline {
 	
 	agent {
@@ -96,11 +99,8 @@ spec:
 							groovy.json.JsonOutput.toJson(input)
 					}
 
-					
-					def host = "http://apigateway.swag-infra:5555"
-					def auth = "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
-					def apiFile = "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"
 					def apiName = "${PACKAGE}%20API"
+					def apiFile = "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"
 
 					//Check if API already exists
 					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'GET', url: "${host}/rest/apigateway/apis?apiName=${apiName}", validResponseCodes: '200'
@@ -162,6 +162,8 @@ spec:
 			steps {
 				script {
 					
+					def apiName = "${PACKAGE}%20API"
+
 					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'GET', url: "${host}/rest/apigateway/apis?apiName=${apiName}", validResponseCodes: '200'
 
 					def object = jsonParse(response.content)
