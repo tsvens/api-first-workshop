@@ -99,7 +99,7 @@ spec:
 							groovy.json.JsonOutput.toJson(input)
 					}
 
-					def apiName = "${PACKAGE}%20API"
+					def apiName = "${PACKAGE}API"
 					def apiFile = "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"
 
 					//Check if API already exists
@@ -162,7 +162,7 @@ spec:
 			steps {
 				script {
 					
-					def apiName = "${PACKAGE}%20API"
+					def apiName = "${PACKAGE}API"
 
 					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'GET', url: "${host}/rest/apigateway/apis?apiName=${apiName}", validResponseCodes: '200'
 
