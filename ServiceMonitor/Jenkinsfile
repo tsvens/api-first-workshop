@@ -90,7 +90,10 @@ spec:
 							groovy.json.JsonOutput.toJson(input)
 					}
 
-					def jsonSlurper = new groovy.json.JsonSlurperClassic()
+					@NonCPS
+					def jsonParse(def json) {
+    					new groovy.json.JsonSlurperClassic().parseText(json)
+					}
 					
 					def host = "http://apigateway.swag-infra:5555"
 					def auth = "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
@@ -100,7 +103,7 @@ spec:
 					//Check if API already exists
 					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'GET', url: "${host}/rest/apigateway/apis?apiName=${apiName}", validResponseCodes: '200'
 
-					def object = jsonSlurper.parseText(response)
+					def object = jsonParse(response)
 
 					def APIID = object.apiResponse.api.id
 
