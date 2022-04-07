@@ -160,6 +160,13 @@ spec:
             }
 		}
 
-		
+		stage('Activate API') {
+			steps {
+				script {
+
+					echo "api id with apiResponse: ${APIID}"
+				}
+			}
+		}
     }
 }
