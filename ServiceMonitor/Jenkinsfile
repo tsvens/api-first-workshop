@@ -102,7 +102,7 @@ spec:
 					def host = "http://apigateway.swag-infra:5555"
 					def auth = "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
 					def apiFile = "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"
-					def apiName = "${PACKAGE} API"
+					def apiName = "${PACKAGE}%20API"
 
 					//Check if API already exists
 					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'GET', url: "${host}/rest/apigateway/apis?apiName=${apiName}", validResponseCodes: '200'
