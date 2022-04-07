@@ -1,4 +1,10 @@
 pipeline {
+	
+	@NonCPS
+	def jsonParse(def json) {
+		new groovy.json.JsonSlurperClassic().parseText(json)
+	}
+
 	agent {
 		kubernetes {
     	label 'docker-builder'
@@ -90,10 +96,6 @@ spec:
 							groovy.json.JsonOutput.toJson(input)
 					}
 
-					@NonCPS
-					def jsonParse(def json) {
-    					new groovy.json.JsonSlurperClassic().parseText(json)
-					}
 					
 					def host = "http://apigateway.swag-infra:5555"
 					def auth = "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
