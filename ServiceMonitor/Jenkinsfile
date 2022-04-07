@@ -113,11 +113,9 @@ spec:
 
 					echo "api id with apiResponse: ${APIID}"
 
-					APIID = object.api.id
-
-					echo "api id without response: ${APIID}"
-
-					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'POST', url: "${host}/rest/apigateway/apis", validResponseCodes: '201', formData: [[name: 'apiName', body: apiName], [name: 'type', body: 'swagger'], [name: 'apiVersion', body: '1.0'], [name: 'apiDescription', body: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: "ServiceMonitor.swagger.yaml", uploadFile: "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"]]
+					if (APIID == null || APIID =='') {
+						response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'POST', url: "${host}/rest/apigateway/apis", validResponseCodes: '201', formData: [[name: 'apiName', body: apiName], [name: 'type', body: 'swagger'], [name: 'apiVersion', body: '1.0'], [name: 'apiDescription', body: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: "ServiceMonitor.swagger.yaml", uploadFile: "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"]]
+					}
 				}
 			}
 		}
