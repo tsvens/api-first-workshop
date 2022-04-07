@@ -99,7 +99,7 @@ spec:
 						]
 					
 					def host = "http://apigateway.swag-infra:5555"
-					response = httpRequest consoleLogResponseBody: true, httpMode: 'POST', url: "${host}/apis", validResponseCodes: '201', formData: [[name: 'apiName', value: 'Service Monitor'], [name: 'type', value: 'swagger'], [name: 'apiVersion', value: '1.0'], [name: 'apiDescription', value: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: 'ServiceMonitor.swagger.yaml', uploadFile: 'api/ServiceMonitor.swagger.yaml']]
+					response = httpRequest consoleLogResponseBody: true, httpMode: 'POST', url: "${host}/apis", validResponseCodes: '201', formData: [[name: 'apiName', value: 'Service Monitor'], [name: 'type', value: 'swagger'], [name: 'apiVersion', value: '1.0'], [name: 'apiDescription', value: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: '$WORKSPACE/$PACKAGE/api/ServiceMonitor.swagger.yaml', uploadFile: 'api/ServiceMonitor.swagger.yaml']]
 				}
 			}
 		}
