@@ -81,6 +81,25 @@ spec:
 			}
 		}
 
+		stage('Deploy API') {
+
+			def toJson = {
+    			input ->
+    				groovy.json.JsonOutput.toJson(input)
+			}
+
+			def body = [
+    			displayName: [
+        			text: "smoke test"],
+    			description: [
+        			text: "for smoke testing"],
+    				genusTypeId: "type"
+				]
+			
+			def host = "http://apigateway.swag-infra:5555"
+			response = httpRequest consoleLogResponseBody: true, httpMode: 'POST', url: "${host}/apis", validResponseCodes: '201', formData: [[name: 'apiName', value: 'Service Monitor'], [name: 'type', value: 'swagger'], [name: 'apiVersion', value: '1.0'], [name: 'apiDescription', value: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: 'ServiceMonitor.swagger.yaml', uploadFile: 'api/ServiceMonitor.swagger.yaml']]
+		}
+
         stage('Build'){
             steps {
 				container(name: 'dind', shell: '/bin/sh') {
@@ -120,5 +139,7 @@ spec:
 				}
             }
 		}
+
+		
     }
 }
