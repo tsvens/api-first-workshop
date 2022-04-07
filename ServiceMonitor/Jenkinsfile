@@ -101,7 +101,7 @@ spec:
 					def host = "http://apigateway.swag-infra:5555"
 					def apiFile = "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"
 					echo apiFile
-					response = httpRequest consoleLogResponseBody: true, httpMode: 'POST', url: "${host}/apis", validResponseCodes: '201', formData: [[name: 'apiName', body: 'Service Monitor'], [name: 'type', body: 'swagger'], [name: 'apiVersion', body: '1.0'], [name: 'apiDescription', body: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: "ServiceMonitor.swagger.yaml", uploadFile: "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"]]
+					response = httpRequest consoleLogResponseBody: true, customHeaders: [[name: 'Authorization', value: 'Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=']], httpMode: 'POST', url: "${host}/rest/apigateway/apis", validResponseCodes: '201', formData: [[name: 'apiName', body: 'Service Monitor'], [name: 'type', body: 'swagger'], [name: 'apiVersion', body: '1.0'], [name: 'apiDescription', body: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: "ServiceMonitor.swagger.yaml", uploadFile: "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"]]
 				}
 			}
 		}
