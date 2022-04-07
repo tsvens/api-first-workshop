@@ -90,18 +90,27 @@ spec:
 							groovy.json.JsonOutput.toJson(input)
 					}
 
-					def body = [
-						displayName: [
-							text: "smoke test"],
-						description: [
-							text: "for smoke testing"],
-							genusTypeId: "type"
-						]
+					def jsonSlurper = new JsonSlurper()
 					
 					def host = "http://apigateway.swag-infra:5555"
+					def auth = "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
 					def apiFile = "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"
-					echo apiFile
-					response = httpRequest consoleLogResponseBody: true, acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: 'Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=']], httpMode: 'POST', url: "${host}/rest/apigateway/apis", validResponseCodes: '201', formData: [[name: 'apiName', body: "${PACKAGE} API"], [name: 'type', body: 'swagger'], [name: 'apiVersion', body: '1.0'], [name: 'apiDescription', body: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: "ServiceMonitor.swagger.yaml", uploadFile: "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"]]
+					def apiName = "${PACKAGE} API"
+
+					//Check if API already exists
+					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'GET', url: "${host}/rest/apigateway/apis?apiName=${apiName}", validResponseCodes: '200'
+
+					def object = jsonSlurper.parseText(response)
+
+					def APIID = object.apiResponse.api.id
+
+					echo "api id with apiResponse: ${APIID}"
+
+					APIID = object.api.id
+
+					echo "api id without response: ${APIID}"
+
+					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'POST', url: "${host}/rest/apigateway/apis", validResponseCodes: '201', formData: [[name: 'apiName', body: apiName], [name: 'type', body: 'swagger'], [name: 'apiVersion', body: '1.0'], [name: 'apiDescription', body: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: "ServiceMonitor.swagger.yaml", uploadFile: "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"]]
 				}
 			}
 		}
