@@ -78,6 +78,8 @@ spec:
               mountPath: /configs
             - name: dataroots
               mountPath: /data/dataroots
+            - name: clusterconfig
+              mountPath: /root/terracotta/config
         - name: readiness
           image: store/softwareag/terracotta-cluster-tool:10.11
           command: ["sh", "-c", "while true; do sleep 86400; done"]
@@ -106,7 +108,14 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 10Gi
+            storage: 11Gi
+    - metadata:
+        name: clusterconfig
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
 ---
 apiVersion: batch/v1
 kind: Job

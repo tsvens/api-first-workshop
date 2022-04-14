@@ -4,8 +4,8 @@ if [ -f licenses.zip ]; then
   mkdir licenses
   cd licenses
   unzip ../licenses.zip
-  IS_LICENSE=$(find . -name \*Integration\?Server\*.xml)
-  WMT_LICENSE=$(find . -name \*Integration\?Server\*.xml)
+  IS_LICENSE=$(find . -name \*MicroservicesRuntime\*.xml)
+  WMT_LICENSE=$(find . -name \*WmTestSuite\*.xml)
   mv "$IS_LICENSE" ISLicense.xml
   mv "$WMT_LICENSE" WmTestSuite100.xml
   cd ..
