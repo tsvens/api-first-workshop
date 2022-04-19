@@ -168,7 +168,7 @@ spec:
 
 					def object = jsonParse(response.content)
 
-					def APIID = object.apiResponse.api.id
+					def APIID = object.apiResponse.api.id[]
 					echo "api id with apiResponse: ${APIID}"
 				}
 			}
