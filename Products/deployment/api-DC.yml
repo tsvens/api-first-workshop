@@ -295,7 +295,12 @@ spec:
         - name: data-set-names
           configMap:
             name: datasetnames
-        - name: iscloudconfig
-          persistentVolumeClaim:
-            claimName: is-cloud-config
   replicas: 1
+  volumeClaimTemplates:
+  - metadata:
+      name: iscloudconfig
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
