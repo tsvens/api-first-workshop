@@ -5,6 +5,7 @@ metadata:
   namespace: "api-first-workshop"
 data:
   application.properties: |
+    artConnection.ConnectedDemosTCDB.ConnectedDemosTCDB.connections.ConnectedDemoStore.connectionEnabled=true
     healthindicators.Adapters.enabled=true
     healthindicators.Cluster.enabled=true
     healthindicators.Cluster.properties.threshold.value=2
