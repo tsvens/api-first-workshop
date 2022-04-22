@@ -295,12 +295,12 @@ spec:
         - name: data-set-names
           configMap:
             name: datasetnames
+      volumeClaimTemplates:
+        - metadata:
+            name: iscloudconfig
+          spec:
+            accessModes: [ "ReadWriteOnce" ]
+            resources:
+              requests:
+                storage: 1Gi
   replicas: 1
-  volumeClaimTemplates:
-  - metadata:
-      name: iscloudconfig
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 1Gi
