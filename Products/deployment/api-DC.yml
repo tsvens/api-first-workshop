@@ -311,5 +311,5 @@ spec:
             name: datasetnames
         - name: is-cloud-config
           persistentVolumeClaim:
-            name: iscloudconfig
+            claimName: iscloudconfig
   replicas: 1
