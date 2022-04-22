@@ -243,6 +243,20 @@ data:
   dataSetNames.txt: |
     Inventory/Product/SalesOrderItem/SalesOrder/UOM
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: iscloudconfig
+  namespace: api-first-workshop
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: local-path
+  volumeMode: Filesystem
+---
 kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
@@ -276,7 +290,7 @@ spec:
               mountPath: /opt/softwareag/IntegrationServer/instances/default/packages/WmPublic/config/fileAccessControl.cnf
               subPath: fileAccessControl.cnf
             - mountPath: /opt/softwareag/IntegrationServer/instances/default/config/integrationlive
-              name: iscloudconfig  
+              name: is-cloud-config  
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
@@ -295,12 +309,7 @@ spec:
         - name: data-set-names
           configMap:
             name: datasetnames
-      volumeClaimTemplates:
-        - metadata:
+        - name: is-cloud-config
+          configMap:
             name: iscloudconfig
-          spec:
-            accessModes: [ "ReadWriteOnce" ]
-            resources:
-              requests:
-                storage: 1Gi
   replicas: 1
