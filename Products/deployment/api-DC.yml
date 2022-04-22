@@ -246,7 +246,7 @@ data:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: iscloudconfig
+  name: productapicloudconfig
   namespace: api-first-workshop
 spec:
   accessModes:
@@ -311,5 +311,5 @@ spec:
             name: datasetnames
         - name: is-cloud-config
           persistentVolumeClaim:
-            claimName: iscloudconfig
+            claimName: productapicloudconfig
   replicas: 1
