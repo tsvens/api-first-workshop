@@ -275,6 +275,8 @@ spec:
             - name: wmpublic-config
               mountPath: /opt/softwareag/IntegrationServer/instances/default/packages/WmPublic/config/fileAccessControl.cnf
               subPath: fileAccessControl.cnf
+            - mountPath: /opt/softwareag/IntegrationServer/instances/default/config/integrationlive
+              name: iscloudconfig  
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
@@ -293,4 +295,7 @@ spec:
         - name: data-set-names
           configMap:
             name: datasetnames
+        - name: iscloudconfig
+          persistentVolumeClaim:
+            claimName: is-cloud-config
   replicas: 1
