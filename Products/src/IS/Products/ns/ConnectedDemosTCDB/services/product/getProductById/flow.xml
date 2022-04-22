@@ -6,7 +6,7 @@
   <!-- nodes -->
 
 <INVOKE TIMEOUT="" SERVICE="ConnectedDemosTCDB.services.query:getProductDetail" VALIDATE-IN="$none" VALIDATE-OUT="$none">
-  <COMMENT></COMMENT>
+  <COMMENT>Some more comments</COMMENT>
 
   <!-- nodes -->
 
