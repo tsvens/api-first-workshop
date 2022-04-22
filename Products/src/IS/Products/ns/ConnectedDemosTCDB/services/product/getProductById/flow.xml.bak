@@ -351,6 +351,9 @@
 
 <MAPCOPY FROM="/xmlProduct;4;0;ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product" TO="/product(1);4;0;ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product">
 </MAPCOPY>
+
+<MAPDELETE FIELD="/product(0);4;0;ConnectedDemos.docs.docTypes:Product">
+</MAPDELETE>
 </MAP>
 </INVOKE>
 </FLOW>
