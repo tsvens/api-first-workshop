@@ -6,6 +6,7 @@ metadata:
 data:
   application.properties: |
     artConnection.ConnectedDemosTCDB.ConnectedDemosTCDB.connections.ConnectedDemoStore.connectionEnabled=true
+    wmcloudsettings.DemoTenant.password={AES}0+h+7GakZdnNSaZomW4xtg==
     healthindicators.Adapters.enabled=true
     healthindicators.Cluster.enabled=true
     healthindicators.Cluster.properties.threshold.value=2
