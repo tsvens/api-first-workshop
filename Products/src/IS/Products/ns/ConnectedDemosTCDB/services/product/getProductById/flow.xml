@@ -208,11 +208,7 @@
 </INVOKE>
 
 <INVOKE TIMEOUT="" SERVICE="ConnectedDemosTCDB.services.product.map:mapCDMtoXML" VALIDATE-IN="$none" VALIDATE-OUT="$none">
-<<<<<<< HEAD
-  <COMMENT>Do the mapping</COMMENT>
-=======
   <COMMENT>Thi first comments</COMMENT>
->>>>>>> branch 'feature_nobuild_container' of https://github.com/tsvens/api-first-workshop
 
   <!-- nodes -->
 

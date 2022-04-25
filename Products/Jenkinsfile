@@ -119,17 +119,17 @@ spec:
             }
         }
 
-		stage('Test') {
-			steps {
-				container(name: 'msr-base', shell: '/bin/sh') {
-					sh '''#!/bin/sh
-						echo "Starting test of Package $PACKAGE"
-						cd ${WORKSPACE}/${PACKAGE}/test
-						echo "working in `pwd`"
-						/opt/softwareag/common/lib/ant/bin/ant -f run-composite-runner.xml -propertyfile run-test-suites.properties composite-runner-all-tests
-						junit '**/build/test/reports/*.xml'''
-				}
-			}
-		}
+//		stage('Test') {
+//			steps {
+//				container(name: 'msr-base', shell: '/bin/sh') {
+//					sh '''#!/bin/sh
+//						echo "Starting test of Package $PACKAGE"
+//						cd ${WORKSPACE}/${PACKAGE}/test
+//						echo "working in `pwd`"
+//						/opt/softwareag/common/lib/ant/bin/ant -f run-composite-runner.xml -propertyfile run-test-suites.properties composite-runner-all-tests
+//						junit '**/build/test/reports/*.xml'''
+//				}
+//			}
+//		}
     }
 }
