@@ -278,7 +278,6 @@ spec:
       containers:
         - name: "products-api"
           image: "${REGISTRY}/products-api:1.0"
-          imagePullPolicy: Always
           ports:
             - containerPort: 5555
               protocol: "TCP"
