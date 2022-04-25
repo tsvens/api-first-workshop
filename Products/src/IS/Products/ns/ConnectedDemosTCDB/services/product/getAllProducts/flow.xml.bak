@@ -4,7 +4,7 @@
 
   <!-- nodes -->
 
-<INVOKE TIMEOUT="" SERVICE="ConnectedDemosTCDB.cache.query:queryAllProductsDateSet" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="ConnectedDemosTCDB.cache.query:queryAllProducts" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
@@ -13,7 +13,7 @@
 </MAP>
 </INVOKE>
 
-<LOOP TIMEOUT="" IN-ARRAY="/queryAllProductsDateSetOutput/results" OUT-ARRAY="/products">
+<LOOP TIMEOUT="" IN-ARRAY="/queryAllProductsOutput/results" OUT-ARRAY="/products">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
@@ -80,7 +80,7 @@
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
-        <value name="field_name">queryAllProductsDateSetOutput</value>
+        <value name="field_name">queryAllProductsOutput</value>
         <value name="field_type">record</value>
         <value name="field_dim">0</value>
         <value name="nillable">true</value>
@@ -265,6 +265,20 @@
                     <value name="form_qualified">false</value>
                     <value name="is_global">false</value>
                   </record>
+                  <record javaclass="com.wm.util.Values">
+                    <value name="node_type">record</value>
+                    <value name="node_subtype">unknown</value>
+                    <value name="is_public">false</value>
+                    <value name="field_name">_env</value>
+                    <value name="field_type">record</value>
+                    <value name="field_dim">0</value>
+                    <value name="nillable">true</value>
+                    <value name="form_qualified">false</value>
+                    <value name="is_global">false</value>
+                    <array name="rec_fields" type="record" depth="1">
+                    </array>
+                    <value name="modifiable">true</value>
+                  </record>
                 </array>
                 <value name="modifiable">true</value>
               </record>
@@ -313,7 +327,7 @@
 
   <!-- nodes -->
 
-<MAPCOPY FROM="/queryAllProductsDateSetOutput;2;0/results;2;0/value;2;0" TO="/product;4;0;ConnectedDemos.docs.docTypes:Product">
+<MAPCOPY FROM="/queryAllProductsOutput;2;0/results;2;0/value;2;0" TO="/product;4;0;ConnectedDemos.docs.docTypes:Product">
 </MAPCOPY>
 </MAP>
 
@@ -353,7 +367,7 @@
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
-        <value name="field_name">queryAllProductsDateSetOutput</value>
+        <value name="field_name">queryAllProductsOutput</value>
         <value name="field_type">record</value>
         <value name="field_dim">0</value>
         <value name="nillable">true</value>
@@ -438,7 +452,7 @@
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
-        <value name="field_name">queryAllProductsDateSetOutput</value>
+        <value name="field_name">queryAllProductsOutput</value>
         <value name="field_type">record</value>
         <value name="field_dim">0</value>
         <value name="nillable">true</value>
@@ -562,7 +576,7 @@
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
-        <value name="field_name">queryAllProductsDateSetOutput</value>
+        <value name="field_name">queryAllProductsOutput</value>
         <value name="field_type">record</value>
         <value name="field_dim">0</value>
         <value name="nillable">true</value>
@@ -636,13 +650,13 @@
 
   <!-- nodes -->
 
-<MAPDELETE FIELD="/queryAllProductsDateSetOutput;2;0">
-</MAPDELETE>
-
 <MAPDELETE FIELD="/xmlProduct;4;0;ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product">
 </MAPDELETE>
 
 <MAPDELETE FIELD="/product;4;0;ConnectedDemos.docs.docTypes:Product">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/queryAllProductsOutput;2;0">
 </MAPDELETE>
 </MAP>
 </FLOW>
