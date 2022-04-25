@@ -6,7 +6,7 @@
   <!-- nodes -->
 
 <INVOKE TIMEOUT="" SERVICE="ConnectedDemosTCDB.services.query:getProductDetail" VALIDATE-IN="$none" VALIDATE-OUT="$none">
-  <COMMENT></COMMENT>
+  <COMMENT>Some more comments</COMMENT>
 
   <!-- nodes -->
 
@@ -208,7 +208,7 @@
 </INVOKE>
 
 <INVOKE TIMEOUT="" SERVICE="ConnectedDemosTCDB.services.product.map:mapCDMtoXML" VALIDATE-IN="$none" VALIDATE-OUT="$none">
-  <COMMENT></COMMENT>
+  <COMMENT>Thi first comments</COMMENT>
 
   <!-- nodes -->
 
