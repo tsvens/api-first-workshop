@@ -19,6 +19,23 @@ spec:
     app: ${CONTAINER}
   type: ClusterIP
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ${CONTAINER}
+  name: ${CONTAINER}-websocket-service
+  namespace: ${NAMESPACE}
+spec: 
+  ports:
+    - name: websocket-container-tcp
+      port: 5545
+      protocol: TCP
+      targetPort: 5545
+  selector:
+    app: ${CONTAINER}
+  type: ClusterIP
+---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:

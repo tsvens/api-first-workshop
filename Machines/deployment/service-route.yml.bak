@@ -38,3 +38,20 @@ spec:
   - hosts:
     - ${CONTAINER}.${HOST}
     secretName: ${CONTAINER}-crt
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ${CONTAINER}-websocket-ingress
+  namespace: "${NAMESPACE}"
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  rules:
+  - host: ${CONTAINER}.${HOST}
+    http:
+      paths:
+      - backend:
+          serviceName: ${CONTAINER}-websocket-service
+          servicePort: 5545
+
