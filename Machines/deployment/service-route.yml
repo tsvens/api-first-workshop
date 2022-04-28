@@ -65,7 +65,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
-  - host: ${CONTAINER}.${HOST}
+  - host: ${CONTAINER}-websocket.${HOST}
     http:
       paths:
       - backend:
