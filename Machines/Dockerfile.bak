@@ -6,6 +6,7 @@ USER root
 COPY ${PACKAGE} /opt/softwareag/IntegrationServer/packages/${PACKAGE}
 
 COPY config /opt/softwareag/IntegrationServer/config
+COPY Listeners/listeners.cnf /IntegrationServer/packages/WmRoot/config
 
 RUN chown 1724:1724 -R /opt/softwareag/IntegrationServer/packages/*
 
