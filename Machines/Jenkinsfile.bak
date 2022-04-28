@@ -59,7 +59,7 @@ spec:
 		NAMESPACE = "api-first-workshop"
 		REGISTRY_INGRESS = "https://${params.REGISTRY}"
 		CONTAINER = "machine-status-api"
-		CONTAINER_TAG = "1.0"
+		CONTAINER_TAG = "1.0.${env.BUILD_NUMBER}"
     }
 
     stages {
