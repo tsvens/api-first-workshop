@@ -5,6 +5,8 @@ metadata:
   namespace: "api-first-workshop"
 data:
   application.properties: |
+    artConnection.ConnectedDemosTCDB.ConnectedDemosTCDB.connections.ConnectedDemoStore.connectionEnabled=true
+    wmcloudsettings.DemoTenant.password={AES}0+h+7GakZdnNSaZomW4xtg==
     healthindicators.Adapters.enabled=true
     healthindicators.Cluster.enabled=true
     healthindicators.Cluster.properties.threshold.value=2
@@ -243,6 +245,20 @@ data:
   dataSetNames.txt: |
     Inventory/Product/SalesOrderItem/SalesOrder/UOM
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: productapicloudconfig
+  namespace: api-first-workshop
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: local-path
+  volumeMode: Filesystem
+---
 kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
@@ -261,7 +277,7 @@ spec:
     spec:
       containers:
         - name: "products-api"
-          image: "${REGISTRY}/products-api:1.0"
+          image: "${REGISTRY}/products-api:1.0.${BUILD_NUMBER}"
           ports:
             - containerPort: 5555
               protocol: "TCP"
@@ -275,6 +291,8 @@ spec:
             - name: wmpublic-config
               mountPath: /opt/softwareag/IntegrationServer/instances/default/packages/WmPublic/config/fileAccessControl.cnf
               subPath: fileAccessControl.cnf
+            - mountPath: /opt/softwareag/IntegrationServer/instances/default/config/integrationlive
+              name: is-cloud-config  
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
@@ -293,4 +311,7 @@ spec:
         - name: data-set-names
           configMap:
             name: datasetnames
+        - name: is-cloud-config
+          persistentVolumeClaim:
+            claimName: productapicloudconfig
   replicas: 1
