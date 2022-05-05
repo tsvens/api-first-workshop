@@ -1,0 +1,55 @@
+---
+swagger: "2.0"
+info:
+  description: "Create Incident when machine is broken"
+  version: "1.0"
+  title: "MachineIncident"
+host: "sagdemo.apigw-aw-us.webmethods.io"
+basePath: "/gateway/MachineIncident/1.0"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+security:
+- apiKey: []
+paths:
+  /incident:
+    post:
+      operationId: "incident_POST_1"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/body"
+      responses:
+        "200":
+          description: "OK"
+        "401":
+          description: "Access Denied"
+securityDefinitions:
+  apiKey:
+    type: "apiKey"
+    name: "x-Gateway-APIKey"
+    in: "header"
+definitions:
+  body:
+    type: "object"
+    required:
+    - "component"
+    - "componentStatusDescriptor"
+    - "machineId"
+    - "status"
+    properties:
+      component:
+        type: "string"
+      componentStatusDescriptor:
+        type: "string"
+      machineId:
+        type: "string"
+      status:
+        type: "string"

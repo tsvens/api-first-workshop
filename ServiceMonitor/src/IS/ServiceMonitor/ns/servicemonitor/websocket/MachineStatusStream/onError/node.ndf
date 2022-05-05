@@ -4,6 +4,7 @@
   <value name="svc_type">flow</value>
   <value name="svc_subtype">default</value>
   <value name="svc_sigtype">java 3.5</value>
+  <value name="svc_spec">pub.websocket:onError</value>
   <value name="stateless">yes</value>
   <value name="caching">no</value>
   <value name="prefetch">no</value>
@@ -38,6 +39,6 @@
   </array>
   <value name="pipeline_option">0</value>
   <null name="originURI"/>
-  <value name="modifiable">true</value>
-  <value name="is_public">false</value>
+  <value name="modifiable">false</value>
+  <value name="is_public">true</value>
 </Values>
