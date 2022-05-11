@@ -35,13 +35,18 @@ spec:
     - /bin/cat
     tty: true
     volumeMounts:
-    - name: docker-sock
+    - name: tmp-dir
+      mountPath: /wm-installer
+	- name: docker-sock
       mountPath: /var/run/docker.sock
     - name: jenkins-docker-cfg
       mountPath: /root/.docker
     securityContext:
       privileged: true
   volumes:
+  - name: tmp-dir
+    hostPath:
+      path: "/tmp/license"
   - name: docker-sock
     hostPath:
       path: "/var/run/docker.sock"
@@ -84,7 +89,7 @@ spec:
 						build/test/reports'
 					sh 'chmod -R go+w build/test'
 					sh 'cd build/container; \
-						cp /tmp/license/ISLicense.xml . ; \
+					    cp /wm-installer/ISLicense.xml .
 					    cp -r ${WORKSPACE}/${PACKAGE}/Dockerfile .; \
 						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/${PACKAGE} .;'
 				}
