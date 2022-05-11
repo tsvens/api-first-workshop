@@ -68,7 +68,7 @@ spec:
 		NAMESPACE = "api-first-workshop"
 		REGISTRY_INGRESS = "https://${params.REGISTRY}"
 		CONTAINER = "service-monitor-api"
-		CONTAINER_TAG = "1.0"
+		CONTAINER_TAG = "1.0.${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -84,6 +84,7 @@ spec:
 						build/test/reports'
 					sh 'chmod -R go+w build/test'
 					sh 'cd build/container; \
+						cp /wm-installer/ISLicense.xml . ; \
 					    cp -r ${WORKSPACE}/${PACKAGE}/Dockerfile .; \
 						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/${PACKAGE} .;'
 				}
