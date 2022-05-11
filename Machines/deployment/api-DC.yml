@@ -54,6 +54,7 @@ spec:
               mountPath: /opt/swagmsr/config
             - name: license-file
               mountPath: /opt/softwareag/IntegrationServer/config/licenseKey.xml
+              subPath: licenseKey.xml
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
