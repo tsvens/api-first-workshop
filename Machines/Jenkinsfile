@@ -74,6 +74,8 @@ spec:
 						build/test \
 						build/test/reports'
 					sh 'mv config build/container'
+					sh 'mv Listeners build/container'
+					sh 'mv acls build/container'
 					sh 'chmod -R go+w build/test; \
 						chmod go+w test'
 					sh 'cd build/container; \

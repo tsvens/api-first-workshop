@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FLOW VERSION="3.0" CLEANUP="true">
+  <COMMENT></COMMENT>
 
   <!-- nodes -->
 
@@ -64,17 +65,11 @@
       <record javaclass="com.wm.util.Values">
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
-        <value name="node_comment"></value>
-        <record name="node_hints" javaclass="com.wm.util.Values">
-          <value name="field_largerEditor">false</value>
-          <value name="field_password">false</value>
-        </record>
         <value name="is_public">false</value>
         <value name="field_name">prd:getProductById</value>
         <value name="field_type">recref</value>
         <value name="field_dim">0</value>
         <value name="field_opt">true</value>
-        <value name="wrapper_type">IData</value>
         <value name="nillable">false</value>
         <value name="field_xmlns">http://ns.softwareag.com/dsa/product/</value>
         <value name="form_qualified">false</value>
@@ -123,17 +118,11 @@
       <record javaclass="com.wm.util.Values">
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
-        <value name="node_comment"></value>
-        <record name="node_hints" javaclass="com.wm.util.Values">
-          <value name="field_largerEditor">false</value>
-          <value name="field_password">false</value>
-        </record>
         <value name="is_public">false</value>
         <value name="field_name">prd:getProductById</value>
         <value name="field_type">recref</value>
         <value name="field_dim">0</value>
         <value name="field_opt">true</value>
-        <value name="wrapper_type">IData</value>
         <value name="nillable">false</value>
         <value name="field_xmlns">http://ns.softwareag.com/dsa/product/</value>
         <value name="form_qualified">false</value>
@@ -141,19 +130,6 @@
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
         <value name="rec_ref">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_ProductId</value>
-      </record>
-      <record javaclass="com.wm.util.Values">
-        <value name="node_type">record</value>
-        <value name="node_subtype">unknown</value>
-        <value name="is_public">false</value>
-        <value name="field_name">prd:getProductByIdResponse</value>
-        <value name="field_type">recref</value>
-        <value name="field_dim">0</value>
-        <value name="nillable">true</value>
-        <value name="form_qualified">false</value>
-        <value name="is_global">false</value>
-        <value name="modifiable">true</value>
-        <value name="rec_ref">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">record</value>
@@ -173,7 +149,20 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">ConnectedDemos.docs.docTypes:Product</value>
+        <value name="rec_ref">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">prd:getProductByIdResponse</value>
+        <value name="field_type">recref</value>
+        <value name="field_dim">0</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <value name="modifiable">true</value>
+        <value name="rec_ref">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product</value>
       </record>
     </array>
     <value name="modifiable">true</value>
@@ -212,7 +201,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">ConnectedDemos.docs.docTypes:Product</value>
+        <value name="rec_ref">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product</value>
       </record>
     </array>
     <value name="modifiable">true</value>

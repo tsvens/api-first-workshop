@@ -47,6 +47,8 @@ spec:
           ports:
             - containerPort: 5555
               protocol: "TCP"
+            - containerPort: 5545
+              protocol: "TCP"
           volumeMounts:
             - name: config-volume
               mountPath: /opt/swagmsr/config

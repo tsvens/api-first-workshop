@@ -4,7 +4,7 @@ info:
   description: "Create incidents when machines are broken\n"
   version: "1.0"
   title: "MachineIncident"
-host: "beneluxint.gateway.webmethodscloud.com"
+host: "sagdemo.gateway.webmethodscloud.com"
 basePath: "/gateway/MachineIncident/1.0"
 schemes:
 - "http"

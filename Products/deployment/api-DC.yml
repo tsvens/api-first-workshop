@@ -24,7 +24,7 @@ data:
     healthindicators.Sessions.enabled=true
     healthindicators.Sessions.properties.threshold.value=85
     healthindicators.UMAliases.enabled=true
-    globalvariable.ConnectedDemos.config.dir.value=/data
+    globalvariable.ConnectedDemos..config..dir.value=/data
     jms.DEFAULT_IS_JMS_CONNECTION.clientID=DEFAULT_IS_JMS_CLIENT
     jndi.DEFAULT_IS_JNDI_PROVIDER.providerURL=nsp\://universalmessaging.swag-infra\:9000
 ---
@@ -128,7 +128,7 @@ data:
             "SalesOrder": [
                 {
                     "id": "SAL0000021",
-                    "customerId": "0011o00001q2b06AAA",
+                    "customerId": "0010900000JUSprAAH",
                     "statusId": "STAT0001",
                     "totalValue": 13.95,
                     "orderDate": "2019-08-22T13:18:00+0100",

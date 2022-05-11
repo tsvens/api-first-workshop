@@ -168,8 +168,12 @@ spec:
 
 					def object = jsonParse(response.content)
 
-					def APIID = object.apiResponse.api.id
+					def APIID = object.apiResponse.api.id[0]
 					echo "api id with apiResponse: ${APIID}"
+					
+					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'PUT', url: "${host}/rest/apigateway/apis/${APIID}/activate", validResponseCodes: '200'
+					
+					echo "api id with ID: ${APIID} activated"
 				}
 			}
 		}

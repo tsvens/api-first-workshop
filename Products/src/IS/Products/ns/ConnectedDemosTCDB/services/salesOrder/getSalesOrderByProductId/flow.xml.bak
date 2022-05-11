@@ -5,6 +5,11 @@
 
   <!-- nodes -->
 
+<SEQUENCE TIMEOUT="" EXIT-ON="FAILURE" FORM="TRY">
+  <COMMENT></COMMENT>
+
+  <!-- nodes -->
+
 <INVOKE TIMEOUT="" SERVICE="ConnectedDemosTCDB.cache.query:querySalesOrderItemByProductId" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
@@ -147,7 +152,6 @@
     <value name="node_type">record</value>
     <value name="node_subtype">unknown</value>
     <value name="is_public">false</value>
-    <value name="field_name">querySalesOrderDataSetInput</value>
     <value name="field_type">record</value>
     <value name="field_dim">0</value>
     <value name="nillable">true</value>
@@ -169,28 +173,6 @@
             <value name="node_type">unknown</value>
             <value name="node_subtype">unknown</value>
             <value name="is_public">false</value>
-            <value name="field_name">key</value>
-            <value name="field_type">string</value>
-            <value name="field_dim">0</value>
-            <value name="nillable">true</value>
-            <value name="form_qualified">false</value>
-            <value name="is_global">false</value>
-          </record>
-          <record javaclass="com.wm.util.Values">
-            <value name="node_type">unknown</value>
-            <value name="node_subtype">unknown</value>
-            <value name="is_public">false</value>
-            <value name="field_name">$datasetName</value>
-            <value name="field_type">string</value>
-            <value name="field_dim">0</value>
-            <value name="nillable">true</value>
-            <value name="form_qualified">false</value>
-            <value name="is_global">false</value>
-          </record>
-          <record javaclass="com.wm.util.Values">
-            <value name="node_type">unknown</value>
-            <value name="node_subtype">unknown</value>
-            <value name="is_public">false</value>
             <value name="field_name">salesOrderId</value>
             <value name="field_type">string</value>
             <value name="field_dim">0</value>
@@ -200,18 +182,6 @@
           </record>
         </array>
         <value name="modifiable">true</value>
-      </record>
-      <record javaclass="com.wm.util.Values">
-        <value name="node_type">record</value>
-        <value name="node_subtype">unknown</value>
-        <value name="is_public">false</value>
-        <value name="field_name">$connectionName</value>
-        <value name="field_type">string</value>
-        <value name="field_dim">0</value>
-        <value name="field_opt">true</value>
-        <value name="nillable">false</value>
-        <value name="form_qualified">false</value>
-        <value name="is_global">false</value>
       </record>
     </array>
     <value name="modifiable">true</value>
@@ -439,13 +409,28 @@
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
-        <value name="field_name">querySalesOrderDataSetInput</value>
+        <value name="field_name">querySalesOrderDataSetOutput</value>
         <value name="field_type">record</value>
         <value name="field_dim">0</value>
         <value name="nillable">true</value>
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <array name="rec_fields" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">
+            <value name="node_type">record</value>
+            <value name="node_subtype">unknown</value>
+            <value name="is_public">false</value>
+            <value name="field_name">results</value>
+            <value name="field_type">record</value>
+            <value name="field_dim">1</value>
+            <value name="nillable">true</value>
+            <value name="form_qualified">false</value>
+            <value name="is_global">false</value>
+            <value name="is_soap_array_encoding_used">false</value>
+            <array name="rec_fields" type="record" depth="1">
+            </array>
+            <value name="modifiable">true</value>
+          </record>
         </array>
         <value name="modifiable">true</value>
       </record>
@@ -464,13 +449,24 @@
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
-        <value name="field_name">querySalesOrderItemByProductIdInput</value>
+        <value name="field_name">querySalesOrderDataSetInput</value>
         <value name="field_type">record</value>
         <value name="field_dim">0</value>
         <value name="nillable">true</value>
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
         <array name="rec_fields" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">
+            <value name="node_type">unknown</value>
+            <value name="node_subtype">unknown</value>
+            <value name="is_public">false</value>
+            <value name="field_name">salesOrderId</value>
+            <value name="field_type">string</value>
+            <value name="field_dim">0</value>
+            <value name="nillable">true</value>
+            <value name="form_qualified">false</value>
+            <value name="is_global">false</value>
+          </record>
         </array>
         <value name="modifiable">true</value>
       </record>
@@ -486,6 +482,31 @@
         <value name="is_global">false</value>
         <value name="modifiable">true</value>
         <value name="rec_ref">ConnectedDemos.docs.docTypes:SalesOrder</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">querySalesOrderItemByProductIdInput</value>
+        <value name="field_type">record</value>
+        <value name="field_dim">0</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <array name="rec_fields" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">
+            <value name="node_type">unknown</value>
+            <value name="node_subtype">unknown</value>
+            <value name="is_public">false</value>
+            <value name="field_name">productId</value>
+            <value name="field_type">string</value>
+            <value name="field_dim">0</value>
+            <value name="nillable">true</value>
+            <value name="form_qualified">false</value>
+            <value name="is_global">false</value>
+          </record>
+        </array>
+        <value name="modifiable">true</value>
       </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">record</value>
@@ -511,20 +532,6 @@
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
         <value name="field_name">querySalesOrderItemByProductIdOutput</value>
-        <value name="field_type">record</value>
-        <value name="field_dim">0</value>
-        <value name="nillable">true</value>
-        <value name="form_qualified">false</value>
-        <value name="is_global">false</value>
-        <array name="rec_fields" type="record" depth="1">
-        </array>
-        <value name="modifiable">true</value>
-      </record>
-      <record javaclass="com.wm.util.Values">
-        <value name="node_type">record</value>
-        <value name="node_subtype">unknown</value>
-        <value name="is_public">false</value>
-        <value name="field_name">querySalesOrderDataSetOutput</value>
         <value name="field_type">record</value>
         <value name="field_dim">0</value>
         <value name="nillable">true</value>
@@ -561,7 +568,6 @@
     <value name="node_type">record</value>
     <value name="node_subtype">unknown</value>
     <value name="is_public">false</value>
-    <value name="field_name">querySalesOrderDataSetOutput</value>
     <value name="field_type">record</value>
     <value name="field_dim">0</value>
     <value name="nillable">true</value>
@@ -592,17 +598,6 @@
             <value name="is_soap_array_encoding_used">false</value>
             <array name="rec_fields" type="record" depth="1">
               <record javaclass="com.wm.util.Values">
-                <value name="node_type">unknown</value>
-                <value name="node_subtype">unknown</value>
-                <value name="is_public">false</value>
-                <value name="field_name">key</value>
-                <value name="field_type">string</value>
-                <value name="field_dim">0</value>
-                <value name="nillable">true</value>
-                <value name="form_qualified">false</value>
-                <value name="is_global">false</value>
-              </record>
-              <record javaclass="com.wm.util.Values">
                 <value name="node_type">record</value>
                 <value name="node_subtype">unknown</value>
                 <value name="is_public">false</value>
@@ -613,119 +608,6 @@
                 <value name="form_qualified">false</value>
                 <value name="is_global">false</value>
                 <array name="rec_fields" type="record" depth="1">
-                  <record javaclass="com.wm.util.Values">
-                    <value name="node_type">unknown</value>
-                    <value name="node_subtype">unknown</value>
-                    <value name="is_public">false</value>
-                    <value name="field_name">totalValue</value>
-                    <value name="field_type">object</value>
-                    <value name="field_dim">0</value>
-                    <value name="wrapper_type">java.lang.Float</value>
-                    <value name="nillable">true</value>
-                    <value name="form_qualified">false</value>
-                    <value name="is_global">false</value>
-                  </record>
-                  <record javaclass="com.wm.util.Values">
-                    <value name="node_type">unknown</value>
-                    <value name="node_subtype">unknown</value>
-                    <value name="is_public">false</value>
-                    <value name="field_name">isUrgent</value>
-                    <value name="field_type">object</value>
-                    <value name="field_dim">0</value>
-                    <value name="wrapper_type">java.lang.Boolean</value>
-                    <value name="nillable">true</value>
-                    <value name="form_qualified">false</value>
-                    <value name="is_global">false</value>
-                  </record>
-                  <record javaclass="com.wm.util.Values">
-                    <value name="node_type">unknown</value>
-                    <value name="node_subtype">unknown</value>
-                    <value name="is_public">false</value>
-                    <value name="field_name">orderItemCount</value>
-                    <value name="field_type">object</value>
-                    <value name="field_dim">0</value>
-                    <value name="wrapper_type">java.lang.Integer</value>
-                    <value name="nillable">true</value>
-                    <value name="form_qualified">false</value>
-                    <value name="is_global">false</value>
-                  </record>
-                  <record javaclass="com.wm.util.Values">
-                    <value name="node_type">unknown</value>
-                    <value name="node_subtype">unknown</value>
-                    <value name="is_public">false</value>
-                    <value name="field_name">processTypeId</value>
-                    <value name="field_type">string</value>
-                    <value name="field_dim">0</value>
-                    <value name="nillable">true</value>
-                    <value name="form_qualified">false</value>
-                    <value name="is_global">false</value>
-                  </record>
-                  <record javaclass="com.wm.util.Values">
-                    <value name="node_type">unknown</value>
-                    <value name="node_subtype">unknown</value>
-                    <value name="is_public">false</value>
-                    <value name="field_name">statusId</value>
-                    <value name="field_type">string</value>
-                    <value name="field_dim">0</value>
-                    <value name="nillable">true</value>
-                    <value name="form_qualified">false</value>
-                    <value name="is_global">false</value>
-                  </record>
-                  <record javaclass="com.wm.util.Values">
-                    <value name="node_type">unknown</value>
-                    <value name="node_subtype">unknown</value>
-                    <value name="is_public">false</value>
-                    <value name="field_name">customerId</value>
-                    <value name="field_type">string</value>
-                    <value name="field_dim">0</value>
-                    <value name="nillable">true</value>
-                    <value name="form_qualified">false</value>
-                    <value name="is_global">false</value>
-                  </record>
-                  <record javaclass="com.wm.util.Values">
-                    <value name="node_type">unknown</value>
-                    <value name="node_subtype">unknown</value>
-                    <value name="is_public">false</value>
-                    <value name="field_name">id</value>
-                    <value name="field_type">string</value>
-                    <value name="field_dim">0</value>
-                    <value name="nillable">true</value>
-                    <value name="form_qualified">false</value>
-                    <value name="is_global">false</value>
-                  </record>
-                  <record javaclass="com.wm.util.Values">
-                    <value name="node_type">unknown</value>
-                    <value name="node_subtype">unknown</value>
-                    <value name="is_public">false</value>
-                    <value name="field_name">currencyId</value>
-                    <value name="field_type">string</value>
-                    <value name="field_dim">0</value>
-                    <value name="nillable">true</value>
-                    <value name="form_qualified">false</value>
-                    <value name="is_global">false</value>
-                  </record>
-                  <record javaclass="com.wm.util.Values">
-                    <value name="node_type">unknown</value>
-                    <value name="node_subtype">unknown</value>
-                    <value name="is_public">false</value>
-                    <value name="field_name">shipDate</value>
-                    <value name="field_type">string</value>
-                    <value name="field_dim">0</value>
-                    <value name="nillable">true</value>
-                    <value name="form_qualified">false</value>
-                    <value name="is_global">false</value>
-                  </record>
-                  <record javaclass="com.wm.util.Values">
-                    <value name="node_type">unknown</value>
-                    <value name="node_subtype">unknown</value>
-                    <value name="is_public">false</value>
-                    <value name="field_name">orderDate</value>
-                    <value name="field_type">string</value>
-                    <value name="field_dim">0</value>
-                    <value name="nillable">true</value>
-                    <value name="form_qualified">false</value>
-                    <value name="is_global">false</value>
-                  </record>
                 </array>
                 <value name="modifiable">true</value>
               </record>
@@ -751,10 +633,29 @@
 
 <MAPDELETE FIELD="/querySalesOrderDataSetOutput;2;0">
 </MAPDELETE>
+
+<MAPDELETE FIELD="/querySalesOrderItemByProductIdOutput;2;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/productId;1;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/querySalesOrderItemByProductIdInput;2;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/querySalesOrderDataSetInput;2;0">
+</MAPDELETE>
 </MAP>
 </INVOKE>
+</SEQUENCE>
 
-<MAP TIMEOUT="" MODE="STANDALONE">
+<SEQUENCE TIMEOUT="" EXIT-ON="FAILURE" FORM="CATCH">
   <COMMENT></COMMENT>
-</MAP>
+
+  <!-- nodes -->
+
+<EXIT FROM="$parent" SIGNAL="FAILURE" FAILURE-MESSAGE="">
+  <COMMENT></COMMENT>
+</EXIT>
+</SEQUENCE>
 </FLOW>
