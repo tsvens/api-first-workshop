@@ -89,7 +89,7 @@ spec:
 						build/test/reports'
 					sh 'chmod -R go+w build/test'
 					sh 'cd build/container; \
-					    cp /wm-installer/ISLicense.xml .
+					    cp /wm-installer/ISLicense.xml .; \
 					    cp -r ${WORKSPACE}/${PACKAGE}/Dockerfile .; \
 						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/${PACKAGE} .;'
 				}
