@@ -5,7 +5,9 @@ MAINTAINER SoftwareAG
 USER root
 
 COPY ${PACKAGE} /opt/softwareag/IntegrationServer/packages/${PACKAGE}
+COPY ISLicense.xml /opt/softwareag/IntegrationServer/config/licenseKey.xml
 
 RUN chown 1724:1724 -R /opt/softwareag/IntegrationServer/packages/*
+RUN chown 1724:1724 /opt/softwareag/IntegrationServer/config/licenseKey.xml
 
 USER 1724
