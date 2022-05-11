@@ -91,7 +91,6 @@ spec:
 					sh 'cd build/container; \
 					    cp -r ${WORKSPACE}/${PACKAGE}/Dockerfile .; \
 						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/${PACKAGE} .;'
-					sh 'cp /wm-installer/ISLicense.xml ./build/container'
 				}
 			}
 		}
@@ -129,6 +128,7 @@ spec:
 				container(name: 'dind', shell: '/bin/sh') {
 					sh '''#!/bin/sh
             			cd ${PACKAGE}
+						cp /wm-installer/ISLicense.xml .
             		'''
 					script {
 						docker.withRegistry("${REGISTRY_INGRESS}") {
