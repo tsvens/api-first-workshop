@@ -37,7 +37,7 @@ spec:
     volumeMounts:
     - name: tmp-dir
       mountPath: /wm-installer
-	- name: docker-sock
+    - name: docker-sock
       mountPath: /var/run/docker.sock
     - name: jenkins-docker-cfg
       mountPath: /root/.docker
