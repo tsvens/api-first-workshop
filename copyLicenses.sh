@@ -12,6 +12,7 @@ if [ -f licenses.zip ]; then
   kubectl apply -f licenseUploadPod.yml
   POD=$(kubectl -n cicd get pods -l pod=swag-licenses --output=jsonpath={.items..metadata.name})
   kubectl -n cicd wait --for=condition=Ready pod/$POD
+  kubectl -n api-first-workshop create configmap msr-license --from-file=./licenses/ISLicense.xml
   kubectl -n cicd cp ./licenses/ISLicense.xml $POD:/licenses/ISLicense.xml
   kubectl -n cicd cp ./licenses/WmTestSuite100.xml $POD:/licenses/WmTestSuite100.xml
   kubectl -n cicd cp SoftwareAGInstaller*.bin $POD:/licenses/SoftwareAGInstaller.bin
