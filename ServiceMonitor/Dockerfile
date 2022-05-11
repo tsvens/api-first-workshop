@@ -4,6 +4,8 @@ MAINTAINER SoftwareAG
 
 USER root
 
+ADD ISLicense.xml /tmp/ISLicense.xml
+
 COPY ${PACKAGE} /opt/softwareag/IntegrationServer/packages/${PACKAGE}
 COPY ISLicense.xml /opt/softwareag/IntegrationServer/config/licenseKey.xml
 
