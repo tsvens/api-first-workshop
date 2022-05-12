@@ -50,6 +50,9 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /opt/swagmsr/config
+            - name: license-file
+              mountPath: /opt/softwareag/IntegrationServer/config/licenseKey.xml
+              subPath: licenseKey.xml
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
@@ -71,4 +74,7 @@ spec:
         - name: config-volume
           configMap:
             name: application-properties-is
+        - name: license-file
+          configMap:
+            name: msr-license
   replicas: 1
