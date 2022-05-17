@@ -52,7 +52,7 @@ spec:
               mountPath: /opt/swagmsr/config
             - name: license-file
               mountPath: /opt/softwareag/IntegrationServer/config/licenseKey.xml
-              subPath: ISLicense.xml              
+              subPath: ISLicense.xml
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
@@ -76,5 +76,5 @@ spec:
             name: application-properties-is
         - name: license-file
           configMap:
-            name: msr-license            
+            name: msr-license
   replicas: 1

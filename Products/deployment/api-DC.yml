@@ -311,6 +311,9 @@ spec:
         - name: data-set-names
           configMap:
             name: datasetnames
+        - name: license-file
+          configMap:
+            name: msr-license
         - name: is-cloud-config
           persistentVolumeClaim:
             claimName: productapicloudconfig
