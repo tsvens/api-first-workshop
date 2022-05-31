@@ -77,13 +77,13 @@ spec:
   - host: registry.master.servers
     http:
       paths:
-      - pathType: ImplementationSpecific
+      - path /
+        pathType: ImplementationSpecific
         backend:
           service:
             name: registry-service
             port:
               number: 5000
-          pathType: ImplementationSpecific
   tls:
   - hosts:
     - registry.master.servers
