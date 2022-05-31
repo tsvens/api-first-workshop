@@ -65,7 +65,7 @@ spec:
       targetPort: 5000
   type: ClusterIP
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: registry-ingress
