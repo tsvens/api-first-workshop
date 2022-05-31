@@ -77,7 +77,7 @@ spec:
   - host: registry.master.servers
     http:
       paths:
-      - backend:
+      - defaultBackend:
           service.name: registry-service
           service.port.number: 5000
           pathType: ImplementationSpecific
