@@ -12,7 +12,7 @@ spec:
     workingDir: /tmp/jenkins
   - name: msr-base 
     workingDir: /tmp/jenkins
-    image: ${REGISTRY}/microservice-runtime-tcdb:10.11
+    image: http://${REGISTRY}/microservice-runtime-tcdb:10.11
     command:
     - /bin/sleep
     - 6000
