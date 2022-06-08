@@ -193,13 +193,7 @@
 
   <!-- nodes -->
 
-<MAPCOPY FROM="/machineStatus;4;0;servicemonitor.docs:MachineStatus/machineId;1;0" TO="/body;4;0;servicemonitor.apis.MachineIncidentAPI_.docTypes:body/component;1;0">
-</MAPCOPY>
-
 <MAPCOPY FROM="/machineStatus;4;0;servicemonitor.docs:MachineStatus/status;1;0" TO="/body;4;0;servicemonitor.apis.MachineIncidentAPI_.docTypes:body/status;1;0">
-</MAPCOPY>
-
-<MAPCOPY FROM="/machineStatus;4;0;servicemonitor.docs:MachineStatus/statusDetails;2;0/component;1;0" TO="/body;4;0;servicemonitor.apis.MachineIncidentAPI_.docTypes:body/machineId;1;0">
 </MAPCOPY>
 
 <MAPCOPY FROM="/machineStatus;4;0;servicemonitor.docs:MachineStatus/statusDetails;2;0/description;1;0" TO="/body;4;0;servicemonitor.apis.MachineIncidentAPI_.docTypes:body/componentStatusDescriptor;1;0">
@@ -252,6 +246,12 @@
 </Values>
 </DATA>
 </MAPSET>
+
+<MAPCOPY FROM="/machineStatus;4;0;servicemonitor.docs:MachineStatus/statusDetails;2;0/component;1;0" TO="/body;4;0;servicemonitor.apis.MachineIncidentAPI_.docTypes:body/component;1;0">
+</MAPCOPY>
+
+<MAPCOPY FROM="/machineStatus;4;0;servicemonitor.docs:MachineStatus/machineId;1;0" TO="/body;4;0;servicemonitor.apis.MachineIncidentAPI_.docTypes:body/machineId;1;0">
+</MAPCOPY>
 </MAP>
 </INVOKE>
 </FLOW>
