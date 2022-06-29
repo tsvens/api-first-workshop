@@ -34,6 +34,8 @@ RUN chmod +x SoftwareAGInstaller.bin
 # provision and unit test
 RUN ./SoftwareAGInstaller.bin -scriptErrorInteract no -readScript createIsImage.script
 
+RUN rm -rf /opt/softwareag/install/fix
+
 FROM $BASE_IMAGE
 
 RUN dnf install -y procps net-tools util-linux && groupadd -g 1724 swag && useradd -u 1724 -g 1724 swagadmin
