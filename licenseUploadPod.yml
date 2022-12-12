@@ -1,22 +1,31 @@
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: DaemonSet
 metadata:
   name: swag-licenses
   labels:
     pod: swag-licenses
   namespace: cicd
 spec:
-  containers:
-  - name: license-upload
-    image: busybox:latest
-    command:
-    - sleep
-    - "100m"
-    volumeMounts:
-    - name: swag-license-keys
-      mountPath: /licenses
-  volumes:
-  - name: swag-license-keys
-    hostPath:
-      path: "/tmp/license"
+  selector:
+    matchLabels:
+      name: license-upload-pod
+  template:
+    metadata:
+      labels:
+        name: license-upload-pod
+        pod: swag-licenses
+    spec:
+      containers:
+      - name: license-upload
+        image: busybox:latest
+        command:
+        - sleep
+        - "100m"
+        volumeMounts:
+        - name: swag-license-keys
+          mountPath: /licenses
+      volumes:
+      - name: swag-license-keys
+        hostPath:
+          path: "/tmp/license"
