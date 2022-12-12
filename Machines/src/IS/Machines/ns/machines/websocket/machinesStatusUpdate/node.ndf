@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">webMethods/WebSocket</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">machines.websocket:machinesStatusUpdate</value>
+  <value name="node_pkg">Machines</value>
+  <value name="is_public">false</value>
+  <value name="uri">/machines/status</value>
+  <value name="behaviour">Server</value>
+  <record name="callback" javaclass="com.wm.util.Values">
+    <value name="onConnect">machines.websocket.machinesStatusUpdate:onConnect</value>
+    <value name="onBinary">machines.websocket.machinesStatusUpdate:onBinary</value>
+    <value name="onText">machines.websocket.machinesStatusUpdate:onText</value>
+    <value name="onClose">machines.websocket.machinesStatusUpdate:onClose</value>
+    <value name="onError">machines.websocket.machinesStatusUpdate:onError</value>
+  </record>
+</Values>

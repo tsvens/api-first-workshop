@@ -11,7 +11,7 @@
     <Property propertyName="syncDocTypesToBroker" propertyValue="true"/>
     <Component name="ConnectedDemosTCDB.connections.ConnectedDemoStore" type="artconnection">
       <Property propertyName="art.deployment.state" propertyValue="enabled"/>
-      <Property propertyName="uri" propertyValue="terracotta://terracotta.api-hip-workshop.svc:9410"/>
+      <Property propertyName="uri" propertyValue="terracotta://terracotta.swag-infra.svc:9410"/>
       <Property propertyName="connectionTimeOut" propertyValue="20"/>
       <Property propertyName="secureDirPath" propertyValue=""/>
       <Property propertyName="reconnectTimeOut" propertyValue="20"/>

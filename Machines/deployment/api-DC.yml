@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: application-properties-is
-  namespace: "${NAMESPACE}"
+  namespace: "api-first-workshop"
 data:
   application.properties: |
     healthindicators.Adapters.enabled=true
@@ -29,7 +29,7 @@ kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
   name: "${CONTAINER}"
-  namespace: "${NAMESPACE}"
+  namespace: "api-first-workshop"
   labels:
     app: "${CONTAINER}"
 spec:
@@ -43,32 +43,40 @@ spec:
     spec:
       containers:
         - name: "${CONTAINER}"
-          image: "${REGISTRY}/${CONTAINER_TAG}"
+          image: "${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}"
           ports:
             - containerPort: 5555
+              protocol: "TCP"
+            - containerPort: 5545
               protocol: "TCP"
           volumeMounts:
             - name: config-volume
               mountPath: /opt/swagmsr/config
+            - name: license-file
+              mountPath: /opt/softwareag/IntegrationServer/config/licenseKey.xml
+              subPath: ISLicense.xml
           env:
             - name: "SAG_IS_CONFIG_PROPERTIES"
               value: "/opt/swagmsr/config/application.properties"
-        - name: "api-micro-gateway"
-          image: "store/softwareag/microgateway-trial:10.5.0.2"
-          ports:
-            - containerPort: 9090
-              protocol: "TCP"
-          env:
-            - name: "mcgw_api_gateway_url"
-              value: "http://api-gateway.swag-infra:5555"
-            - name: "mcgw_api_gateway_user"
-              value: "Administrator"
-            - name: "mcgw_api_gateway_password"
-              value: "manage"
-            - name: "mcgw_downloads_apis"
-              value: "${CONTAINER}"
+#        - name: "api-micro-gateway"
+#          image: "softwareag/microgateway-trial:10.11"
+#          ports:
+#            - containerPort: 9090
+#              protocol: "TCP"
+#          env:
+#            - name: "mcgw_api_gateway_url"
+#              value: "http://apigateway.swag-infra:5555"
+#            - name: "mcgw_api_gateway_user"
+#              value: "Administrator"
+#            - name: "mcgw_api_gateway_password"
+#              value: "manage"
+#            - name: "mcgw_downloads_apis"
+#              value: "${CONTAINER}"
       volumes:
         - name: config-volume
           configMap:
             name: application-properties-is
+        - name: license-file
+          configMap:
+            name: msr-license
   replicas: 1

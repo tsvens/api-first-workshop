@@ -1,7 +1,49 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: application-properties-is
+  namespace: "api-first-workshop"
+data:
+  application.properties: |
+    artConnection.ConnectedDemosTCDB.ConnectedDemosTCDB.connections.ConnectedDemoStore.connectionEnabled=true
+    wmcloudsettings.DemoTenant.password={AES}0+h+7GakZdnNSaZomW4xtg==
+    healthindicators.Adapters.enabled=true
+    healthindicators.Cluster.enabled=true
+    healthindicators.Cluster.properties.threshold.value=2
+    healthindicators.Diskspace.enabled=true
+    healthindicators.Diskspace.properties.threshold.value=10
+    healthindicators.JDBC.enabled=true
+    healthindicators.JMS.enabled=true
+    healthindicators.JNDIAliases.enabled=false
+    healthindicators.Memory.enabled=true
+    healthindicators.Memory.properties.threshold.value=10
+    healthindicators.RemoteServers.enabled=true
+    healthindicators.SFTPServers.enabled=true
+    healthindicators.ServiceThread.enabled=true
+    healthindicators.ServiceThread.properties.threshold.value=10
+    healthindicators.Sessions.enabled=true
+    healthindicators.Sessions.properties.threshold.value=85
+    healthindicators.UMAliases.enabled=true
+    globalvariable.ConnectedDemos..config..dir.value=/data
+    jms.DEFAULT_IS_JMS_CONNECTION.clientID=DEFAULT_IS_JMS_CLIENT
+    jndi.DEFAULT_IS_JNDI_PROVIDER.providerURL=nsp\://universalmessaging.swag-infra\:9000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wmpublic-config
+  namespace: "api-first-workshop"
+data:
+  fileAccessControl.cnf: |
+    allowedReadPaths=/data
+    allowedWritePaths=
+    allowedDeletePaths=
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: demodata
+  namespace: "api-first-workshop"
 data:
   ProductData.json: |
     {
@@ -83,6 +125,42 @@ data:
                     "inventoryTypeId": "REFINV-01"
                 }
             ],
+            "SalesOrder": [
+                {
+                    "id": "SAL0000021",
+                    "customerId": "0010900000JUSprAAH",
+                    "statusId": "STAT0001",
+                    "totalValue": 13.95,
+                    "orderDate": "2019-08-22T13:18:00+0100",
+                    "shipDate": "2019-08-22T13:21:00+0100",
+                    "isUrgent": false,
+                    "currencyId": "EUR",
+                    "processTypeId": "PROC00002",
+                    "orderItemCount": 1
+                }
+            ],
+            "SalesOrderItem": [
+                {
+                    "id": "SAL0000021-001",
+                    "orderId": "SAL0000021",
+                    "productId": "PROD00002",
+                    "statusId": "STAT005",
+                    "quantity": 1.0,
+                    "price": 11.00,
+                    "totalValue": 13.95,
+                    "currencyId": "EUR"
+                },
+                {
+                    "id": "SAL0000021-002",
+                    "orderId": "SAL0000021",
+                    "productId": "PROD00003",
+                    "statusId": "STAT005",
+                    "quantity": 1.0,
+                    "price": 2.95,
+                    "totalValue": 13.95,
+                    "currencyId": "EUR"
+                }
+            ],
             "Product": [{
                     "id": "PROD00001",
                     "productName": "Millennium Falcon",
@@ -157,46 +235,86 @@ data:
             ]
         }
     }
-
 ---
-kind: "DeploymentConfig"
-apiVersion: "v1"
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: "${CONTAINER}"
+  name: datasetnames
+  namespace: "api-first-workshop"
+data:  
+  dataSetNames.txt: |
+    Inventory/Product/SalesOrderItem/SalesOrder/UOM
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: productapicloudconfig
+  namespace: api-first-workshop
 spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: local-path
+  volumeMode: Filesystem
+---
+kind: "Deployment"
+apiVersion: "apps/v1"
+metadata:
+  name: "products-api"
+  namespace: "api-first-workshop"
+  labels:
+    app: "products-api"
+spec:
+  selector:
+    matchLabels:
+      app: "products-api" 
   template: 
     metadata:
       labels:
-        name: "${CONTAINER}"
+        app: "products-api"
     spec:
       containers:
-        - name: "${CONTAINER}"
-          image: "${NAMESPACE}/${CONTAINER_TAG}"
+        - name: "products-api"
+          image: "${REGISTRY}/products-api:1.0.${BUILD_NUMBER}"
           ports:
             - containerPort: 5555
               protocol: "TCP"
           volumeMounts:
+            - name: config-volume
+              mountPath: /opt/swagmsr/config
             - name: data-volume
               mountPath: /data
+            - name: data-set-names
+              mountPath: /data/utils/dataSet
+            - name: wmpublic-config
+              mountPath: /opt/softwareag/IntegrationServer/instances/default/packages/WmPublic/config/fileAccessControl.cnf
+              subPath: fileAccessControl.cnf
+            - mountPath: /opt/softwareag/IntegrationServer/instances/default/config/integrationlive
+              name: is-cloud-config  
+          env:
+            - name: "SAG_IS_CONFIG_PROPERTIES"
+              value: "/opt/swagmsr/config/application.properties"
+      imagePullSecrets:
+        - name: regcred
       volumes:
+        - name: config-volume
+          configMap:
+            name: application-properties-is
         - name: data-volume
           configMap:
             name: demodata
+        - name: wmpublic-config
+          configMap:
+            name: wmpublic-config
+        - name: data-set-names
+          configMap:
+            name: datasetnames
+        - name: license-file
+          configMap:
+            name: msr-license
+        - name: is-cloud-config
+          persistentVolumeClaim:
+            claimName: productapicloudconfig
   replicas: 1
-  triggers:
-    - type: "ConfigChange" 
-    - type: "ImageChange" 
-      imageChangeParams:
-        automatic: true
-        containerNames:
-          - ${CONTAINER}
-        from:
-          kind: ImageStreamTag
-          name: '${CONTAINER_TAG}'
-          namespace: ${NAMESPACE}
-      type: ImageChange
-  strategy: 
-    type: "Rolling"
-  paused: false 
-  revisionHistoryLimit: 2 
-  minReadySeconds: 0

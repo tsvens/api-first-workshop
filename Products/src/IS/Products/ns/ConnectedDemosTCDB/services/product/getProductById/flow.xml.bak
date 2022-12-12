@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FLOW VERSION="3.0" CLEANUP="true">
+  <COMMENT>This is a first comment</COMMENT>
 
   <!-- nodes -->
 
 <INVOKE TIMEOUT="" SERVICE="ConnectedDemosTCDB.services.query:getProductDetail" VALIDATE-IN="$none" VALIDATE-OUT="$none">
-  <COMMENT></COMMENT>
+  <COMMENT>This is a first comment</COMMENT>
 
   <!-- nodes -->
 
@@ -19,26 +20,17 @@
     <value name="is_public">false</value>
     <value name="field_type">record</value>
     <value name="field_dim">0</value>
-    <value name="wrapper_type">IData</value>
     <value name="nillable">true</value>
     <value name="form_qualified">false</value>
     <value name="is_global">false</value>
     <array name="rec_fields" type="record" depth="1">
       <record javaclass="com.wm.util.Values">
-        <value name="node_type">record</value>
+        <value name="node_type">unknown</value>
         <value name="node_subtype">unknown</value>
-        <value name="node_comment"></value>
-        <record name="node_hints" javaclass="com.wm.util.Values">
-          <value name="field_usereditable">true</value>
-          <value name="field_largerEditor">false</value>
-          <value name="field_password">false</value>
-        </record>
         <value name="is_public">false</value>
         <value name="field_name">productID</value>
         <value name="field_type">string</value>
         <value name="field_dim">0</value>
-        <array name="field_options" type="value" depth="1">
-        </array>
         <value name="nillable">true</value>
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
@@ -107,6 +99,19 @@
     <value name="is_global">false</value>
     <array name="rec_fields" type="record" depth="1">
       <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">Product</value>
+        <value name="field_type">recref</value>
+        <value name="field_dim">0</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <value name="modifiable">true</value>
+        <value name="rec_ref">ConnectedDemos.docs.docTypes:Product</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
         <value name="node_type">unknown</value>
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
@@ -149,6 +154,94 @@
         <value name="modifiable">true</value>
         <value name="rec_ref">ConnectedDemos.docs.docTypes:Product</value>
       </record>
+    </array>
+    <value name="modifiable">true</value>
+  </record>
+</Values>
+</MAPTARGET>
+  <MAPSOURCE>
+
+<Values version="2.0">
+  <record name="xml" javaclass="com.wm.util.Values">
+    <value name="node_type">record</value>
+    <value name="node_subtype">unknown</value>
+    <value name="is_public">false</value>
+    <value name="field_type">record</value>
+    <value name="field_dim">0</value>
+    <value name="nillable">true</value>
+    <value name="form_qualified">false</value>
+    <value name="is_global">false</value>
+    <array name="rec_fields" type="record" depth="1">
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">Product</value>
+        <value name="field_type">recref</value>
+        <value name="field_dim">0</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <value name="modifiable">true</value>
+        <value name="rec_ref">ConnectedDemos.docs.docTypes:Product</value>
+      </record>
+    </array>
+    <value name="modifiable">true</value>
+  </record>
+</Values>
+</MAPSOURCE>
+
+  <!-- nodes -->
+
+<MAPCOPY FROM="/Product;4;0;ConnectedDemos.docs.docTypes:Product" TO="/product;4;0;ConnectedDemos.docs.docTypes:Product">
+</MAPCOPY>
+
+<MAPDELETE FIELD="/Product;4;0;ConnectedDemos.docs.docTypes:Product">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/id;1;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/productID;1;0">
+</MAPDELETE>
+</MAP>
+</INVOKE>
+
+<INVOKE TIMEOUT="" SERVICE="ConnectedDemosTCDB.services.product.map:mapCDMtoXML" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+  <COMMENT>One more comment</COMMENT>
+
+  <!-- nodes -->
+
+<MAP MODE="INPUT">
+</MAP>
+
+<MAP MODE="OUTPUT">
+  <MAPTARGET>
+
+<Values version="2.0">
+  <record name="xml" javaclass="com.wm.util.Values">
+    <value name="node_type">record</value>
+    <value name="node_subtype">unknown</value>
+    <value name="is_public">false</value>
+    <value name="field_type">record</value>
+    <value name="field_dim">0</value>
+    <value name="nillable">true</value>
+    <value name="form_qualified">false</value>
+    <value name="is_global">false</value>
+    <array name="rec_fields" type="record" depth="1">
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">product</value>
+        <value name="field_type">recref</value>
+        <value name="field_dim">0</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <value name="modifiable">true</value>
+        <value name="rec_ref">ConnectedDemos.docs.docTypes:Product</value>
+      </record>
       <record javaclass="com.wm.util.Values">
         <value name="node_type">record</value>
         <value name="node_subtype">unknown</value>
@@ -158,7 +251,7 @@
           <value name="field_password">false</value>
         </record>
         <value name="is_public">false</value>
-        <value name="field_name">Product</value>
+        <value name="field_name">xmlProduct</value>
         <value name="field_type">recref</value>
         <value name="field_dim">0</value>
         <value name="wrapper_type">IData</value>
@@ -167,7 +260,20 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">ConnectedDemos.docs.docTypes:Product</value>
+        <value name="rec_ref">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">product</value>
+        <value name="field_type">recref</value>
+        <value name="field_dim">0</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <value name="modifiable">true</value>
+        <value name="rec_ref">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product</value>
       </record>
     </array>
     <value name="modifiable">true</value>
@@ -197,7 +303,7 @@
           <value name="field_password">false</value>
         </record>
         <value name="is_public">false</value>
-        <value name="field_name">Product</value>
+        <value name="field_name">xmlProduct</value>
         <value name="field_type">recref</value>
         <value name="field_dim">0</value>
         <value name="wrapper_type">IData</value>
@@ -206,7 +312,7 @@
         <value name="is_global">false</value>
         <value name="rec_closed">true</value>
         <value name="modifiable">true</value>
-        <value name="rec_ref">ConnectedDemos.docs.docTypes:Product</value>
+        <value name="rec_ref">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product</value>
       </record>
     </array>
     <value name="modifiable">true</value>
@@ -216,17 +322,11 @@
 
   <!-- nodes -->
 
-<MAPCOPY FROM="/Product;4;0;ConnectedDemos.docs.docTypes:Product" TO="/product;4;0;ConnectedDemos.docs.docTypes:Product">
+<MAPDELETE FIELD="/xmlProduct;4;0;ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product">
+</MAPDELETE>
+
+<MAPCOPY FROM="/xmlProduct;4;0;ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product" TO="/product(1);4;0;ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product">
 </MAPCOPY>
-
-<MAPDELETE FIELD="/Product;4;0;ConnectedDemos.docs.docTypes:Product">
-</MAPDELETE>
-
-<MAPDELETE FIELD="/id;1;0">
-</MAPDELETE>
-
-<MAPDELETE FIELD="/productID;1;0">
-</MAPDELETE>
 </MAP>
 </INVOKE>
 </FLOW>

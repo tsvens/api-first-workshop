@@ -1,17 +1,9 @@
-FROM store/softwareag/webmethods-microservicesruntime:10.5
+ARG BASE_IMAGE
+ARG PACKAGE
 
-MAINTAINER SoftwareAG
+FROM $BASE_IMAGE
 
-USER root
-
-COPY terracotta* /opt/softwareag/common/lib/
-COPY ${PACKAGE} /opt/softwareag/IntegrationServer/packages/${PACKAGE}
-COPY ConnectedDemos /opt/softwareag/IntegrationServer/packages/ConnectedDemos
-COPY ConnectedDemosTCDB /opt/softwareag/IntegrationServer/packages/ConnectedDemosTCDB
-COPY WmTCDBAdapter /opt/softwareag/IntegrationServer/packages/WmTCDBAdapter
-
-COPY config /opt/softwareag/IntegrationServer/config
-
-RUN chown 1724:1724 -R /opt/softwareag/IntegrationServer/packages/*
-
-USER 1724
+COPY --chown=1724:1724 $PACKAGE /opt/softwareag/IntegrationServer/instances/default/packages/$PACKAGE
+COPY --chown=1724:1724 ConnectedDemos /opt/softwareag/IntegrationServer/instances/default/packages/ConnectedDemos
+COPY --chown=1724:1724 ConnectedDemosTCDB /opt/softwareag/IntegrationServer/instances/default/packages/ConnectedDemosTCDB
+COPY --chown=1724:1724 config /opt/softwareag/IntegrationServer/instances/default/config

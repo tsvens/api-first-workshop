@@ -1,73 +1,181 @@
+@NonCPS
+def jsonParse(def json) {
+	new groovy.json.JsonSlurperClassic().parseText(json)
+}
+
+def host = "http://apigateway.swag-infra:5555"
+def auth = "Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U="
+
 pipeline {
-    agent {
-		node {
-			label 'wm-jenkins-slave'
+	
+	agent {
+		kubernetes {
+    	label 'docker-builder'
+    	defaultContainer 'jnlp'
+    	yaml """
+kind: Pod
+spec:
+  serviceAccountName: jenkins-agent-account
+  containers:
+  - name: jnlp
+    workingDir: /tmp/jenkins
+  - name: msr-base 
+    workingDir: /tmp/jenkins
+    image: ${REGISTRY}/microservice-runtime-tcdb:10.11
+    command:
+    - /bin/sleep
+    - 6000
+    tty: true
+  - name: dind
+    workingDir: /tmp/jenkins
+    image: portainer/kube-tools
+    imagePullPolicy: Always
+    restartPolicy: Never
+    command: 
+    - /bin/cat
+    tty: true
+    volumeMounts:
+    - name: docker-sock
+      mountPath: /var/run/docker.sock
+    - name: jenkins-docker-cfg
+      mountPath: /root/.docker
+    securityContext:
+      privileged: true
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: "/var/run/docker.sock"
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: regcred 
+          items:
+            - key: .dockerconfigjson
+              path: config.json 
+"""
 		}
 	}
-	
+
+		
+	parameters{
+		string(name: 'REGISTRY', defaultValue: 'registry.master.servers', description: 'Endpoint of the docker registry')
+		string(name: 'HOST', description: 'Base hostname of your cloud machine for the ingress')
+	}
+
 	environment {
-        JAVA_HOME = "/opt/softwareag/jvm/jvm"
 		PACKAGE = "ServiceMonitor"
-		NAMESPACE = "api-hip-workshop"
+		NAMESPACE = "api-first-workshop"
+		REGISTRY_INGRESS = "https://${params.REGISTRY}"
 		CONTAINER = "service-monitor-api"
-		CONTAINER_TAG = "${env.CONTAINER}:latest"
+		CONTAINER_TAG = "1.0.${env.BUILD_NUMBER}"
     }
 
     stages {
-        stage('Initialize'){
+
+		stage('Prepare'){
             steps {
-                sh 'chmod -R 777 ${WORKSPACE}'
-				sh '/opt/softwareag/common/lib/ant/bin/ant -f ${WORKSPACE}/${PACKAGE}/prepareBuild.xml prep'
+				dir("${PACKAGE}") {
+					sh 'mkdir build \
+						build/repo \
+						build/container \
+						dist \
+						build/test \
+						build/test/reports'
+					sh 'chmod -R go+w build/test'
+					sh 'cd build/container; \
+					    cp -r ${WORKSPACE}/${PACKAGE}/Dockerfile .; \
+						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/${PACKAGE} .;'
+				}
 			}
 		}
-		
-		stage('Build'){
-            steps {		
-				sh 'cd ${WORKSPACE}/${PACKAGE}; /opt/softwareag/common/AssetBuildEnvironment/bin/build.sh -propertyfile build.properties'
-            }
-        }
-		
-		stage('Deploy') {
+
+		stage('Deploy API') {
+
 			steps {
-				timeout(120) {
-					waitUntil {
-						script {
-							def r = sh script: 'wget -q --user Administrator --password manage http://localhost:5555 -O /dev/null', returnStatus: true
-							return (r == 0);
+				script {
+					def toJson = {
+						input ->
+							groovy.json.JsonOutput.toJson(input)
+					}
+
+					def apiName = "${PACKAGE}API"
+					def apiFile = "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"
+
+					//Check if API already exists
+					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'GET', url: "${host}/rest/apigateway/apis?apiName=${apiName}", validResponseCodes: '200'
+
+					def object = jsonParse(response.content)
+
+					def APIID = object.apiResponse.api.id
+
+					echo "api id with apiResponse: ${APIID[0]}"
+
+					if (APIID == null || APIID ==[]) {
+						response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'POST', url: "${host}/rest/apigateway/apis", validResponseCodes: '201', formData: [[name: 'apiName', body: apiName], [name: 'type', body: 'swagger'], [name: 'apiVersion', body: '1.0'], [name: 'apiDescription', body: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: "ServiceMonitor.swagger.yaml", uploadFile: "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"]]
+					}
+				}
+			}
+		}
+
+        stage('Build'){
+            steps {
+				container(name: 'dind', shell: '/bin/sh') {
+					sh '''#!/bin/sh
+            			cd ${PACKAGE}
+            		'''
+					script {
+						docker.withRegistry("${REGISTRY_INGRESS}") {
+					
+							def customImage = docker.build("${CONTAINER}:${CONTAINER_TAG}", "${PACKAGE}/build/container --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
+
+							/* Push the container to the custom Registry */
+							customImage.push()
 						}
 					}
 				}
-				sh 'cd /opt/softwareag/IntegrationServer/instances/default/packages/WmDeployer/bin; ./projectautomatorUnix.sh ${WORKSPACE}/${PACKAGE}/build/project-deploy.xml; \
-					./Deployer.sh --deploy -force -dc myDeployment -project ACDL_MSR_PACKAGES -host localhost -port 5555 -user Administrator -pwd manage'
 			}
 		}
 		
-		stage('CreateContainer') {
-			steps {
-				
-			    sh 'cd ${PACKAGE}/build/container; cp -r /opt/softwareag/IntegrationServer/instances/default/packages/${PACKAGE} .; \
-				    docker build -t ${CONTAINER_TAG} -f Dockerfile .'
-			}
-		}
-		stage('tag') {
-			steps {
-				sh 'docker tag ${CONTAINER_TAG} 172.30.1.1:5000/${NAMESPACE}/${CONTAINER_TAG}; docker login -u admin -p `oc whoami -t` 172.30.1.1:5000; docker push 172.30.1.1:5000/${NAMESPACE}/${CONTAINER_TAG}'
-			} // steps
-		} // stage
-	
-	stage('Deploy-Container'){
+		stage('Deploy-Container'){
             steps {
-				sh 'oc apply -f ${PACKAGE}/deployment/${CONTAINER}-DC.yml'
+				container(name: 'dind', shell: '/bin/sh') {
+					withKubeConfig([credentialsId: 'jenkins-agent-account', serverUrl: 'https://kubernetes.default']) {
+						sh '''#!/bin/sh
+						cat ${PACKAGE}/deployment/api-DC.yml | sed --expression='s/${CONTAINER}/'$CONTAINER'/g' | sed --expression='s/${REGISTRY}/'$REGISTRY'/g' | sed --expression='s/${CONTAINER_TAG}/'$CONTAINER_TAG'/g' | kubectl apply -f -'''
 				
-				script {
-					try {
-						sh 'oc get service ${CONTAINER}-service'
-					} catch (exc) {
-						echo 'Service does not exist yet'
-						sh 'oc apply -f ${PACKAGE}/deployment/${CONTAINER}-service-route.yml'
+						script {
+							try {
+								sh 'kubectl -n ${NAMESPACE} get service ${CONTAINER}-service'
+							} catch (exc) {
+								echo 'Service does not exist yet'
+								sh '''#!/bin/sh
+								cat ${PACKAGE}/deployment/service-route.yml | sed --expression='s/${HOST}/'$HOST'/g' | sed --expression='s/${CONTAINER}/'$CONTAINER'/g' | sed --expression='s/${NAMESPACE}/'$NAMESPACE'/g' | kubectl apply -f -'''
+							}
+						}
 					}
 				}
             }
-        }
+		}
+
+		stage('Activate API') {
+			steps {
+				script {
+					
+					def apiName = "${PACKAGE}API"
+
+					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'GET', url: "${host}/rest/apigateway/apis?apiName=${apiName}", validResponseCodes: '200'
+
+					def object = jsonParse(response.content)
+
+					def APIID = object.apiResponse.api.id[0]
+					echo "api id with apiResponse: ${APIID}"
+					
+					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'PUT', url: "${host}/rest/apigateway/apis/${APIID}/activate", validResponseCodes: '200'
+					
+					echo "api id with ID: ${APIID} activated"
+				}
+			}
+		}
     }
 }

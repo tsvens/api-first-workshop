@@ -67,7 +67,7 @@
           <value name="is_global">false</value>
           <value name="rec_closed">true</value>
           <value name="modifiable">true</value>
-          <value name="rec_ref">ConnectedDemos.docs.docTypes:Product</value>
+          <value name="rec_ref">ConnectedDemosTCDB.webservices.productsWSD_.docTypes:docTypeRef_prd_Product</value>
         </record>
       </array>
       <value name="modifiable">true</value>
@@ -108,6 +108,7 @@
     <value name="cancelThreadOnTimeout">false</value>
   </record>
   <array name="allowedHTTPMethods" type="value" depth="1">
+    <value>TRACE</value>
     <value>HEAD</value>
     <value>DELETE</value>
     <value>POST</value>

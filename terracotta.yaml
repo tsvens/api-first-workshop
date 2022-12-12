@@ -1,0 +1,210 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tc-configs
+  namespace: swag-infra
+data:
+  tc-config.cfg: |
+    cluster-name=MyCluster
+    offheap-resources=main:1024MB
+    stripe-names=tc-stripe1
+    tc-stripe1:node-names=terracotta
+    terracotta:hostname=terracotta-0.terracotta.swag-infra.svc.cluster.local
+    terracotta:metadata-dir=/data/dataroots/terracotta/metadata
+    terracotta:data-dirs=data:/data/dataroots/terracotta/user-data
+    terracotta:log-dir=/data/dataroots/terracotta/logs
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: terracotta
+  namespace: swag-infra
+  labels:
+    app: terracotta
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  ports:
+    - name: terracotta-port
+      port: 9410
+    - name: sync-port
+      port: 9430
+  selector:
+    app: terracotta
+  clusterIP: None
+#  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: terracotta
+  namespace: swag-infra
+  labels:
+    app: terracotta
+spec:
+  selector:
+    matchLabels:
+      app: terracotta
+  serviceName: terracotta
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: terracotta
+    spec:
+      hostname: terracotta
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: terracotta
+          image: softwareag/terracotta-server:10.11
+          command: ["bin/start-tc-server.sh"]
+          args: ["-f", "/configs/tc-config.cfg", "-n", "terracotta"]
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 4Gi
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+          ports:
+            - containerPort: 9410
+              name: terracotta-port
+            - containerPort: 9430
+              name: sync-port
+          volumeMounts:
+            - name: config-volume
+              mountPath: /configs
+            - name: dataroots
+              mountPath: /data/dataroots
+            - name: clusterconfig
+              mountPath: /root/terracotta/config
+        - name: readiness
+          image: softwareag/terracotta-cluster-tool:10.11
+          command: ["sh", "-c", "while true; do sleep 86400; done"]
+          imagePullPolicy: Always
+          readinessProbe:
+            exec:
+              command: ["bash", "-c", "bin/cluster-tool.sh status -s terracotta-0.terracotta.swag-infra.svc.cluster.local"]
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            timeoutSeconds: 5
+            # 10,000 as failure threshold gives around 41 hours of time to load from FRS and start terracotta successfully.
+            failureThreshold: 10000
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: tc-configs
+      imagePullSecrets:
+        - name: regcred
+  volumeClaimTemplates:
+    - metadata:
+        name: dataroots
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 11Gi
+    - metadata:
+        name: clusterconfig
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: config-tool
+  namespace: swag-infra
+spec:
+  template:
+    metadata:
+      name: config-tool
+    spec:
+      containers:
+        - name: config-tool
+          image: softwareag/terracotta-config-tool:10.11
+          args: ["activate", "-cluster-name", "MyCluster", "-license-file", "/licenses/license.xml", "-connect-to", "terracotta.swag-infra"]
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          volumeMounts:
+          - name: config-volume
+            mountPath: /configs
+          - name: license-volume
+            mountPath: /licenses
+      volumes:
+        - name: config-volume
+          configMap:
+            name: tc-configs
+        - name: license-volume
+          configMap:
+            name: license
+      restartPolicy: OnFailure
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tmc-internal
+  namespace: swag-infra
+  labels:
+    app: tmc
+spec:
+  ports:
+  - name: tmc-port
+    port: 9480
+  clusterIP: None
+  selector:
+    app: tmc
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tmc
+  namespace: swag-infra
+  labels:
+    app: tmc
+spec:
+  selector:
+    matchLabels:
+      app: tmc
+  serviceName: tmc-internal
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tmc
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - image: softwareag/tmc:10.11
+          name: tmc
+          imagePullPolicy: Always
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: TMS_DEFAULTURL
+              value: "terracotta://terracotta.swag-infra:9410"
+          ports:
+            - containerPort: 9480
+          volumeMounts:
+            - name: tmcdata
+              mountPath: /data/tmc/
+      imagePullSecrets:
+        - name: regcred
+  volumeClaimTemplates:
+    - metadata:
+        name: tmcdata
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 2Gi
