@@ -82,7 +82,7 @@ spec:
               --destination ${REGISTRY}/microservice-runtime-tcdb:${CONTAINER_TAG} \
               --destination ${REGISTRY}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
               --destination ${REGISTRY}/microservice-runtime-tcdb:latest \
-              --insecure-registry ${REG} \
+              --insecure-registry ${REGISTRY} \
               --build-arg BUILDER_IMAGE=redhat/ubi8 \
               --build-arg BASE_IMAGE=redhat/ubi8
             '''
