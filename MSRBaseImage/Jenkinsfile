@@ -17,7 +17,7 @@ spec:
     imagePullPolicy: Always
     restartPolicy: Never
     command: 
-    - /bin/cat
+    - /busybox/cat
     tty: true
     volumeMounts:
     - name: jenkins-docker-cfg
