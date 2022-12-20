@@ -89,8 +89,9 @@ spec:
               --destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}.${BUILD_NUMBER} \
               --destination ${REGISTRY}/${CONTAINER}:latest \
               --skip-tls-verify \
-							--build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 
-							--build-arg PACKAGE=${PACKAGE}'''
+							--build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 \
+							--build-arg PACKAGE=${PACKAGE}
+						'''
 					}
 				}
 			}
