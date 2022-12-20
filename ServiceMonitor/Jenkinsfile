@@ -35,9 +35,17 @@ spec:
     - name: tmp-dir
       mountPath: /wm-installer
   volumes:
-  - name: docker-sock
+  - name: tmp-dir
     hostPath:
-      path: "/var/run/docker.sock"
+      path: "/tmp/license"
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: regcred 
+          items:
+            - key: .dockerconfigjson
+              path: config.json
 """
 		}
 	}
