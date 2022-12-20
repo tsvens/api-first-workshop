@@ -10,32 +10,23 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
-  - name: msr-base 
-    workingDir: /tmp/jenkins
-    image: ${REGISTRY}/microservice-runtime-tcdb:10.11
-    command:
-    - /bin/sleep
-    - 6000
-    tty: true
   - name: dind
     workingDir: /tmp/jenkins
-    image: portainer/kube-tools
+    image: registry.k8s/kaniko:tini
     imagePullPolicy: Always
     restartPolicy: Never
     command: 
-    - /bin/cat
+    - /busybox/cat
     tty: true
     volumeMounts:
-    - name: docker-sock
-      mountPath: /var/run/docker.sock
     - name: jenkins-docker-cfg
-      mountPath: /root/.docker
-    securityContext:
-      privileged: true
+      mountPath: /kaniko/.docker
+    - name: tmp-dir
+      mountPath: /wm-installer
   volumes:
-  - name: docker-sock
+  - name: tmp-dir
     hostPath:
-      path: "/var/run/docker.sock"
+      path: "/tmp/license"
   - name: jenkins-docker-cfg
     projected:
       sources:
@@ -84,26 +75,22 @@ spec:
 			}
 		}
 
-        stage('Build'){
-            steps {
+    stage('Build'){
+      steps {
 				container(name: 'dind', shell: '/bin/sh') {
 					sh '''#!/bin/sh
             			cd ${PACKAGE}
             		'''
 					script {
-						docker.withRegistry("${REGISTRY_INGRESS}") {
-					
-							def customImage = docker.build("${CONTAINER}:${CONTAINER_TAG}", "${PACKAGE}/build/container --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
-
-							/* Push the container to the custom Registry */
-							customImage.push()
-						}
+						sh '''#!/busybox/sh
+            /kaniko/executor --context ${PACKAGE} \
+              --destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG} \
+              --destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}.${BUILD_NUMBER} \
+              --destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}:latest \
+              --skip-tls-verify \
+							--build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 
+							--build-arg PACKAGE=${PACKAGE}")'''
 					}
-					sh 'cp ${WORKSPACE}/${PACKAGE}/config/substitutionVars.xml /opt/softwareag/IntegrationServer/instances/default/packages/WmDeployer/replicate/inbound/;\
-						cd /opt/softwareag/IntegrationServer/instances/default/packages/WmDeployer/bin;\
-						./projectautomatorUnix.sh ${WORKSPACE}/${PACKAGE}/build/project-deploy.xml;\
-						./Deployer.sh --import -varsub -vsFile substitutionVars.xml -map myDeploymentMap -project ACDL_MSR_PACKAGES -validate true -host localhost -port 5555 -user Administrator -pwd manage;\
-						./Deployer.sh --deploy -force -dc myDeployment -project ACDL_MSR_PACKAGES -host localhost -port 5555 -user Administrator -pwd manage'
 				}
 			}
 		}
