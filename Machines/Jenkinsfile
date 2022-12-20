@@ -97,9 +97,9 @@ spec:
 			}
 		}
 	stage('Deploy-Container'){
-            steps {
-				container(name: 'dind', shell: '/bin/sh') {
-					withKubeConfig([credentialsId: 'jenkins-agent-account', serverUrl: 'https://kubernetes.default']) {
+    steps {
+			container(name: 'jnlp', shell: '/bin/sh') {
+				withKubeConfig([credentialsId: 'jenkins-agent-account', serverUrl: 'https://kubernetes.default']) {
 						sh '''#!/bin/sh
 						cat ${PACKAGE}/deployment/api-DC.yml | sed --expression='s/${CONTAINER}/'$CONTAINER'/g' | sed --expression='s/${REGISTRY}/'$REGISTRY'/g' | sed --expression='s/${CONTAINER_TAG}/'$CONTAINER_TAG'/g' | kubectl apply -f -'''
 				
