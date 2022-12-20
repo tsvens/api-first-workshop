@@ -84,7 +84,7 @@ spec:
 					script {
 						sh '''#!/busybox/sh
 						echo "building ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}"
-            /kaniko/executor --context ${PACKAGE} \
+            /kaniko/executor --context ${PACKAGE}/build/container \
               --destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG} \
               --destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}.${BUILD_NUMBER} \
               --destination ${REGISTRY}/${CONTAINER}:latest \
