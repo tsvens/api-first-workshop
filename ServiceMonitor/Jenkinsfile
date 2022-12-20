@@ -20,7 +20,7 @@ spec:
   - name: jnlp
     workingDir: /tmp/jenkins
   - name: kubectl
-    image: portainer/kubectl-shell
+    image: portainer/kube-tools
     command:
     - /bin/cat
     tty: true
