@@ -24,6 +24,9 @@ spec:
     command:
     - /bin/cat
     tty: true
+    volumeMounts:
+    - name: jenkins-docker-cfg
+      mountPath: /home/shell/.docker
   - name: dind
     workingDir: /tmp/jenkins
     image: registry.k8s/kaniko:tini
@@ -135,7 +138,7 @@ spec:
 		}
 		
 		stage('Deploy-Container'){
-            steps {
+      steps {
 				container(name: 'kubectl', shell: '/bin/sh') {
 					withKubeConfig([credentialsId: 'jenkins-agent-account', serverUrl: 'https://kubernetes.default']) {
 						sh '''#!/bin/sh
