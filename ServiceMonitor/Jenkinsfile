@@ -23,6 +23,7 @@ spec:
     image: portainer/kubectl-shell
     command:
     - /bin/cat
+    tty: true
   - name: dind
     workingDir: /tmp/jenkins
     image: registry.k8s/kaniko:tini
