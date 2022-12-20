@@ -140,7 +140,6 @@ spec:
 					withKubeConfig([credentialsId: 'jenkins-agent-account', serverUrl: 'https://kubernetes.default']) {
 						sh '''#!/bin/sh
 						echo "Updating deployment scripts."
-						kubectl --kubeconfig=${KUBECONFIG} config view
 						cat ${KUBECONFIG}
 						cat ${PACKAGE}/deployment/api-DC.yml | sed --expression='s/${CONTAINER}/'$CONTAINER'/g' | sed --expression='s/${REGISTRY}/'$REGISTRY'/g' | sed --expression='s/${CONTAINER_TAG}/'$CONTAINER_TAG'/g' | kubectl --kubeconfig=${KUBECONFIG} apply -f -
 						echo "Deployed the API implementation"'''
