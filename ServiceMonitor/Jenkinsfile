@@ -139,18 +139,16 @@ spec:
 				container(name: 'kubectl', shell: '/bin/sh') {
 					withKubeConfig([credentialsId: 'jenkins-agent-account', serverUrl: 'https://kubernetes.default']) {
 						sh '''#!/bin/sh
-						echo "Updating deployment scripts."
-						cat ${KUBECONFIG}
-						cat ${PACKAGE}/deployment/api-DC.yml | sed --expression='s/${CONTAINER}/'$CONTAINER'/g' | sed --expression='s/${REGISTRY}/'$REGISTRY'/g' | sed --expression='s/${CONTAINER_TAG}/'$CONTAINER_TAG'/g' | kubectl --kubeconfig=${KUBECONFIG} apply -f -
+						cat ${PACKAGE}/deployment/api-DC.yml | sed --expression='s/${CONTAINER}/'$CONTAINER'/g' | sed --expression='s/${REGISTRY}/'$REGISTRY'/g' | sed --expression='s/${CONTAINER_TAG}/'$CONTAINER_TAG'/g' | kubectl apply -f -
 						echo "Deployed the API implementation"'''
 				
 						script {
 							try {
-								sh 'kubectl --kubeconfig=${KUBECONFIG} -n ${NAMESPACE} get service ${CONTAINER}-service'
+								sh 'kubectl -n ${NAMESPACE} get service ${CONTAINER}-service'
 							} catch (exc) {
 								echo 'Service does not exist yet'
 								sh '''#!/bin/sh
-								cat ${PACKAGE}/deployment/service-route.yml | sed --expression='s/${HOST}/'$HOST'/g' | sed --expression='s/${CONTAINER}/'$CONTAINER'/g' | sed --expression='s/${NAMESPACE}/'$NAMESPACE'/g' | kubectl --kubeconfig=${KUBECONFIG} apply -f -'''
+								cat ${PACKAGE}/deployment/service-route.yml | sed --expression='s/${HOST}/'$HOST'/g' | sed --expression='s/${CONTAINER}/'$CONTAINER'/g' | sed --expression='s/${NAMESPACE}/'$NAMESPACE'/g' | kubectl apply -f -'''
 							}
 						}
 					}
