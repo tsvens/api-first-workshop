@@ -19,47 +19,32 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
-  - name: msr-base 
-    workingDir: /tmp/jenkins
-    image: ${REGISTRY}/microservice-runtime-tcdb:10.11
-    command:
-    - /bin/sleep
-    - 6000
-    tty: true
+  - name: kubectl
+    image: portainer/kubectl-shell
   - name: dind
     workingDir: /tmp/jenkins
-    image: portainer/kube-tools
+    image: registry.k8s/kaniko:tini
     imagePullPolicy: Always
     restartPolicy: Never
     command: 
-    - /bin/cat
+    - /busybox/cat
     tty: true
     volumeMounts:
-    - name: docker-sock
-      mountPath: /var/run/docker.sock
     - name: jenkins-docker-cfg
-      mountPath: /root/.docker
-    securityContext:
-      privileged: true
+      mountPath: /kaniko/.docker
+    - name: tmp-dir
+      mountPath: /wm-installer
   volumes:
   - name: docker-sock
     hostPath:
       path: "/var/run/docker.sock"
-  - name: jenkins-docker-cfg
-    projected:
-      sources:
-      - secret:
-          name: regcred 
-          items:
-            - key: .dockerconfigjson
-              path: config.json 
 """
 		}
 	}
 
 		
 	parameters{
-		string(name: 'REGISTRY', defaultValue: 'registry.master.servers', description: 'Endpoint of the docker registry')
+		string(name: 'REGISTRY', defaultValue: 'registry.k8s', description: 'Endpoint of the docker registry')
 		string(name: 'HOST', description: 'Base hostname of your cloud machine for the ingress')
 	}
 
@@ -124,14 +109,16 @@ spec:
 					sh '''#!/bin/sh
             			cd ${PACKAGE}
             		'''
-					script {
-						docker.withRegistry("${REGISTRY_INGRESS}") {
-					
-							def customImage = docker.build("${CONTAINER}:${CONTAINER_TAG}", "${PACKAGE}/build/container --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
-
-							/* Push the container to the custom Registry */
-							customImage.push()
-						}
+					sh '''#!/busybox/sh
+						echo "building ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}"
+            /kaniko/executor --context ${PACKAGE}/build/container \
+              --destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG} \
+              --destination ${REGISTRY}/${CONTAINER}:${CONTAINER_TAG}.${BUILD_NUMBER} \
+              --destination ${REGISTRY}/${CONTAINER}:latest \
+              --skip-tls-verify \
+							--build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 \
+							--build-arg PACKAGE=${PACKAGE}
+							'''
 					}
 				}
 			}
@@ -139,7 +126,7 @@ spec:
 		
 		stage('Deploy-Container'){
             steps {
-				container(name: 'dind', shell: '/bin/sh') {
+				container(name: 'kubectl', shell: '/bin/sh') {
 					withKubeConfig([credentialsId: 'jenkins-agent-account', serverUrl: 'https://kubernetes.default']) {
 						sh '''#!/bin/sh
 						cat ${PACKAGE}/deployment/api-DC.yml | sed --expression='s/${CONTAINER}/'$CONTAINER'/g' | sed --expression='s/${REGISTRY}/'$REGISTRY'/g' | sed --expression='s/${CONTAINER_TAG}/'$CONTAINER_TAG'/g' | kubectl apply -f -'''
