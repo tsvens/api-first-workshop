@@ -75,7 +75,7 @@ spec:
               name: sync-port
           volumeMounts:
             - name: config-volume
-              mountPath: /configs
+              mountPath: /opt/softwareag/config
             - name: dataroots
               mountPath: /data/dataroots
             - name: clusterconfig
