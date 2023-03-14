@@ -17,17 +17,24 @@ spec:
     imagePullPolicy: Always
     restartPolicy: Never
     command: 
-    - /busybox/cat
+    - /bin/cat
     tty: true
     volumeMounts:
     - name: jenkins-docker-cfg
       mountPath: /kaniko/.docker
     - name: tmp-dir
       mountPath: /wm-installer
+    - name: docker-sock
+      mountPath: /var/run/docker.sock
+    securityContext:
+      privileged: true
   volumes:
   - name: tmp-dir
     hostPath:
       path: "/tmp/license"
+  - name: docker-sock
+    hostPath:
+      path: "/var/run/docker.sock"
   - name: jenkins-docker-cfg
     projected:
       sources:
@@ -44,7 +51,7 @@ spec:
 
 		credentials(credentialType: 'com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl', 
 			defaultValue: '', description: 'Empower credentials ', name: 'EMPOWER_CREDENTIALS', required: true)
-      string(name: 'REGISTRY_INGRESS', defaultValue: 'registry.k8s', description: 'Endpoint of the docker registry')
+      string(name: 'REGISTRY_INGRESS', defaultValue: 'https://registry.master.servers', description: 'Endpoint of the docker registry')
 	}
 
 	environment {
@@ -52,7 +59,6 @@ spec:
 		BUILDER_TAG = "10.11"
     CONTAINER_TAG = "10.11"
 		REGISTRY = "${params.REGISTRY_INGRESS}"
-    REG = "https://${REGISTRY}"
 		EMPOWER_CREDS = credentials('EMPOWER_CREDENTIALS')
     }
 
@@ -76,19 +82,21 @@ spec:
 		
       stage('Build') {
 			  steps {
-				  container(name: 'dind', shell: '/busybox/sh') {
-            sh '''#!/busybox/sh
-            /kaniko/executor --context ${PACKAGE} \
-              --destination ${REGISTRY}/microservice-runtime-tcdb:${CONTAINER_TAG} \
-              --destination ${REGISTRY}/microservice-runtime-tcdb:${CONTAINER_TAG}.${BUILD_NUMBER} \
-              --destination ${REGISTRY}/microservice-runtime-tcdb:latest \
-              --skip-tls-verify \
-              --build-arg BUILDER_IMAGE=redhat/ubi8 \
-              --build-arg BASE_IMAGE=redhat/ubi8
+				  container(name: 'dind', shell: '/bin/sh') {
+					  sh '''#!/bin/sh
+            cd ${PACKAGE}
             '''
-          }
-				}
-			}
-		}
-  }
+					  script {
+						  docker.withRegistry("${REGISTRY}") {
+					
+							def customImage = docker.build("microservice-runtime-tcdb:${CONTAINER_TAG}", "${PACKAGE} --build-arg BUILDER_IMAGE=redhat/ubi8 --build-arg BASE_IMAGE=redhat/ubi8")
 
+							/* Push the container to the custom Registry */
+							customImage.push()
+						}
+					}
+				  }
+			  }
+		  }
+    }
+}
