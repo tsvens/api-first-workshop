@@ -13,7 +13,7 @@ spec:
     workingDir: /tmp/jenkins
   - name: dind
     workingDir: /tmp/jenkins
-    image: plugins/kaniko:1.7.1
+    image: docker
     imagePullPolicy: Always
     restartPolicy: Never
     command: 
