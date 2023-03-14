@@ -56,8 +56,8 @@ spec:
 
 	environment {
 		PACKAGE="MSRBaseImage"
-		BUILDER_TAG = "10.11"
-    CONTAINER_TAG = "10.11"
+		BUILDER_TAG = "10.15"
+    CONTAINER_TAG = "10.15"
 		REGISTRY = "${params.REGISTRY_INGRESS}"
 		EMPOWER_CREDS = credentials('EMPOWER_CREDENTIALS')
     }
