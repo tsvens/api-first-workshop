@@ -13,7 +13,7 @@ spec:
     workingDir: /tmp/jenkins
   - name: dind
     workingDir: /tmp/jenkins
-    image: registry.k8s/kaniko:tini
+    image: plugins/kaniko:1.7.1
     imagePullPolicy: Always
     restartPolicy: Never
     command: 
