@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="shared">cHVibGljIHN0YXRpYyBib29sZWFuIGlzTnVtZXJpYyhTdHJpbmcgc3RyTnVtKXsNCgkvL2NoZWNr
+IGlmIFN0cmluZyBpcyBudW1lcmljDQoJcmV0dXJuIHN0ck51bS5tYXRjaGVzKCItP1xcZCsoXFwu
+XFxkKyk/Iik7DQp9DQoNCnB1YmxpYyBzdGF0aWMgU3RyaW5nIGZvcm1hdERhdGVTdHJpbmcoU3Ry
+aW5nIGRhdGVTdHJpbmcpIHRocm93cyBQYXJzZUV4Y2VwdGlvbiB7DQoJLy9QYXJzZSBTdHJpbmcg
+Zm9yIGdpdmVuIEZvcm1hdA0KCVNpbXBsZURhdGVGb3JtYXQgbXlGb3JtYXQgPSBuZXcgU2ltcGxl
+RGF0ZUZvcm1hdCgieXl5eS1NTS1kZCdUJ0hIOm1tOnNzWiIpOw0KCURhdGUgZCA9IG15Rm9ybWF0
+LnBhcnNlKGRhdGVTdHJpbmcpOyANCglyZXR1cm4gbXlGb3JtYXQuZm9ybWF0KGQpOw0KfQ0KDQpw
+dWJsaWMgc3RhdGljIFN0cmluZyBmb3JtYXREYXRlKERhdGUgZGF0ZSkgdGhyb3dzIFBhcnNlRXhj
+ZXB0aW9uIHsNCgkvL1BhcnNlIFN0cmluZyBmb3IgZ2l2ZW4gRm9ybWF0DQoJU2ltcGxlRGF0ZUZv
+cm1hdCBteUZvcm1hdCA9IG5ldyBTaW1wbGVEYXRlRm9ybWF0KCJ5eXl5LU1NLWRkJ1QnSEg6bW06
+c3NaIik7DQoJcmV0dXJuIG15Rm9ybWF0LmZvcm1hdChkYXRlKTsNCgkNCn0NCg0KcHVibGljIHN0
+YXRpYyBDYWxlbmRhciBhZGRTZWNvbmRzVG9DdXJyZW50RGF0ZShJbnRlZ2VyIHNlY29uZHMpew0K
+CS8vYWRkIGdpdmVuL3JlbW92ZSBzZWNvbmRzIHRvIHRoZSBjdXJyZW50IGRhdGUNCglDYWxlbmRh
+ciBjYWwgPSBDYWxlbmRhci5nZXRJbnN0YW5jZSgpOw0KCWNhbC5hZGQoQ2FsZW5kYXIuU0VDT05E
+LCBzZWNvbmRzKTsNCgkNCglyZXR1cm4gY2FsOw0KfQ0K</value>
+  <value name="encodeutf8">true</value>
+  <array name="imports" type="value" depth="1">
+    <value>com.ibm.icu.util.Calendar</value>
+    <value>java.text.ParseException</value>
+    <value>java.text.SimpleDateFormat</value>
+    <value>java.util.Date</value>
+  </array>
+</Values>

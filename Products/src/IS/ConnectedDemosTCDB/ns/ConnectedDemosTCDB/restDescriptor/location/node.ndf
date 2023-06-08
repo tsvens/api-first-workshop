@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">restDescriptor</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">ConnectedDemosTCDB.restDescriptor:location</value>
+  <value name="node_pkg">ConnectedDemosTCDB</value>
+  <value name="is_public">false</value>
+  <record name="generalInfo" javaclass="com.wm.util.Values">
+    <value name="specVersion">2.0</value>
+    <value name="hostName">daeipresal26959.eur.ad.sag:5555</value>
+    <value name="basePath">/rest</value>
+    <array name="schemes" type="value" depth="1">
+      <value>http</value>
+    </array>
+    <array name="consumes" type="value" depth="1">
+      <value>application/json</value>
+    </array>
+    <array name="produces" type="value" depth="1">
+      <value>application/json</value>
+    </array>
+  </record>
+  <record name="appInfo" javaclass="com.wm.util.Values">
+    <value name="appVersion">1.0</value>
+    <value name="title">location</value>
+    <null name="termsOfService"/>
+    <record name="contact" javaclass="com.wm.util.Values">
+      <null name="contactName"/>
+      <null name="contactUrl"/>
+      <null name="contactEmail"/>
+    </record>
+    <record name="license" javaclass="com.wm.util.Values">
+      <null name="licenseName"/>
+      <null name="licenseUrl"/>
+    </record>
+  </record>
+  <null name="sourceUri"/>
+  <null name="swaggerUrl"/>
+  <Boolean name="modifiable">true</Boolean>
+  <record name="restResources" javaclass="com.wm.util.Values">
+    <record name="ConnectedDemosTCDB.restSvc.location" javaclass="com.wm.util.Values">
+      <value name="nsName">ConnectedDemosTCDB.restSvc.location</value>
+      <null name="path"/>
+      <null name="suffix"/>
+      <record name="operations" javaclass="com.wm.util.Values">
+        <record name="GET" javaclass="com.wm.util.Values">
+          <value name="operationType">GET</value>
+          <value name="nsName">ConnectedDemosTCDB.restSvc.location:_get</value>
+          <record name="parameters" javaclass="com.wm.util.Values">
+            <record name="$resourceID" javaclass="com.wm.util.Values">
+              <value name="name">$resourceID</value>
+              <value name="source">FORMDATA</value>
+              <value name="type">STRING</value>
+              <null name="description"/>
+              <Boolean name="isRequired">false</Boolean>
+              <Boolean name="isArray">false</Boolean>
+              <null name="defaultValue"/>
+              <null name="refDefinition"/>
+              <null name="definitionName"/>
+              <Boolean name="includeInRad">true</Boolean>
+            </record>
+            <record name="$path" javaclass="com.wm.util.Values">
+              <value name="name">$path</value>
+              <value name="source">FORMDATA</value>
+              <value name="type">STRING</value>
+              <null name="description"/>
+              <Boolean name="isRequired">false</Boolean>
+              <Boolean name="isArray">false</Boolean>
+              <null name="defaultValue"/>
+              <null name="refDefinition"/>
+              <null name="definitionName"/>
+              <Boolean name="includeInRad">true</Boolean>
+            </record>
+          </record>
+          <record name="responses" javaclass="com.wm.util.Values">
+            <record name="200" javaclass="com.wm.util.Values">
+              <value name="statusCode">200</value>
+              <value name="description">Successful</value>
+              <Boolean name="returnOutput">true</Boolean>
+            </record>
+            <record name="401" javaclass="com.wm.util.Values">
+              <value name="statusCode">401</value>
+              <value name="description">Access Denied</value>
+              <Boolean name="returnOutput">false</Boolean>
+            </record>
+          </record>
+        </record>
+      </record>
+    </record>
+  </record>
+  <record name="restDefinitions" javaclass="com.wm.util.Values">
+  </record>
+</Values>

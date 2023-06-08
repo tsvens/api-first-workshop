@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>quickstart.md</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="quick-start">Quick Start</h1>
+<p>This section explains the minimum set of changes required to run the demo on the VM. For further information on configuring and customising the demo, see <a href="./userguide.html">User Guide</a>.</p>
+<h2 id="initial-setup-configuration">Initial Setup Configuration</h2>
+<p>When you first create the VM Blueprint, you need to configure the demo to use the correct settings. This can be done by:</p>
+<ol>
+<li>Use the Remote Desktop Connection to log into the VM using your SoftwareAG credentials.</li>
+<li>Double-click on the ‘Start Services.bat’ script on the Desktop, wait about 2 minutes for the products to start. (This will set the services to automatic and the next startup should be quicker). Users should only need to perform this step once after creating the VM instance.</li>
+</ol>
+<h2 id="opening-the-home-page">Opening the Home page</h2>
+<p>Double click on the ‘Demo Home’ shortcut on the public Desktop to open the demo Home page. Alternatively navigate to the following URL using your internet browser (preferably Google Chrome).</p>
+<p><a href="http://sagbase.eur.ad.sag:8585/ConnectedServices#!/home" target="_top">http://sagbase.eur.ad.sag:8585/ConnectedServices#!/home</a></p>
+<p>In either case, you may be asked for the following credentials:</p>
+<ul>
+<li>Username = <code>Administrator</code></li>
+<li>Password = <code>manage</code></li>
+</ul>
+<h2 id="starting-the-demo">Starting the Demo</h2>
+<p>To start the demo:</p>
+<ol>
+<li>
+<p>Click the ‘Start Demo’ button on the ‘Home’ page to start the Demo.<br>
+<img src="./images/startDemo.png" alt="enter image description here"></p>
+</li>
+<li>
+<p>The Demo will be running shortly after you see the message ‘Demo Started’.<br>
+<img src="./images/startedMessage.png" alt="enter image description here"></p>
+<p><strong>Note</strong>: In some cases, there may be a short delay after the message is displayed before the demo is fully operational.  This is expected, and is typically due to the creation of historic data, creation of simulators, etc.</p>
+</li>
+<li>
+<p>Open the demo tab by selecting it from the top of the screen, or from this link:<br>
+<a href="http://sagbase.eur.ad.sag:8585/ConnectedServices#!/main" target="_top">http://sagbase.eur.ad.sag:8585/ConnectedServices#!/main</a></p>
+</li>
+</ol>
+<h2 id="stopping-the-demo">Stopping the Demo</h2>
+<p>The demo can be stopped by clicking the ‘Stop Demo’ button on ‘Home’ page.<br>
+<img src="./images/stopDemo.png" alt="enter image description here"></p>
+<p><strong>Note</strong>: The data from the demo will be persisted after stopping the demo, and will be re-loaded after the demo is restarted.</p>
+<h2 id="accessing-the-demo-remotely">Accessing the Demo remotely</h2>
+<p>To access the demo remotely (using the web browser on your machine rather than inside the VM) you’ll need to make a change to your hosts file.</p>
+<ol>
+<li>
+<p>Read the IP address of the VM. This can be done by :<br>
+- Open a command prompt on the VM<br>
+- Enter <code>ipconfig</code><br>
+- Copy the IPV4 Address</p>
+</li>
+<li>
+<p>On your local machine update the hosts file. This can be done by:<br>
+- Opening the <code>C:\Windows\System32\drivers\etc\hosts</code>file in a text editor.<br>
+- Adding the following new line:<br>
+<code>&lt;ip-address&gt; sagbase.eur.ad.sag #Demo Machine</code><br>
+where ip-address is the IPV4 Address you copied.<br>
+<strong>Note</strong>: The user needs to have Administrator access to change the hosts file.</p>
+</li>
+</ol>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>userguide.md</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="user-guide">User Guide</h1>
+<p>This section describes the demo setup and configuration in more detail, including how to customise the demo configuration.</p>
+<h2 id="check-the-platform-is-running">Check the Platform is Running</h2>
+<p>Most of the products, except Apama and Terracotta, are installed as Windows services which are automatically started when the machine is started. To check that the product services are running correctly:</p>
+<ol>
+<li>Log into the VM using Remote Desktop with your SoftwareAG User credentials.</li>
+<li>Double-click on the ‘Start Services.bat’ script on the Desktop.  This script will start all of the necessary services.</li>
+</ol>
+<p><strong>Note:</strong> Users should only need to perform this step once after creating the VM instance.</p>
+<p>If there are still problems with the products not running, or the script failed:</p>
+<ol>
+<li>
+<p>Log into the VM using Remote Desktop with your SoftwareAG User credentials.</p>
+</li>
+<li>
+<p>Open the Windows Services and confirm that the services listed in below image are ‘Running’. To do this:</p>
+<ol>
+<li>Right click on the taskbar and select ‘Task Manager’.</li>
+<li>Go to the ‘Services’ tab and click on the ‘Open Services’ link at the bottom of window to list of all the services that are running on the VM.</li>
+<li>Check that the services highlighted below have status of ‘Running’.</li>
+<li>If any service does not have a status of ‘Running’, you must start the service by right clicking on service and selecting ‘start’.  Or alternatively, double-click on the ‘Start Services.bat’ script on the Desktop.</li>
+</ol>
+</li>
+</ol>
+<p><img src="./images/servicesList.png" alt="enter image description here"></p>
+<p><strong>Note:</strong> Software AG Mashzone Nextgen service should be the last one to be started to ensure that the services it connects to are all available.</p>
+<h2 id="opening-the-demo-home-page">Opening the Demo Home page</h2>
+<p>Double-click on ‘Demo Home’ shortcut on the public Desktop to open the home page. Alternatively navigate to following URL using your internet browser (preferably Google Chrome).</p>
+<p><a href="http://sagbase.eur.ad.sag:8585/ConnectedServices#!/home" target="_top">http://sagbase.eur.ad.sag:8585/ConnectedServices#!/home</a></p>
+<p>In either case, you may be asked for the following credentials:</p>
+<ul>
+<li>Username: Administrator</li>
+<li>Password: manage</li>
+</ul>
+<h2 id="demo-configuration">Demo Configuration</h2>
+<p>The configuration of the products used in the demo is controlled by the following file:</p>
+<pre><code>C:\Users\Public\Desktop\demo_config\config\democonfig.json
+</code></pre>
+<ol>
+<li>
+<p><strong>Changing the Demo Configuration</strong></p>
+<p>The demo configuration can be viewed by clicking on the ‘Configure Demo’ button.</p>
+<p><img src="./images/configurationButton.png" alt="enter image description here"></p>
+<p>In the ‘Configuration’ window, the user can view the following tabs:</p>
+<ul>
+<li><strong>Look’n’Feel</strong>: This section shows the configuration for the main demo landing page e.g. Title, sub-title, description, etc. It also provides a reference for where to change the demo data and images used in the demo.</li>
+<li><strong>Demo Screens &amp; Documentation</strong>: This section allows you to define the links for the various tabs that will be used in the demo, and whether they should be embedded into the demo frame or opened as separate tabs in the browser.</li>
+<li><strong>Servers</strong>: This section allows you to modify and add multiples servers for the demo setups. This is used to ‘connect’ other Demo Recipe demos together to form richer demos.</li>
+</ul>
+<p><img src="./images/configuration.png" alt="enter image description here"></p>
+</li>
+</ol>
+<h2 id="changing-the-demo-master-data">Changing the Demo Master Data</h2>
+<p>The user can change both the Master Data and the images for the demo. Once you have modified the Master Data set, you need to restart the demo before the changes take effect. These steps are covered below in <a href="#stopping-the-demo">Stopping the Demo</a> and <a href="#starting-the-demo">Starting the Demo</a>.</p>
+<h3 id="master-data">Master Data</h3>
+<p>The Master Data for the demo is stored in one or more JSON files in the following directory:</p>
+<p><code>C:\Users\Public\Desktop\demo_config\data</code></p>
+<p>The data descriptions inside this file can be amended to ensure that the products and categories match the industry which you wish to demo.  Some demos may have a number of alternative master data sets available for different segments or industries.  These are available under the ‘Alternative Demo Configurations’ folder on the public desktop. The original master data set can be deleted and replaced by the ones in ‘Alternative Demo Configurations’ folder.</p>
+<h3 id="images">Images</h3>
+<p>In addition to amending the data in the JSON file, you are also able to replace some of the images which will be displayed inside the demo. The images are located in the following folder:</p>
+<p><code>C:\Users\Public\Desktop\demo_config\images</code></p>
+<p><strong>Note:</strong> Ensure that when you replace the images, the filenames remain the same as they may be referenced inside the Master Data and elsewhere in the demo.</p>
+<p>For further details on how to customise the Master Data for the Demo Recipes, see the ‘Master Data’ section of the ‘<a href="https://solutionbook.softwareag.com/sb-web/page/detail_page.xhtml?guid=954828848" target="_top">Demo Recipe How-To</a>’ guide in SolutionBook.</p>
+<h2 id="starting-the-demo">Starting the Demo</h2>
+<p>To start the demo:</p>
+<ol>
+<li>Check that the demo isn’t already running (see <a href="#stopping-the-demo">Stopping the Demo</a>).</li>
+<li>Click the ‘Start Demo’ button on the ‘Home’ page to start the Demo.<br>
+<img src="./images/startDemo.png" alt="enter image description here"></li>
+<li>The Demo will be running shortly after you see the message ‘Demo Started’.<br>
+<img src="./images/startedMessage.png" alt="enter image description here"></li>
+</ol>
+<p><strong>Note:</strong> In some cases, there may be a short delay after the message is displayed before the demo is fully operational.  This is expected, and is typically due to the creation of historic data, creation of simulators, etc.</p>
+<p><strong>Note:</strong> If you have made modifications to the Master Data (see <a href="#changing-the-demo-master-data">Changing the Demo Master Data</a>), this will be loaded when the demo is restarted.</p>
+<h2 id="stopping-the-demo">Stopping the Demo</h2>
+<p>The demo can be stopped by clicking the ‘Stop Demo’ button on ‘Home’ page.<br>
+<img src="./images/stopDemo.png" alt="enter image description here"></p>
+<p><strong>Note:</strong> The data from the demo will be persisted after stopping the demo, and will be re-loaded after the demo is restarted.</p>
+</div>
+</body>
+
+</html>
