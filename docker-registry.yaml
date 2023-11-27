@@ -65,21 +65,23 @@ spec:
       targetPort: 5000
   type: ClusterIP
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: registry-ingress
   namespace: registry
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: '0'
 spec:
+  ingressClassName: traefik
   rules:
-  - host: registry.master.servers
+  - host: registry.localhost
     http:
       paths:
       - backend:
-          serviceName: registry-service
-          servicePort: 5000
+          service:
+            name: registry-service
+            port: 
+              number: 5000
+        pathType: ImplementationSpecific
   tls:
   - hosts:
-    - registry.master.servers
+    - registry.localhost
