@@ -1,0 +1,188 @@
+# ApiGW Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: apigateway
+  namespace: swag-infra
+spec:
+  selector:
+    component: apigateway
+  ports:
+  - name: api
+    port: 5555
+    targetPort: 5555
+  - name: apigw-ui
+    port: 9072
+    targetPort: 9072
+  - name: wsapi
+    port: 5545
+    targetPort: 5545
+  - name: secureapi
+    port: 5543
+    targetPort: 5543
+---
+# ApiGW Ingress 9072
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: apiui
+  namespace: swag-infra
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: apiui.localhost
+    http:
+      paths:
+      - backend:
+          service:
+            name: apigateway
+            port:
+              number: 9072
+        pathType: ImplementationSpecific
+---
+# ApiGW Ingress 5555
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api
+  namespace: swag-infra
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: api.localhost
+    http:
+      paths:
+      - backend:
+          service:
+            name: apigateway
+            port:
+              number: 5555
+        pathType: ImplementationSpecific
+---
+# ApiGW Ingress 5545
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wsapi
+  namespace: swag-infra
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: wsapi.localhost
+    http:
+      paths:
+      - backend:
+          service:
+            name: apigateway
+            port:
+              number: 5545
+        pathType: ImplementationSpecific
+---
+# ApiGW Ingress 5543
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: secureapi
+  namespace: swag-infra
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: secureapi.localhost
+    http:
+      paths:
+      - backend:
+          service:
+            name: apigateway
+            port:
+              number: 5545
+        pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - secureapi.localhost
+---
+# ApiGW Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway
+  namespace: swag-infra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: apigateway
+  template:
+    metadata:
+      labels:
+        component: apigateway
+    spec:
+      containers:
+        - name: apigateway
+          namespace: swag-infra
+          image: sagcr.azurecr.io/apigateway:10.15
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5555
+              name: apiport
+              protocol: TCP
+            - containerPort: 9072
+              name: uiport
+              protocol: TCP
+            - containerPort: 9072
+              name: wsport
+              protocol: TCP
+            - containerPort: 5543
+              name: secureapi
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /rest/apigateway/health
+              port: 5555
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 3
+          env:
+            - name: apigw_elasticsearch_hosts
+              value: elastic-svc:9200
+            - name: apigw_elasticsearch_http_password
+              value: Elastic_S3cret!
+            - name: apigw_cp_agentConfig_enabled
+              value: "true"
+            - name: apigw_cp_agentConfig_runtimeConfig_deploymentType
+              value: ON_PREMISE
+            - name: apigw_cp_agentConfig_runtimeConfig_runtimeName
+              value: local-gateway
+            - name: apigw_cp_agentConfig_runtimeConfig_description
+              value: The gateway used for the API-Workshopå demo
+            - name: apigw_cp_agentConfig_runtimeConfig_tags
+              value: local,dev
+            - name: apigw_cp_agentConfig_runtimeConfig_location
+              value: Stockholm
+            - name: apigw_cp_agentConfig_runtimeConfig_region
+              value: Sweden
+            - name: apigw_cp_agentConfig_runtimeConfig_capacity_value
+              value: "10000"
+            - name: apigw_cp_agentConfig_runtimeConfig_capacity_units
+              value: per week
+            - name: apigw_cp_agentConfig_controlPlaneConfig_controlPlaneURL
+              value: http://ingress-svc.control-plane.svc.cluster.local:8080
+            - name: apigw_cp_agentConfig_controlPlaneConfig_username
+              value: Administrator
+            - name: apigw_cp_agentConfig_controlPlaneConfig_password
+              value: manage
+          volumeMounts:
+            - mountPath: >-
+                /opt/softwareag/IntegrationServer/instances/default/config/licenseKey.xml
+              name: apigatewaylicense
+              subPath: licenseKey.xml
+      imagePullSecrets:
+        - name: swagregcred
+#        - name: string
+      volumes:
+        - configMap:
+            name: apigatewaylicense
+            optional: false
+          name: apigatewaylicense
