@@ -58,7 +58,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: terracotta
-          image: sagcr.azurecr.io/terracotta-server:10.11
+          image: softwareag/terracotta-server:10.11
           command: ["bin/start-tc-server.sh"]
           args: ["-f", "/configs/tc-config.cfg", "-n", "terracotta"]
           imagePullPolicy: Always
@@ -79,9 +79,10 @@ spec:
             - name: dataroots
               mountPath: /data/dataroots
             - name: clusterconfig
-              mountPath: /root/terracotta/config
+#               mountPath: /root/terracotta/config
+              mountPath: /opt/softwareag/terracotta/config
         - name: readiness
-          image: sagcr.azurecr.io/terracotta-cluster-tool:10.11
+          image: softwareag/terracotta-cluster-tool:10.11
           command: ["sh", "-c", "while true; do sleep 86400; done"]
           imagePullPolicy: Always
           readinessProbe:
@@ -129,7 +130,7 @@ spec:
     spec:
       containers:
         - name: config-tool
-          image: sagcr.azurecr.io/terracotta-config-tool:10.11
+          image: softwareag/terracotta-config-tool:10.11
           args: ["activate", "-cluster-name", "MyCluster", "-license-file", "/licenses/license.xml", "-connect-to", "terracotta.swag-infra"]
           env:
           - name: ACCEPT_EULA
@@ -185,7 +186,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-        - image: sagcr.azurecr.io/terracotta-management-server:10.11
+        - image: softwareag/tmc:10.11
           name: tmc
           imagePullPolicy: Always
           env:
