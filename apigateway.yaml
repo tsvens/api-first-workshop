@@ -119,7 +119,7 @@ spec:
       containers:
         - name: apigateway
           namespace: swag-infra
-          image: sagcr.azurecr.io/apigateway:10.15
+          image: sagcr.azurecr.io/apigateway:10.15.0.11
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5555

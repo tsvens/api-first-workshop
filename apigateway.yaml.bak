@@ -78,7 +78,7 @@ spec:
               number: 5545
         pathType: ImplementationSpecific
 ---
-# ApiGW Ingress 5543
+# ApiGW Ingress Secure
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -94,7 +94,7 @@ spec:
           service:
             name: apigateway
             port:
-              number: 5545
+              number: 5555
         pathType: ImplementationSpecific
   tls:
     - hosts:
