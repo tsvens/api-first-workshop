@@ -1,1 +1,8 @@
 licenses.zip
+*.bak
+ISLicense.xml
+license.xml
+SoftwareAGInstaller.bin
+WmTestSuite100.xml
+Products/Jenkinsfile.bak
+*.bak
