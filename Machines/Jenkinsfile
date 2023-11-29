@@ -50,7 +50,7 @@ spec:
 
 		
 	parameters{
-		string(name: 'REGISTRY', defaultValue: 'registry.master.servers', description: 'Endpoint of the docker registry')
+		string(name: 'REGISTRY', defaultValue: 'registry.localhost', description: 'Endpoint of the docker registry')
 		string(name: 'HOST', description: 'Base hostname of your cloud machine for the ingress')
 	}
 
