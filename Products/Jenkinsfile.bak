@@ -13,7 +13,7 @@ spec:
     workingDir: /tmp/jenkins
   - name: msr-base
     workingDir: /tmp/jenkins
-    image: ${REGISTRY}/microservice-runtime-tcdb:10.11
+    image: ${REGISTRY}/microservice-runtime-tcdb:10.15
     command:
     - /bin/sleep
     - 6000
@@ -90,7 +90,7 @@ spec:
 					script {
 						docker.withRegistry("${REGISTRY_INGRESS}") {
 					
-							def customImage = docker.build("${CONTAINER}:${CONTAINER_TAG}", "${PACKAGE}/build/container --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.11 --build-arg PACKAGE=${PACKAGE}")
+							def customImage = docker.build("${CONTAINER}:${CONTAINER_TAG}.${BUILD_NUMBER}", "${PACKAGE}/build/container --build-arg BASE_IMAGE=microservice-runtime-tcdb:10.15 --build-arg PACKAGE=${PACKAGE}")
 
 							/* Push the container to the custom Registry */
 							customImage.push()
@@ -104,7 +104,7 @@ spec:
             steps {
 				container(name: 'dind', shell: '/bin/sh') {
 					withKubeConfig([credentialsId: 'jenkins-agent-account', serverUrl: 'https://kubernetes.default']) {
-						sh 'cat ${PACKAGE}/deployment/api-DC.yml | sed --expression=\'s/${REGISTRY}/\'"$REGISTRY"\'/g\' | kubectl apply -f -'
+						sh 'cat ${PACKAGE}/deployment/api-DC.yml | sed --expression=\'s/${REGISTRY}/\'"$REGISTRY"\'/g\' | sed --expression=\'s/${BUILD_NUMBER}/\'"$BUILD_NUMBER"\'/g\' | kubectl apply -f -'
 				
 						script {
 							try {
