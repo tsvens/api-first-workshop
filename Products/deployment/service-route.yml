@@ -19,7 +19,7 @@ spec:
     app: products-api
   type: ClusterIP
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: products-api-ingress
@@ -32,9 +32,9 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: products-api-service
-          servicePort: 5555
-  tls:
-  - hosts:
-    - products-api.${HOST}
-    secretName: products-api-crt
+          service:
+            name: products-api-service
+            port:
+              number: 5555
+        pathType: ImplementationSpecific
+
