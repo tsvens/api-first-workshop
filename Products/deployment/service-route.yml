@@ -24,9 +24,8 @@ kind: Ingress
 metadata:
   name: products-api-ingress
   namespace: "api-first-workshop"
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
+  ingressClassName: traefik
   rules:
   - host: products-api.${HOST}
     http:
