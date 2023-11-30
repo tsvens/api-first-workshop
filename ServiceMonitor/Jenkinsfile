@@ -65,9 +65,7 @@ spec:
 					sh 'chmod -R go+w build/test;'
 					sh 'cd build/container; \
 					    cp -r ${WORKSPACE}/${PACKAGE}/Dockerfile .; \
-						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/${PACKAGE} .; \
-						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/ConnectedDemos .; \
-						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/ConnectedDemosTCDB .;'
+						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/${PACKAGE} .;'
 
 				}
 			}
