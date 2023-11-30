@@ -62,8 +62,7 @@ spec:
 						dist \
 						build/test \
 						build/test/reports'
-					sh 'chmod -R go+w build/test; \
-						chmod go+w test'
+					sh 'chmod -R go+w build/test;
 					sh 'cd build/container; \
 					    cp -r ${WORKSPACE}/${PACKAGE}/Dockerfile .; \
 						cp -r ${WORKSPACE}/${PACKAGE}/src/IS/${PACKAGE} .; \
