@@ -1,4 +1,4 @@
-FROM sagcr.azurecr.io/webmethods-microservicesruntime:10.15.0.2
+FROM sagcr.azurecr.io/webmethods-microservicesruntime:10.15.0.7
 MAINTAINER SoftwareAG
 
 USER root
