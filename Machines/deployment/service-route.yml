@@ -69,9 +69,6 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: ${CONTAINER}-websocket-service
-          servicePort: 5545
-      - backend:
           service:
             name: ${CONTAINER}-websocket-service
             port:
