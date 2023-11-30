@@ -1,4 +1,4 @@
-FROM softwareag/webmethods-microservicesruntime:10.11.0.2
+FROM softwareag/webmethods-microservicesruntime:10.15.0.7
 
 MAINTAINER SoftwareAG
 
