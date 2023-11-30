@@ -12,7 +12,7 @@ spec:
     workingDir: /tmp/jenkins
   - name: msr-base 
     workingDir: /tmp/jenkins
-    image: ${REGISTRY}/microservice-runtime-tcdb:10.11
+    image: ${REGISTRY}/microservice-runtime-tcdb:10.15
     command:
     - /bin/sleep
     - 6000
@@ -50,7 +50,7 @@ spec:
 
 		
 	parameters{
-		string(name: 'REGISTRY', defaultValue: 'registry.master.servers', description: 'Endpoint of the docker registry')
+		string(name: 'REGISTRY', defaultValue: 'registry.localhost', description: 'Endpoint of the docker registry')
 		string(name: 'HOST', description: 'Base hostname of your cloud machine for the ingress')
 	}
 
@@ -75,6 +75,7 @@ spec:
 						build/test/reports'
 					sh 'mv config build/container'
 					sh 'mv Listeners build/container'
+					sh 'mv acls build/container'
 					sh 'chmod -R go+w build/test; \
 						chmod go+w test'
 					sh 'cd build/container; \
