@@ -42,7 +42,7 @@ spec:
     projected:
       sources:
       - secret:
-          name: regcredswag
+          name: swagregcred
           items:
             - key: .dockerconfigjson
               path: config.json 
