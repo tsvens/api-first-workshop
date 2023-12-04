@@ -83,7 +83,7 @@ spec:
 					def apiFile = "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"
 
 					//Check if API already exists
-					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'GET', url: "${host}/rest/apigateway/apis?apiName=${apiName}", validResponseCodes: '200'
+					response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'GET', url: "apigateway.swag-infra.svc.cluster:5555/rest/apigateway/apis?apiName=${apiName}", validResponseCodes: '200'
 
 					def object = jsonParse(response.content)
 
@@ -92,7 +92,7 @@ spec:
 					echo "api id with apiResponse: ${APIID[0]}"
 
 					if (APIID == null || APIID ==[]) {
-						response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'POST', url: "${host}/rest/apigateway/apis", validResponseCodes: '201', formData: [[name: 'apiName', body: apiName], [name: 'type', body: 'swagger'], [name: 'apiVersion', body: '1.0'], [name: 'apiDescription', body: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: "ServiceMonitor.swagger.yaml", uploadFile: "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"]]
+						response = httpRequest acceptType: 'APPLICATION_JSON', customHeaders: [[name: 'Authorization', value: auth]], httpMode: 'POST', url: "apigateway.swag-infra.svc.cluster:5555/rest/apigateway/apis", validResponseCodes: '201', formData: [[name: 'apiName', body: apiName], [name: 'type', body: 'swagger'], [name: 'apiVersion', body: '1.0'], [name: 'apiDescription', body: 'Service Monitor API'], [contentType: 'text/plain', name: 'file', fileName: "ServiceMonitor.swagger.yaml", uploadFile: "${WORKSPACE}/${PACKAGE}/api/ServiceMonitor.swagger.yaml"]]
 					}
 				}
 			}
