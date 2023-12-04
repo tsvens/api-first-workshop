@@ -36,3 +36,4 @@ spec:
             name: ${CONTAINER}-service
             port: 
               number: 5555
+        pathType: ImplementationSpecific              
