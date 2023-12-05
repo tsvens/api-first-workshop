@@ -9,3 +9,4 @@ Products/Jenkinsfile.bak
 Products/Jenkinsfile.bak
 Products/deployment/api-DC.yml.bak
 Machines/deployment/service-route.yml.bak
+ServiceMonitor/deployment/api-DC.yml.bak
