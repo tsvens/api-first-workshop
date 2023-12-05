@@ -47,6 +47,11 @@ spec:
           ports:
             - containerPort: 5555
               protocol: "TCP"
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              memory: 512Mi
           volumeMounts:
             - name: config-volume
               mountPath: /opt/swagmsr/config
