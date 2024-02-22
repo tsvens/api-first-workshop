@@ -11,11 +11,11 @@ spec:
   containers:
   - name: jnlp
     workingDir: /tmp/jenkins
-    restartPolicy: Never
   - name: dind
     workingDir: /tmp/jenkins
     image: docker
     imagePullPolicy: Always
+  restartPolicy: Never
     command: 
     - /bin/cat
     tty: true
