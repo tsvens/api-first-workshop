@@ -22,7 +22,6 @@ spec:
     workingDir: /tmp/jenkins
     image: portainer/kube-tools
     imagePullPolicy: Always
-    restartPolicy: Never
     command: 
     - /bin/cat
     tty: true
@@ -31,6 +30,7 @@ spec:
       mountPath: /var/run/docker.sock
     securityContext:
       privileged: true
+  restartPolicy: Never
   volumes:
   - name: docker-sock
     hostPath:
