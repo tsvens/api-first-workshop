@@ -15,7 +15,6 @@ spec:
     workingDir: /tmp/jenkins
     image: docker
     imagePullPolicy: Always
-    restartPolicy: Never
     command: 
     - /bin/cat
     tty: true
